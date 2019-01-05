@@ -40,7 +40,7 @@ class Profile(models.Model):
 
 
 class Post(Timestamp):
-    author = models.ForeignKey("User", on_delete=models.CASCADE)
+    author = models.ForeignKey("User", on_delete=models.CASCADE, related_name='post')
     title = models.CharField(max_length=255)
     text = models.TextField(null=True)
 
