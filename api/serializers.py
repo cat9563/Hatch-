@@ -2,11 +2,11 @@ from rest_framework import serializers
 from core.models import Post, Response
 
 class ResponseSerializer(serializers.ModelSerializer):
-    # author=serializers.StringRelatedField()
+    author=serializers.StringRelatedField()
 
     class Meta:
         model = Response
-        fields = ('id', 'author', 'post', 'text', 'created_at')
+        fields = ('id', 'author', 'text', 'created_at')
 
 class PostSerializer(serializers.ModelSerializer):
     post = serializers.StringRelatedField()
@@ -15,4 +15,4 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'author', 'title', 'post', 'responses', 'text', 'created_at')
+        fields = ('id', 'author', 'title', 'post', 'text', 'created_at', 'responses')
