@@ -32,6 +32,8 @@ urlpatterns = [
         name='localAllies'),
     path('localEvents/', TemplateView.as_view(template_name='localEvents.html'),
         name='localEvents'),
+    path('dashboard/', TemplateView.as_view(template_name='dashboard.html'),
+        name='dashboard'),
     path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
         name='messageBoard'),
     path('admin/', admin.site.urls),
