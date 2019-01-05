@@ -39,9 +39,9 @@ urlpatterns = [
     path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
         name='messageBoard'),
     path('admin/', admin.site.urls),
-    path ('api/posts/', 
-        api_views.post_list, 
-        name='api_post_list'),
+    # API
+    path ('api/posts/', api_views.post_list, name='api_post_list'),
+    path ('api/events/', api_views.event_list, name='api_event_list'),
 ]
 
 if settings.DEBUG:
