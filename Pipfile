@@ -11,6 +11,7 @@ django-debug-toolbar = "*"
 gunicorn = "*"
 django-heroku = "*"
 pillow = "*"
+djangorestframework = "*"
 
 [dev-packages]
 pylint = "*"

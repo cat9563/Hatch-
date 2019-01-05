@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #my_apps
     'core',
+    'api',
     #third_party
     'django_extensions',
     'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings 
+from api import views as api_views
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from core import views
+
 
 urlpatterns = [
     path('',views.index, name='home'),
@@ -37,6 +39,9 @@ urlpatterns = [
     path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
         name='messageBoard'),
     path('admin/', admin.site.urls),
+    path ('api/posts/', 
+        api_views.post_list, 
+        name='api_post_list'),
 ]
 
 if settings.DEBUG:
