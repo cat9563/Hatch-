@@ -11,6 +11,7 @@ django-debug-toolbar = "*"
 gunicorn = "*"
 django-heroku = "*"
 pillow = "*"
+django-registration-redux = "==2.0"
 
 [dev-packages]
 pylint = "*"
