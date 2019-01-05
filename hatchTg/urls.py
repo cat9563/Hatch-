@@ -17,10 +17,23 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings 
 from django.conf.urls.static import static 
+from django.views.generic import TemplateView
 from core import views
 
 urlpatterns = [
     path('',views.index, name='home'),
+    path('about/', TemplateView.as_view(template_name='about.html'),
+        name='about'),
+    path('contact/', TemplateView.as_view(template_name='contact.html'),
+        name='contact'),
+    path('lgbtFriendlyBusiness/', TemplateView.as_view(template_name='lgbtFriendlyBusiness.html'),
+        name='lgbtFriendlyBusiness'),
+    path('localAllies/', TemplateView.as_view(template_name='localAllies.html'),
+        name='localAllies'),
+    path('localEvents/', TemplateView.as_view(template_name='localEvents.html'),
+        name='localEvents'),
+    path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
+        name='messageBoard'),
     path('admin/', admin.site.urls),
 ]
 
