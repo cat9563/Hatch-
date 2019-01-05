@@ -27,6 +27,7 @@ from core.backends import MyRegistrationView
 
 urlpatterns = [
     path('',views.index, name='home'),
+    path('accounts/', include('allauth.urls')),
     path('about/', TemplateView.as_view(template_name='about.html'),
         name='about'),
     path('contact/', TemplateView.as_view(template_name='contact.html'),
@@ -52,6 +53,7 @@ urlpatterns = [
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
+    
 ]
 
 if settings.DEBUG:
