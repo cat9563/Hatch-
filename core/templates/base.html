@@ -19,7 +19,7 @@
 <body>
 <header>
     {% block header %}
-        <h1>You've arrived</h1> 
+        <h1 class='generic'>You've arrived</h1> 
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li> 
@@ -38,6 +38,11 @@
 </header>
 
     {% block content %}{% endblock content %}
-    {% block footer %}{% endblock footer %}
+
+<footer>
+    {% block footer %}
+        <p>This is the footer.</p>
+    {% endblock footer %}
+</footer>
 </body>
 </html>
