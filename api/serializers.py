@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from core.models import Post, Response, Event
+from core.models import Post, Response
+
+
+class CreateSlugRelatedField(serializers.SlugRelatedField):
+    def to_internal_value(self, data):
+        try:
+            value, _ = self.get_queryset().get_or_create(**{self.slug_field: data})
+            return value
+        except (TypeError, ValueError):
+            self.fail("invalid")
 
 class ResponseSerializer(serializers.ModelSerializer):
     author=serializers.StringRelatedField()
@@ -14,8 +23,8 @@ class ResponseSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     post = serializers.StringRelatedField()
-    responses = ResponseSerializer(many=True)
-    author = serializers.StringRelatedField()
+    responses = ResponseSerializer(many=True, required=False)
+    author = serializers.SlugRelatedField(slug_field="username", read_only=True)
 
     class Meta:
         model = Post
@@ -27,18 +36,3 @@ class PostSerializer(serializers.ModelSerializer):
                     'text', 
                     'created_at', 
                     'responses')
-
-class EventSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Event
-        fields = (
-                    'organization',
-                    'organizer',
-                    'email',
-                    'title',
-                    'description',
-                    'location',
-                    'time',
-                    'link')
-                
