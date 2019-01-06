@@ -90,7 +90,8 @@
                 "sha256:63f76cbe1e7d12b94c357d7e54401103b2e52aef0f7c1650d6c820ad708776e5"
             ],
             "index": "pypi",
-            "version": "==3.9.0"
+            "version": "==3.9.0",
+
         "django-registration-redux": {
             "hashes": [
                 "sha256:ccc43c4a5000c2798f56e40b8bb2cb79cc63ea25038326f7a6ed58a29f640948"
@@ -328,4 +329,4 @@
             "version": "==1.10.11"
         }
     }
-}
+}}

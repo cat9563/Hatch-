@@ -2,6 +2,8 @@ from django.contrib import admin
 from core.models import (Post, Response, Event, User)
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetForm, PasswordResetView)
+from core.models import (Post, Response, Event)
+from django.contrib.auth.admin import UserAdmin
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -24,7 +26,7 @@ class EventAdmin(admin.ModelAdmin):
                     'link', 
                     'created_at']
 
-# Register your models here.
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Response, ResponseAdmin)
 admin.site.register(Event, EventAdmin)
