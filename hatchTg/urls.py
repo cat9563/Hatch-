@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings 
-from api import views as api_views
+from api import urls as api_urls
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from core import views
@@ -29,6 +29,8 @@ from core.backends import MyRegistrationView
 
 urlpatterns = [
     path('',views.index, name='home'),
+    path('admin/', admin.site.urls),
+    path('api/', include(api_urls)),
     path('accounts/', include('allauth.urls')),
     path('about/', TemplateView.as_view(template_name='about.html'),
         name='about'),
@@ -54,17 +56,10 @@ urlpatterns = [
         'registration/password_reset_complete.html'), name="password_reset_complete"),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('admin/', admin.site.urls),
-    # API
-    path ('api/posts/', api_views.post_list, name='api_post_list'),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
-
-        # For django versions before 2.0:
-        # url(r'^__debug__/', include(debug_toolbar.urls)),
-
     ] + urlpatterns
