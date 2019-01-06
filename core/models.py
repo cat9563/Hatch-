@@ -40,43 +40,45 @@ class Profile(models.Model):
 
 
 class Post(Timestamp):
-    author = models.ForeignKey("User", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    text = models.TextField
+    author = models.ForeignKey("User", on_delete=models.CASCADE, related_name='post')
+    title = models.CharField(max_length=255, blank=False)
+    text = models.TextField(blank=False, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Response(Timestamp):
     author = models.ForeignKey("User", on_delete=models.CASCADE)
-    post = models.ForeignKey("Post", on_delete=models.CASCADE)
-    text = models.TextField
+    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="responses")
+    text = models.TextField(blank=False, null=True)
 
 
 class Goal(Timestamp):
     author = models.ForeignKey("User", on_delete=models.CASCADE)
-    subgoal = models.CharField(max_length=255)
+    subgoal = models.CharField(max_length=255, blank=False)
 
 
 class Note(Timestamp):
     author = models.ForeignKey("User", on_delete=models.CASCADE)
     goal = models.ForeignKey("Goal", on_delete=models.CASCADE)
-    text = models.TextField
+    text = models.TextField(blank=False, null=True)
 
 class Event(Timestamp):
-    organization = models.CharField(max_length=100)
-    organizer = models.CharField(max_length=75)
-    email = models.EmailField
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=1000)
-    location = models.CharField(max_length=255)
-    date = models.DateField
-    time = models.TimeField
-    link = models.URLField
-
+    organization = models.CharField(max_length=100, blank=False)
+    organizer = models.CharField(max_length=75, blank=False)
+    email = models.EmailField(max_length=75, blank=False, null=True)
+    title = models.CharField(max_length=255, blank=False)
+    description = models.CharField(max_length=1000, blank=False)
+    location = models.CharField(max_length=255, blank=False)
+    date = models.DateField(blank=False, null=True)
+    time = models.TimeField(blank=False,  null=True)
+    link = models.URLField(blank=True, null=True)
 
 class Resource(models.Model):
-    business_name = models.CharField(max_length=255)
-    business_location = models.CharField(max_length=255)
+    business_name = models.CharField(max_length=255, blank=False)
+    business_location = models.CharField(max_length=255, blank=False)
     description = models.CharField(max_length=500, blank=True)
-    phone = models.IntegerField
-    email = models.EmailField
-    website = models.URLField        
+    phone = models.IntegerField(blank=True, null=True)
+    email = models.EmailField(max_length=75, blank=True)
+    website = models.URLField(blank=True, null=True)      

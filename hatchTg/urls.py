@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings 
+from api import views as api_views
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from core import views
@@ -24,6 +25,7 @@ from django.contrib.auth.views import (
 	PasswordResetConfirmView, PasswordResetCompleteView, 
 )
 from core.backends import MyRegistrationView
+
 
 urlpatterns = [
     path('',views.index, name='home'),
@@ -53,7 +55,8 @@ urlpatterns = [
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
-    
+    # API
+    path ('api/posts/', api_views.post_list, name='api_post_list'),
 ]
 
 if settings.DEBUG:

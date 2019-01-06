@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     #my_apps
     'core',
+    'api',
     #third_party
     'django_extensions',
     'debug_toolbar',
+    'rest_framework',
     'registration',
     'allauth',
     'allauth.account',
