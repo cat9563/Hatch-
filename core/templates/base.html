@@ -14,12 +14,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block header %}{% endblock header %}
 </head>
-<body>
 
+<body>
+<header>
+    {% block header %}
+        <h1 class='generic'>You've arrived</h1> 
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li> 
+                    <li><a href="{% url 'about' %}">About</a></li> 
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                    {% if user.is_authenticated %} 
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'auth_login' %}">Login</a></li>
+                    <li><a href="{% url 'registration_register' %}">Register</a></li>
+                    {% endif %}
+                </ul> 
+            </nav>
+    {% endblock header %}
+</header>
 
     {% block content %}{% endblock content %}
-    {% block footer %}{% endblock footer %}
+
+<footer>
+    {% block footer %}
+        <p>This is the footer.</p>
+    {% endblock footer %}
+</footer>
 </body>
 </html>

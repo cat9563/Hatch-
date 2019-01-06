@@ -26,3 +26,9 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Response, ResponseAdmin)
 admin.site.register(Event, EventAdmin)
+from core.models import (User)
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetForm, PasswordResetView)
+
+
+admin.site.register(User, UserAdmin)
