@@ -12,6 +12,8 @@ gunicorn = "*"
 django-heroku = "*"
 pillow = "*"
 djangorestframework = "*"
+django-registration-redux = "==2.0"
+django-allauth = "*"
 
 [dev-packages]
 pylint = "*"

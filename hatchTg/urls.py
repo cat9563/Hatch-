@@ -20,10 +20,16 @@ from api import views as api_views
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from core import views
+from django.contrib.auth.views import ( 
+	PasswordResetView, PasswordResetDoneView, 
+	PasswordResetConfirmView, PasswordResetCompleteView, 
+)
+from core.backends import MyRegistrationView
 
 
 urlpatterns = [
     path('',views.index, name='home'),
+    path('accounts/', include('allauth.urls')),
     path('about/', TemplateView.as_view(template_name='about.html'),
         name='about'),
     path('contact/', TemplateView.as_view(template_name='contact.html'),
@@ -38,6 +44,16 @@ urlpatterns = [
         name='dashboard'),
     path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
         name='messageBoard'),
+    path('accounts/password/reset/', PasswordResetView.as_view(template_name=
+        'registration/password_reset_form.html'), name="password_reset"),
+    path('accounts/password/reset/done/', PasswordResetDoneView.as_view(template_name=
+        'registration/password_reset_done.html'), name="password_reset_done"),
+    path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name=
+        'registration/password_reset_confirm.html'), name="password_reset_confirm"),
+    path('accounts/password/done/', PasswordResetCompleteView.as_view(template_name=
+        'registration/password_reset_complete.html'), name="password_reset_complete"),
+    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
     # API
     path ('api/posts/', api_views.post_list, name='api_post_list'),
