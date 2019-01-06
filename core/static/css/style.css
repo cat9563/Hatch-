@@ -24,3 +24,13 @@ footer {
     border-top: 2px black dashed;
     display: block;
 }
+
+/* customize navbar */
+
+.bg-dark {
+    background-color: rgb(91, 206, 250) !important;
+}
+
+.dropdown-item {
+    color: rgb(245, 168, 184);
+}
