@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import (Post, Response, Event, User)
+from core.models import (Post, Response, Event, User, Profile)
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetForm, PasswordResetView)
 from core.models import (Post, Response, Event)
