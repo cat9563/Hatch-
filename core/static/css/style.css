@@ -27,6 +27,15 @@ footer {
     background-color: lavender;
     border-top: 2px black dashed;
     display: block;
+    text-align: center;
+}
+
+footer ul li {
+    /* background-color: lavender; */
+    /* border-top: 2px black dashed; */
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /* customize navbar */

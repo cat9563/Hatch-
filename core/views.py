@@ -40,4 +40,11 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
 
         args = {'form': form}
-        return render(request, 'profile/change_password.html', args)
+        return render(request, 'profile/change_password.html', args
+                      
+def terms(request):
+    return render(request, 'terms.html')
+
+def privacy(request):
+    return render(request, 'privacy.html')
+                      
