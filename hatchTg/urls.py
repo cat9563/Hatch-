@@ -56,6 +56,8 @@ urlpatterns = [
         'registration/password_reset_complete.html'), name="password_reset_complete"),
     path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='terms'),
 ]
 
 if settings.DEBUG:
