@@ -20,9 +20,10 @@ from api import urls as api_urls
 from django.conf.urls.static import static 
 from django.views.generic import TemplateView
 from core import views
+from core import views as core_views
 from django.contrib.auth.views import ( 
 	PasswordResetView, PasswordResetDoneView, 
-	PasswordResetConfirmView, PasswordResetCompleteView, 
+	PasswordResetConfirmView, PasswordResetCompleteView,
 )
 from core.backends import MyRegistrationView
 
@@ -32,6 +33,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_urls)),
     path('accounts/', include('allauth.urls')),
+
+    path('profile/', core_views.profile, name='profile'),
+    path('profile/edit', core_views.edit_profile, name='edit_profile'),
+    path('change-password/', core_views.change_password, name='change_password'),
+
     path('about/', TemplateView.as_view(template_name='about.html'),
         name='about'),
     path('contact/', TemplateView.as_view(template_name='contact.html'),
@@ -46,6 +52,7 @@ urlpatterns = [
         name='dashboard'),
     path('messageBoard/', TemplateView.as_view(template_name='messageBoard.html'),
         name='messageBoard'),
+
     path('accounts/password/reset/', PasswordResetView.as_view(template_name=
         'registration/password_reset_form.html'), name="password_reset"),
     path('accounts/password/reset/done/', PasswordResetDoneView.as_view(template_name=
