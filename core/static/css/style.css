@@ -39,3 +39,53 @@ footer ul li {
 .dropdown-item {
     color: rgb(245, 168, 184);
 }
+
+/* dashboard */
+
+.container {
+    border: 5px dotted black;
+    display: inline-block;
+    margin: 10px;
+}
+
+.row {
+    border: 3px dashed blue;
+    /* display: inline-block; */
+}
+
+.col {
+    border: 1px solid magenta;
+}
+
+.ib {
+    display: inline-block;
+}
+
+.col1of2 {
+    float: left;
+    width: 45%;
+    margin: 10px;
+    align-items: center;
+}
+
+.col2of2 {
+    float: left;
+    width: 45%;
+    margin: 10px;
+}
+
+.goal {
+    margin: 10px;
+    justify-content: space-around;
+}
+
+.goal-row {
+    margin: 10px;
+    justify-content: space-around;
+}
+
+.note {
+    margin: 10px;
+    justify-content: space-around;
+    display: block;
+}
