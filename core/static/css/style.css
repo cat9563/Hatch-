@@ -11,12 +11,16 @@ header {
     background-color: rgb(200, 245, 237)
 }
 
-.newsfeed {
+/* .newsfeed {
     background-color: rgb(255, 226, 189);
     border: 5px black solid;
     text-align: center;
     margin: 20%;
     padding: 10%;
+} */
+
+.carousel-item {
+    height: 500px;
 }
 
 footer {
