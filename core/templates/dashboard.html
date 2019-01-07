@@ -5,4 +5,58 @@
 
 {% block content %}
     <p>Dashboard Content</p>
+
+<div>
+<div class="container"> 
+    <div class="container">Header Container
+        <div class="row">
+            <div class="col">Profile picture</div>
+            <div class="col">
+                <div class="col">Username</div>
+                <div class="col">Email address</div>
+            </div>
+            <div class="col">
+                <div class="col">Motivate Me!</div>
+                <div class="col">Badges</div>
+            </div>
+        </div>
+    </div>
+    <div class="container ib">
+    <div class="container col1of2">
+        <div class="container" style="margin: 10px">Goal Container
+            <div class="row">
+                {% comment %} <div class="col"> {% endcomment %}
+                    <div class="row goal-row">
+                        <div class="col col-4 goal">Goal 1</div>
+                        <div class="col col-4 goal">Goal 2</div>
+                    </div>
+                {% comment %} </div> {% endcomment %}
+            </div>
+            <div class="row">
+                {% comment %} <div class="col col-justify-content-around"> {% endcomment %}
+                    <div class="row goal-row">
+                        <div class="col col-4 goal">Goal 3</div>
+                        <div class="col col-4 goal">Goal 4</div>
+                    </div>
+                {% comment %} </div> {% endcomment %}
+            </div>
+        </div>
+        <div class="container" style="margin: 10px">Note Container
+            <div class="row">
+                <div class="col note">Note one
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="container col2of2">
+            <div class="row">
+                <div class="col col-justify-content-center col-align-items-center"> 
+                    <p>Cool Goal Meter Here!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock content %}
