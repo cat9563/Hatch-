@@ -291,7 +291,7 @@ position: relative;
 }
 
 .row {
-    border: 3px dashed blue;
+    /* border: 3px dashed blue; */
     /* display: inline-block; */
 }
 
@@ -330,4 +330,12 @@ position: relative;
     margin: 10px;
     justify-content: space-around;
     display: block;
+}
+
+.card {
+    margin: 4px;
+}
+
+.card-body2 {
+    padding: 2px;
 }
