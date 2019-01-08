@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'api',
     #third_party
+    'django_gravatar',
     'django_extensions',
     'debug_toolbar',
     'rest_framework',
