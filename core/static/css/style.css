@@ -1,4 +1,4 @@
-header {
+/* header {
     border: 2px;
     border-style: solid;
     border-color: black;
@@ -9,14 +9,6 @@ header {
     border-style: dotted;
     border-color: gray;
     background-color: rgb(200, 245, 237)
-}
-
-/* .newsfeed {
-    background-color: rgb(255, 226, 189);
-    border: 5px black solid;
-    text-align: center;
-    margin: 20%;
-    padding: 10%;
 } */
 
 .carousel-item {
@@ -47,6 +39,8 @@ footer ul li {
 .dropdown-item {
     color: rgb(245, 168, 184);
 }
+
+/* dashboard */
 
 .container {
     border: 5px dotted black;
@@ -95,3 +89,51 @@ footer ul li {
     justify-content: space-around;
     display: block;
 }
+
+/* dragula css */
+
+.gu-mirror {
+    position: fixed !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
+    opacity: 0.8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+  }
+  .gu-hide {
+    display: none !important;
+  }
+  .gu-unselectable {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  .gu-transit {
+    opacity: 0.2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+  }
+
+  /* Sign up */
+
+  .header-signup {
+    background-color: rgb(91, 206, 250);
+    color: #fff;
+    height: 50px;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    padding-left:   15px;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  }
+
+  .signup-form {
+      padding-left: 25px;
+      padding-top: 25px;
+  }
+
+  
