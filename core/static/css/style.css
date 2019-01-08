@@ -23,8 +23,6 @@ footer {
 }
 
 footer ul li {
-    /* background-color: lavender; */
-    /* border-top: 2px black dashed; */
     display: inline;
     margin-left: 10px;
     margin-right: 10px;
@@ -49,7 +47,7 @@ footer ul li {
 }
 
 .row {
-    border: 3px dashed blue;
+    /* border: 3px dashed blue; */
     /* display: inline-block; */
 }
 
