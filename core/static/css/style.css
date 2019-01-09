@@ -352,12 +352,26 @@ position: relative;
     display: block;
 }
 
-.card {
+.goal-card {
     margin: 4px;
     border: #ff3052 solid 2px;
+    overflow: scroll;
+    height: 200px;
+    
 }
 
 .card-body2 {
     padding: 2px;
     border: solid purple 2px;
+    height: 300px;
+}
+
+p {
+    overflow: scroll;
+}
+
+.card {
+    margin: 4px;
+    border: #ff3052 solid 2px;
+    height: 50px;
 }

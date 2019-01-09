@@ -1,10 +1,11 @@
 # from django.shortcuts import render
-from core.models import Post, Goal, Note, Event, Resource
+from core.models import Post, Goal, Note, Event, Resource, Task
 from rest_framework import generics
 from rest_framework.reverse import reverse
 from api.serializers import (
     PostSerializer,
     GoalSerializer, 
+    TaskSerializer,
     NoteSerializer, 
     EventSerializer, 
     ResourceSerializer
@@ -41,6 +42,17 @@ class GoalListView(generics.ListCreateAPIView):
     """
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+class TaskListView(generics.ListCreateAPIView):
+    """
+    Retrieves list of tasks
+    Allows users to submit new tasks
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

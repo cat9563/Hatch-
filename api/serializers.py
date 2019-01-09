@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Post, Response, Goal, Note, Event, Resource
+from core.models import Post, Response, Goal, Note, Event, Resource, Task
 
 class ResponseSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
@@ -36,8 +36,19 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = (
                     'id', 
                     'author', 
-                    'subgoal', 
+                    'title',
+                    'description', 
                     'created_at')
+
+class TaskSerializer(serializers.ModelSerializer):
+    goal = GoalSerializer(many=True, required=False)
+
+    class Meta:
+        model = Task
+        fields = (
+                    'id',
+                    'goal',
+                    'text')
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
