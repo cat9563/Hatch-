@@ -122,10 +122,6 @@ footer ul li {
     height: 300px;
 }
 
-p {
-    overflow: scroll;
-}
-
 .card {
     margin: 4px;
     border: #ff3052 solid 2px;
