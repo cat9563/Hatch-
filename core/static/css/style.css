@@ -11,10 +11,6 @@
     background-color: rgb(200, 245, 237)
 } */
 
-.carousel-item {
-    height: 500px;
-}
-
 footer {
     background-color: lavender;
     border-top: 2px black dashed;
@@ -43,6 +39,10 @@ footer ul li {
 .container {
     border: 5px dotted black;
     display: inline-block;
+    margin: 10px;
+}
+
+.container-clear {
     margin: 10px;
 }
 
