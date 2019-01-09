@@ -6,7 +6,9 @@ function addTask() {
     if (addTask) {
         addTask.addEventListener('click', function() {
             checklist.push(taskLine)
+            console.log('plus button clicked')
         })
     }
 }
 
+addTask()
