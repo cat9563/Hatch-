@@ -284,15 +284,28 @@ margin: 0;
 position: relative;
 }
 
+.lg-container {
+    border: 5px dotted black;
+    display: flex;
+    /* margin: 10px; */
+    padding: 0px;
+    justify-content: space-around;
+}
+
 .container {
     border: 5px dotted black;
     display: inline-block;
-    margin: 10px;
+    /* margin: 10px; */
+    padding: 0px;
 }
 
 .row {
-    /* border: 3px dashed blue; */
+    border: 3px dashed blue;
     /* display: inline-block; */
+    width: 100%;
+    padding: 0px;
+    justify-content: center;
+    margin: auto;
 }
 
 .col {
@@ -301,6 +314,10 @@ position: relative;
 
 .ib {
     display: inline-block;
+}
+
+.dflex {
+    display: flex;
 }
 
 .col1of2 {
@@ -314,11 +331,14 @@ position: relative;
     float: left;
     width: 45%;
     margin: 10px;
+    justify-content: space-around;
+    text-align: center;
 }
 
 .goal {
     margin: 10px;
     justify-content: space-around;
+    border: #ff9430 solid 2px;
 }
 
 .goal-row {
@@ -334,8 +354,10 @@ position: relative;
 
 .card {
     margin: 4px;
+    border: #ff3052 solid 2px;
 }
 
 .card-body2 {
     padding: 2px;
+    border: solid purple 2px;
 }
