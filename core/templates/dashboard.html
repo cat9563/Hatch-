@@ -4,11 +4,11 @@
 {% endblock title %}
 
 {% block content %}
-    <p>Dashboard Content</p>
+    {% comment %} <p>Dashboard Content</p> {% endcomment %}
 
 <div>
-<div class="container"> 
-    <div class="container">Header Container
+<!-- Header Container -->
+    <div class="lg-container">
         <div class="row">
             <div class="col">Profile picture</div>
             <div class="col">
@@ -21,21 +21,56 @@
             </div>
         </div>
     </div>
-    <div class="container ib">
-    <div class="container col1of2">
-        <div class="container" style="margin: 10px"><center>Goal Container</center>
+<!-- Large Container that holds goal container and note container -->
+    <div class="lg-container">
+        <div class="container ib col1of2">
+<!--  GOAL CONTAINER -->
+            <div class="container" style="margin: 10px"><center>Goal Container</center>
+                <div class="row d-flex justify-content-center">
+                    <div class="col col-sm-6">
+                       <div class="goal-card">
+                            <div class="card-body">
+<!-- Goal title as button to open modal -->                            
+                                <h5 class="ib card-title">Find a local therapist</h5>
+<!-- Modal text on front of card, not associated with checklist -->                                
+                                <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 1</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
+<!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+<!-- Checklist within the modal body -->
+                                            <div class="modal-body">
+                                                <button id='plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
+                                                <div class="input-group mb-3" id='checklist-task'>
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                        <input type="checkbox" aria-label="Checkbox for following text input">
+                                                        </div>
+                                                    </div>
+                                                        <input type="text" class="form-control" aria-label="Text input with checkbox">
+                                                </div>
+                                            </div>
+<!-- END of checklist within modal body -->                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card">
+                <div class="col col-sm-6">
+                    <div class="goal-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal 2</h5>
                         <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
@@ -46,7 +81,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="goal-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal 3</h5>
                         <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
@@ -54,7 +89,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="goal-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal 4</h5>
                         <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
@@ -65,7 +100,7 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="goal-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal 5</h5>
                         <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
@@ -73,7 +108,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="goal-card">
                     <div class="card-body">
                         <h5 class="card-title">Goal 6</h5>
                         <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
@@ -83,6 +118,8 @@
             </div>
 
         </div>
+
+        {% comment %} NOTE CONTAINER {% endcomment %}
         <div class="container" style="margin: 10px"><center>Note Container</center>
             <div class="row">
                 <div class="card">
@@ -120,13 +157,13 @@
     </div>
         <div class="container col2of2">
             <div class="row">
-                <div class="col col-justify-content-center col-align-items-center"> 
-                    <p>Cool Goal Meter Here!</p>
+                <div class="col col-10 col-justify-content-center"> 
+                    Cool Goal Meter Here!
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+{% comment %} </div> {% endcomment %}
+</div> 
 
 {% endblock content %}

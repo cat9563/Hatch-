@@ -36,10 +36,19 @@ footer ul li {
 
 /* dashboard */
 
+.lg-container {
+    border: 5px dotted black;
+    display: flex;
+    /* margin: 10px; */
+    padding: 0px;
+    justify-content: space-around;
+}
+
 .container {
     border: 5px dotted black;
     display: inline-block;
-    margin: 10px;
+    /* margin: 10px; */
+    padding: 0px;
 }
 
 .container-clear {
@@ -47,8 +56,12 @@ footer ul li {
 }
 
 .row {
-    /* border: 3px dashed blue; */
+    border: 3px dashed blue;
     /* display: inline-block; */
+    width: 100%;
+    padding: 0px;
+    justify-content: center;
+    margin: auto;
 }
 
 .col {
@@ -57,6 +70,10 @@ footer ul li {
 
 .ib {
     display: inline-block;
+}
+
+.dflex {
+    display: flex;
 }
 
 .col1of2 {
@@ -70,11 +87,14 @@ footer ul li {
     float: left;
     width: 45%;
     margin: 10px;
+    justify-content: space-around;
+    text-align: center;
 }
 
 .goal {
     margin: 10px;
     justify-content: space-around;
+    border: #ff9430 solid 2px;
 }
 
 .goal-row {
@@ -88,7 +108,29 @@ footer ul li {
     display: block;
 }
 
-/* dragula css */
+.goal-card {
+    margin: 4px;
+    border: #ff3052 solid 2px;
+    overflow: scroll;
+    height: 200px;
+    
+}
+
+.card-body2 {
+    padding: 2px;
+    border: solid purple 2px;
+    height: 300px;
+}
+
+p {
+    overflow: scroll;
+}
+
+.card {
+    margin: 4px;
+    border: #ff3052 solid 2px;
+    height: 50px;
+}
 
 .gu-mirror {
     position: fixed !important;
@@ -133,5 +175,3 @@ footer ul li {
       padding-left: 25px;
       padding-top: 25px;
   }
-
-  
