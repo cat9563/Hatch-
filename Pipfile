@@ -14,6 +14,7 @@ pillow = "*"
 djangorestframework = "*"
 django-registration-redux = "==2.0"
 django-allauth = "*"
+"django-gravatar2" = "*"
 
 [dev-packages]
 pylint = "*"

@@ -4,11 +4,38 @@
     Registration Form - {{ block.super }} 
 {% endblock title %}
 
-{% block content %}
+{% comment %} {% block content %}
     <h1>Registration Form</h1>
     <form role="form" action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit" />
     </form>
-{% endblock content %}
+{% endblock content %}  {% endcomment %}
+
+
+{% block content %}
+<div class="container register-container">
+    <div class="header-signup">
+        <h2>Sign up</h2>
+  </div>
+  <div class="signup-form">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        <button type="submit">Sign up</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
