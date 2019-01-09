@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import (Post, Response, Event, User, Profile)
+from core.models import (Post, Response, Event, User, Profile, Goal, Task)
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetForm, PasswordResetView)
 
@@ -26,10 +26,20 @@ class EventAdmin(admin.ModelAdmin):
                     'created_at']
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ("username", "email")
+    fields = ('username', 'email')
+
+class GoalAdmin(admin.ModelAdmin):
+    model = Goal
+    list_display = ['author', 'title', 'description', 'created_at']
+
+class TaskAdmin(admin.ModelAdmin):
+    model = Task
+    list_display = ['goal', 'text']
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Response, ResponseAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(Goal, GoalAdmin)
+admin.site.register(Task, TaskAdmin)
