@@ -11,10 +11,6 @@
     background-color: rgb(200, 245, 237)
 } */
 
-.carousel-item {
-    height: 500px;
-}
-
 footer {
     background-color: lavender;
     border-top: 2px black dashed;
@@ -38,6 +34,11 @@ footer ul li {
     color: rgb(245, 168, 184);
 }
 
+/* news feed */
+.carousel-caption {
+    ;
+}
+
 /* dashboard */
 
 .lg-container {
@@ -53,6 +54,10 @@ footer ul li {
     display: inline-block;
     /* margin: 10px; */
     padding: 0px;
+}
+
+.container-clear {
+    margin: 10px;
 }
 
 .row {
@@ -122,9 +127,9 @@ footer ul li {
     height: 300px;
 }
 
-p {
+/* p {
     overflow: scroll;
-}
+} */
 
 .card {
     margin: 4px;
