@@ -34,6 +34,11 @@ footer ul li {
     color: rgb(245, 168, 184);
 }
 
+/* news feed */
+.carousel-caption {
+    ;
+}
+
 /* dashboard */
 
 .lg-container {
@@ -122,9 +127,9 @@ footer ul li {
     height: 300px;
 }
 
-p {
+/* p {
     overflow: scroll;
-}
+} */
 
 .card {
     margin: 4px;
