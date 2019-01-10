@@ -55,20 +55,17 @@ class Response(Timestamp):
 
 
 class Goal(Timestamp):
-    author = models.ForeignKey("User", on_delete=models.CASCADE)
+    author = models.ForeignKey("User", on_delete=models.CASCADE, related_name="goals")
     title = models.CharField(max_length = 255, null=True)
-    description = models.TextField(max_length = 255, null=True)
-    subgoal = models.CharField(max_length=255, blank=False)
 
 
 class Task(models.Model):
-    goal = models.ForeignKey("Goal", on_delete=models.CASCADE)
+    goal = models.ForeignKey("Goal", on_delete=models.CASCADE, related_name="tasks")
     text = models.CharField(max_length=255, blank=False)
 
 
 class Note(Timestamp):
     author = models.ForeignKey("User", on_delete=models.CASCADE)
-    goal = models.ForeignKey("Goal", on_delete=models.CASCADE)
     text = models.TextField(blank=False, null=True)
 
 class Event(Timestamp):
