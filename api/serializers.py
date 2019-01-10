@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from core.models import (
-    # Post, 
-    # Response, 
+from core.models import ( 
     Goal, 
     Task,
     Note, 
@@ -9,44 +7,22 @@ from core.models import (
     # Resource, 
 )
 
-# class ResponseSerializer(serializers.ModelSerializer):
-#     author = serializers.StringRelatedField(read_only=True)
-
-#     class Meta:
-#         model = Response
-#         fields = (
-#                     'id', 
-#                     'author', 
-#                     'text', 
-#                     'created_at')
-
-# class PostSerializer(serializers.ModelSerializer):
-#     post = serializers.StringRelatedField()
-#     responses = ResponseSerializer(many=True, required=False)
-#     author = serializers.SlugRelatedField(slug_field="username", read_only=True)
-
-#     class Meta:
-#         model = Post
-#         fields = (
-#                     'id', 
-#                     'author', 
-#                     'title', 
-#                     'post', 
-#                     'text', 
-#                     'created_at', 
-#                     'responses')
-
 class TaskSerializer(serializers.ModelSerializer):
+    task_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='task-detail')
 
     class Meta:
         model = Task
         fields = (
                     'id',
-                    'text')
+                    'text',
+                    'task_detail_link')
 
 class GoalSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
-    tasks = TaskSerializer(many=True, required=True)
+    tasks = TaskSerializer(many=True, read_only=True)
+    goal_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='goal-detail')
 
     class Meta:
         model = Goal
@@ -55,7 +31,8 @@ class GoalSerializer(serializers.ModelSerializer):
                     'author', 
                     'title',
                     'tasks', 
-                    'created_at')
+                    'created_at',
+                    'goal_detail_link')
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)

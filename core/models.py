@@ -55,7 +55,7 @@ class Response(Timestamp):
 
 
 class Goal(Timestamp):
-    author = models.ForeignKey("User", on_delete=models.CASCADE)
+    author = models.ForeignKey("User", on_delete=models.CASCADE, related_name="goals")
     title = models.CharField(max_length = 255, null=True)
 
 
