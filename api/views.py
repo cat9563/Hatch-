@@ -12,6 +12,9 @@ from api.serializers import (
 )
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -46,6 +49,7 @@ class GoalListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
 class TaskListView(generics.ListCreateAPIView):
     """
     Retrieves list of tasks
@@ -53,6 +57,7 @@ class TaskListView(generics.ListCreateAPIView):
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

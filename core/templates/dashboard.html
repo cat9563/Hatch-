@@ -25,15 +25,15 @@
     <div class="lg-container">
         <div class="container ib col1of2">
 <!--  GOAL CONTAINER -->
-            <div class="container" style="margin: 10px"><center>Goal Container</center>
+            <div class="goal-container" style="margin: 10px"><center>Goal Container</center>
                 <div class="row d-flex justify-content-center">
                     <div class="col col-sm-6">
                        <div class="goal-card">
-                            <div class="card-body">
-<!-- Goal title as button to open modal -->                            
-                                <h5 class="ib card-title">Find a local therapist</h5>
+                            <div class="card-body">                 
+                                <h5 class="ib card-title">
+                                {{ goal.title }}</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
+                                <p class="card-text">{{ goal.description }}</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
 <!-- Modal -->
@@ -41,7 +41,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ goal.title }}</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -57,7 +57,8 @@
                                                         <input type="checkbox" aria-label="Checkbox for following text input">
                                                         </div>
                                                     </div>
-                                                        <input type="text" class="form-control" aria-label="Text input with checkbox">
+                                                        <input type="text" class="form-control" aria-label="Text input with checkbox"
+                                                        id='new-task-text'>
                                                 </div>
                                                 </li>
                                                 </ul>
@@ -65,7 +66,7 @@
 <!-- END of checklist within modal body -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-canges'>Save changes</button>
+                                                <button type="button" class="btn btn-primary" id='save-changes'>Save changes</button>
                                             </div>
                                         </div>
                                     </div>

@@ -62,6 +62,7 @@ class Goal(Timestamp):
 
 
 class Task(models.Model):
+    author = models.ForeignKey("User", on_delete=models.CASCADE, blank=False, null=False)
     goal = models.ForeignKey("Goal", on_delete=models.CASCADE)
     text = models.CharField(max_length=255, blank=False)
 
