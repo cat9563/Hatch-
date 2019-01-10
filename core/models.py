@@ -60,7 +60,7 @@ class Goal(Timestamp):
 
 
 class Task(models.Model):
-    goal = models.ForeignKey("Goal", on_delete=models.CASCADE)
+    goal = models.ForeignKey("Goal", on_delete=models.CASCADE, related_name="tasks")
     text = models.CharField(max_length=255, blank=False)
 
 
