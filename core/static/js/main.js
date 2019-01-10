@@ -1,59 +1,63 @@
-// // create a new line item
-// var newEl = document.createElement('li');
-// console.log(newEl)
-// // create a text node that says 'testing'
-// var newText = document.createTextNode('testing');
-// // console.log(newText)
-// // grab the element 'checklist'
-// var position = document.getElementById('checklist');
-// // console.log(position)
-// // new line item containing the text node that says 'testing'
-// var newTask = newEl.appendChild(newText);
-// // add new line containing text node that says 'testing' onto element 'checklist'
-// position.appendChild(newTask)
+dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
+
 
 
 var addLine = document.getElementById('plus-button')
-addLine.addEventListener('click', addTask)
-
-
+addLine.addEventListener('click', addTask2)
 
 function addTask() {
-    console.log('Beginning of Function')
     if (addLine) {
-        // addLine.addEventListener('click', function() {
             var newEl = document.createElement('li');
             newEl.innerText = 'HALP'
-            // console.log(newEl)
-            // var newText = document.createTextNode('test');
-            // console.log(newText)
-            // var newTask = newEl.appendChild(newText);
             var position = document.getElementById('checklist');
         position.appendChild(newEl)
-        
-        
-        // console.log(newTask)
-        console.log('end of function')
+        }}
+
+function addTask2() {
+    if (addLine) {
+            var newEl = document.createElement('li');
+            newEl.innerHTML = taskHTML()
+            var position = document.getElementById('checklist');
+        position.appendChild(newEl)
         }}
         
 
-    // var addLine = document.getElementById('plus-button')
-
-
-
-function addChecklistTask() {
-return`
-    <li>
-        <div class="input-group mb-3" id='checklist-task'>
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for following text input">
+function taskHTML() {
+return `
+    <div class='input-group mb-3' id='checklist-task'>
+            <div class='input-group-prepend'>
+                <div class='input-group-text'>
+                <input type='checkbox' aria-label='Checkbox for following text input'>
                 </div>
             </div>
-            <input type="text" class="form-control" aria-label="Text input with checkbox">
+            <input type='text' class='form-control' aria-label='Text input with checkbox'>
         </div>
-    </li>
-`
+        `
 }
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
+function postNewTask(){
+    let task = {
+        text: $('#new-task-text').val()
+    }
+    $.ajax({
+        url: '/api/tasks/',
+        method: 'POST',
+        data: JSON.stringify(task), 
+        contentType: 'application/json'
+    }).then(function (task) {
+
+        addTaskToList(task)
+        toggleModal();
+    });
+}
+
+
+function addTaskToList(task){
+    document.getElementById('checklist').insertAdjacentHTML('afterbegin', taskHTML(task));
+    
+}
+function saveTask(){
+    let taskSubmit = document.getElementById('save-changes');
+    if (taskSubmit) {
+        taskSubmit.addEventListener('click', postNewTask);
+    }}

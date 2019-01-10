@@ -41,7 +41,7 @@ class GoalSerializer(serializers.ModelSerializer):
                     'created_at')
 
 class TaskSerializer(serializers.ModelSerializer):
-    goal = GoalSerializer(many=True, required=False)
+    goal = GoalSerializer(many=False, read_only=True)
 
     class Meta:
         model = Task
