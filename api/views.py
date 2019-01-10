@@ -1,50 +1,74 @@
 # from django.shortcuts import render
-from core.models import Post, Goal, Note, Event, Resource, Task
-from rest_framework import generics
-from rest_framework.reverse import reverse
+from core.models import (
+    # Post, 
+    Goal, 
+    Note, 
+    Event, 
+    # Resource, 
+    Task
+)
 from api.serializers import (
-    PostSerializer,
+    # PostSerializer,
     GoalSerializer, 
     TaskSerializer,
     NoteSerializer, 
     EventSerializer, 
-    ResourceSerializer
+    # ResourceSerializer
 )
+from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.views import APIView
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         # 'users': reverse('user-list', request=request, format=format),
-        'posts': reverse('post-list', request=request, format=format),
+        # 'posts': reverse('post-list', request=request, format=format),
         'goals': reverse('goal-list', request=request, format=format),
+        'tasks': reverse('task-list', request=request, format=format),
         'notes': reverse('note-list', request=request, format=format),
         'events': reverse('event-list', request=request, format=format),
-        'resources': reverse('resource-list', request=request, format=format),
+        # 'resources': reverse('resource-list', request=request, format=format),
     })
 
-class PostListView(generics.ListCreateAPIView):
-    """
-    Retrieves list of posts
-    Allows users to submit new posts
-    """
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+# class PostListView(generics.ListCreateAPIView):
+#     """
+#     Retrieves list of posts
+#     Allows users to submit new posts
+#     """
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user)
 
-class GoalListView(generics.ListCreateAPIView):
-    """
-    Retrieves list of goals
-    Allows users to submit new goals
-    """
-    queryset = Goal.objects.all()
-    serializer_class = GoalSerializer
+# class GoalListView(generics.ListCreateAPIView):
+#     """
+#     Retrieves list of goals
+#     Allows users to submit new goals
+#     """
+#     queryset = Goal.objects.all()
+#     serializer_class = GoalSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user)
+
+class GoalListCreateView(APIView):
+    def get(self, request):
+        goals = Goal.objects.filter(author=request.user)
+        serializer = GoalSerializer(goals, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = GoalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user)
+            return Response(serializer.data, status=201)
+
+        return Response(serializer.errors, status=400)
 
 class TaskListView(generics.ListCreateAPIView):
     """
@@ -79,13 +103,13 @@ class EventListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class ResourceListView(generics.ListCreateAPIView):
-    """
-    Retrieves list of resources
-    Allows users to submit new resources
-    """
-    queryset = Resource.objects.all()
-    serializer_class = ResourceSerializer
+# class ResourceListView(generics.ListCreateAPIView):
+#     """
+#     Retrieves list of resources
+#     Allows users to submit new resources
+#     """
+#     queryset = Resource.objects.all()
+#     serializer_class = ResourceSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user)
