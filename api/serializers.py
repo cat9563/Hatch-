@@ -1,35 +1,28 @@
 from rest_framework import serializers
-from core.models import Post, Response, Goal, Note, Event, Resource, Task
+from core.models import ( 
+    Goal, 
+    Task,
+    Note, 
+    Event, 
+    # Resource, 
+)
 
-class ResponseSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
-
-    class Meta:
-        model = Response
-        fields = (
-                    'id', 
-                    'author', 
-                    'text', 
-                    'created_at')
-
-class PostSerializer(serializers.ModelSerializer):
-    post = serializers.StringRelatedField()
-    responses = ResponseSerializer(many=True, required=False)
-    author = serializers.SlugRelatedField(slug_field="username", read_only=True)
+class TaskSerializer(serializers.ModelSerializer):
+    task_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='task-detail')
 
     class Meta:
-        model = Post
+        model = Task
         fields = (
-                    'id', 
-                    'author', 
-                    'title', 
-                    'post', 
-                    'text', 
-                    'created_at', 
-                    'responses')
+                    'id',
+                    'text',
+                    'task_detail_link')
 
 class GoalSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+    tasks = TaskSerializer(many=True, read_only=True)
+    goal_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='goal-detail')
 
     class Meta:
         model = Goal
@@ -37,18 +30,9 @@ class GoalSerializer(serializers.ModelSerializer):
                     'id', 
                     'author', 
                     'title',
-                    'description', 
-                    'created_at')
-
-class TaskSerializer(serializers.ModelSerializer):
-    goal = GoalSerializer(many=True, required=False)
-
-    class Meta:
-        model = Task
-        fields = (
-                    'id',
-                    'goal',
-                    'text')
+                    'tasks', 
+                    'created_at',
+                    'goal_detail_link')
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
@@ -80,16 +64,16 @@ class EventSerializer(serializers.ModelSerializer):
                     'link',
                     'created_at')
 
-class ResourceSerializer(serializers.ModelSerializer):
+# class ResourceSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Resource
-        fields = (
-                    'id', 
-                    'business_name',
-                    'business_location',
-                    'description',
-                    'phone',
-                    'email',
-                    'website',
-                    'created_at')
+#     class Meta:
+#         model = Resource
+#         fields = (
+#                     'id', 
+#                     'business_name',
+#                     'business_location',
+#                     'description',
+#                     'phone',
+#                     'email',
+#                     'website',
+#                     'created_at')
