@@ -20,6 +20,11 @@ from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticat
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import generics
 from rest_framework.views import APIView
+from rest_framework.permissions import (
+    BasePermission,
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated
+)
 
 
 @api_view(['GET'])
@@ -35,7 +40,12 @@ def api_root(request, format=None):
 
 
 class GoalListCreateView(generics.ListCreateAPIView):
+    """
+    Retrieves list of only the user's goals
+    Allows user to create goals
+    """
     serializer_class = GoalSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user.goals
@@ -50,6 +60,7 @@ class GoalDetailView(generics.RetrieveDestroyAPIView):
     """
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -64,6 +75,7 @@ class TaskListView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
 
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
@@ -74,6 +86,7 @@ class TaskDetailView(generics.RetrieveDestroyAPIView):
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated,)
 
 class NoteListView(generics.ListCreateAPIView):
     """
@@ -82,6 +95,7 @@ class NoteListView(generics.ListCreateAPIView):
     """
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -93,6 +107,7 @@ class EventListView(generics.ListCreateAPIView):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

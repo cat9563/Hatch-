@@ -7,8 +7,8 @@ var myChart = new Chart(ctx, {
             label: '',
             data: [7, 3],
             backgroundColor: [
-                '#05A80F',
-                '#FFF700'
+                '#ee82ee',
+                '#fdfd96'
             ],
             borderWidth: 1
         }]
