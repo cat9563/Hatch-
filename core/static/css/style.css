@@ -44,7 +44,7 @@ footer ul li {
 .lg-container {
     /* border: 5px dotted black; */
     display: flex;
-    /* margin: 10px; */
+    margin-top: 80px;
     padding: 0px;
     justify-content: space-around;
 }
@@ -145,25 +145,25 @@ footer ul li {
     opacity: 0.8;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
-  }
-  .gu-hide {
+}
+.gu-hide {
     display: none !important;
-  }
-  .gu-unselectable {
+}
+.gu-unselectable {
     -webkit-user-select: none !important;
     -moz-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
-  }
-  .gu-transit {
+}
+.gu-transit {
     opacity: 0.2;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
     filter: alpha(opacity=20);
-  }
+}
 
-  /* Sign up */
+/* Sign up */
 
-  .header-signup {
+.header-signup {
     background-color: rgb(91, 206, 250);
     color: #fff;
     height: 50px;
@@ -175,7 +175,7 @@ footer ul li {
     line-height: inherit;
     white-space: nowrap;
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  }
+}
 
   .signup-form {
       padding-left: 25px;
@@ -231,3 +231,7 @@ footer ul li {
     min-width: 380px;
     overflow: scroll;
   }
+.signup-form {
+    padding-left: 25px;
+    padding-top: 25px;
+}
