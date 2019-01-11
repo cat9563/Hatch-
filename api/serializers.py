@@ -37,7 +37,7 @@ class GoalSerializer(serializers.ModelSerializer):
                     'id', 
                     'author', 
                     'title',
-                    'description', 
+                    # 'description', 
                     'created_at')
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -47,6 +47,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = (
                     'id',
+                    'author',
                     'goal',
                     'text')
 

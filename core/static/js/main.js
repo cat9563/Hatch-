@@ -53,7 +53,6 @@ function postNewTask(){
         addTaskToList(task);
     });
 
-    // csrfSafeMethod()
 }
 
 function getUserGoals(){
@@ -141,6 +140,7 @@ function goalHTML() {
 // });
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
+    console.log(csrftoken);
     console.log('Inside setupCSRFAjax function')
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
@@ -158,3 +158,5 @@ console.log('do we make it into csrfSafeMethod?')
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
+
+setupCSRFAjax()

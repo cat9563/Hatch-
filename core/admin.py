@@ -30,11 +30,11 @@ class UserAdmin(admin.ModelAdmin):
 
 class GoalAdmin(admin.ModelAdmin):
     model = Goal
-    list_display = ['author', 'title', 'description', 'created_at']
+    list_display = ['author', 'title', 'created_at']
 
 class TaskAdmin(admin.ModelAdmin):
     model = Task
-    list_display = ['goal', 'text']
+    list_display = ['author', 'goal', 'text']
 
 
 admin.site.register(Post, PostAdmin)
