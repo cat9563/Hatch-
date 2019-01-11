@@ -1,47 +1,52 @@
 # from django.shortcuts import render
-from core.models import Post, Goal, Note, Event, Resource, Task
-from rest_framework import generics
-from rest_framework.reverse import reverse
+from core.models import (
+    Goal, 
+    Note, 
+    Event, 
+    # Resource, 
+    Task
+)
 from api.serializers import (
-    PostSerializer,
     GoalSerializer, 
     TaskSerializer,
     NoteSerializer, 
     EventSerializer, 
-    ResourceSerializer
+    # ResourceSerializer
 )
+from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
 from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework import generics
+from rest_framework.views import APIView
 
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         # 'users': reverse('user-list', request=request, format=format),
-        'posts': reverse('post-list', request=request, format=format),
         'goals': reverse('goal-list', request=request, format=format),
+        'tasks': reverse('task-list', request=request, format=format),
         'notes': reverse('note-list', request=request, format=format),
         'events': reverse('event-list', request=request, format=format),
-        'resources': reverse('resource-list', request=request, format=format),
+        # 'resources': reverse('resource-list', request=request, format=format),
     })
 
-class PostListView(generics.ListCreateAPIView):
-    """
-    Retrieves list of posts
-    Allows users to submit new posts
-    """
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+
+class GoalListCreateView(generics.ListCreateAPIView):
+    serializer_class = GoalSerializer
+
+    def get_queryset(self):
+        return self.request.user.goals
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class GoalListView(generics.ListCreateAPIView):
+class GoalDetailView(generics.RetrieveDestroyAPIView):
     """
-    Retrieves list of goals
-    Allows users to submit new goals
+    Retrieves details of one goal
+    Allows users to destroy their goals
     """
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
@@ -61,6 +66,14 @@ class TaskListView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+class TaskDetailView(generics.RetrieveDestroyAPIView):
+    """
+    Retrieves details of one task
+    Allows users to destroy their tasks
+    """
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
 
 class NoteListView(generics.ListCreateAPIView):
     """
@@ -84,13 +97,13 @@ class EventListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class ResourceListView(generics.ListCreateAPIView):
-    """
-    Retrieves list of resources
-    Allows users to submit new resources
-    """
-    queryset = Resource.objects.all()
-    serializer_class = ResourceSerializer
+# class ResourceListView(generics.ListCreateAPIView):
+#     """
+#     Retrieves list of resources
+#     Allows users to submit new resources
+#     """
+#     queryset = Resource.objects.all()
+#     serializer_class = ResourceSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user)
