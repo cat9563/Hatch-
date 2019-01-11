@@ -29,10 +29,10 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = (
                     'id', 
                     'author', 
-                    'title',
-                    'tasks', 
+                    'title', 
                     'created_at',
-                    'goal_detail_link')
+                    'goal_detail_link', 
+                    'tasks')
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
