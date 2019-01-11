@@ -18,6 +18,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.views import APIView
+from rest_framework.permissions import (
+    BasePermission,
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated
+)
 
 
 @api_view(['GET'])
@@ -33,7 +38,12 @@ def api_root(request, format=None):
 
 
 class GoalListCreateView(generics.ListCreateAPIView):
+    """
+    Retrieves list of only the user's goals
+    Allows user to create goals
+    """
     serializer_class = GoalSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return self.request.user.goals
@@ -48,6 +58,7 @@ class GoalDetailView(generics.RetrieveDestroyAPIView):
     """
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
+    permission_classes = (IsAuthenticated,)
 
 class TaskListView(generics.ListCreateAPIView):
     """
@@ -56,6 +67,7 @@ class TaskListView(generics.ListCreateAPIView):
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -67,6 +79,7 @@ class TaskDetailView(generics.RetrieveDestroyAPIView):
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated,)
 
 class NoteListView(generics.ListCreateAPIView):
     """
@@ -75,6 +88,7 @@ class NoteListView(generics.ListCreateAPIView):
     """
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -86,6 +100,7 @@ class EventListView(generics.ListCreateAPIView):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
