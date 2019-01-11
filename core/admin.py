@@ -6,7 +6,8 @@ from core.models import (
     User, 
     Profile, 
     Goal, 
-    Task)
+    Task,
+    Note)
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.views import (PasswordResetCompleteView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetForm, PasswordResetView)
 
@@ -43,6 +44,10 @@ class TaskAdmin(admin.ModelAdmin):
     model = Task
     list_display = ['goal', 'text']
 
+class NoteAdmin(admin.ModelAdmin):
+    model = Task
+    list_display = ['author', 'text']
+
 
 # admin.site.register(Post, PostAdmin)
 # admin.site.register(Response, ResponseAdmin)
@@ -50,3 +55,4 @@ admin.site.register(Event, EventAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(Task, TaskAdmin)
+admin.site.register(Note,NoteAdmin)
