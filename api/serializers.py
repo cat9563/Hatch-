@@ -29,10 +29,22 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = (
                     'id', 
                     'author', 
-                    'title', 
-                    'created_at',
-                    'goal_detail_link', 
-                    'tasks')
+                    'title',
+                    'tasks', 
+                    'goal_detail_link',
+                    'created_at')
+
+class TaskSerializer(serializers.ModelSerializer):
+    # goal = GoalSerializer(many=False, required=False, read_only=True)
+
+    class Meta:
+        model = Task
+        fields = (
+                    'id',
+                    'author',
+                    'goal',
+                    'text')
+
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
