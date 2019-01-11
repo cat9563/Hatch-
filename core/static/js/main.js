@@ -40,7 +40,7 @@ function addTaskToList(task){
 
 function postNewTask(){
     let task = {
-        author: 'meagan',
+        author: 1,
         goal: 1,
         text: "fucking work please"
     }
