@@ -133,6 +133,7 @@ function noteHtml() {
 `
 }
 
+//gets the container for the notes and adds the notehtml
 function postNoteToJournal(note){
     document.getElementById("noteList").insertAdjacentHTML('afterbegin',
     noteHtml(note));
@@ -145,11 +146,13 @@ function postNoteToJournal(note){
 //     }
 // }
 
+//loads on page load
 function loadNotes(){
     getUserNotes(apiPage);
     apiPage =+ 1;
 }
 
+//get request to api 
 function getUserNotes(){
     $.ajax({
         method: "GET",
@@ -164,6 +167,7 @@ function getUserNotes(){
     })
 }
 
+//inserts them individual form the list of notes 
 function addNotesToJournal(notes){
     for (note of notes)
     document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
