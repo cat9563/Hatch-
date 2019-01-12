@@ -73,6 +73,14 @@ footer ul li {
     padding: 0px;
 }
 
+
+.goal-container {
+    border: 5px dotted black;
+    display: inline-block;
+    /* margin: 10px; */
+    padding: 0px;
+}
+
 .container-clear {
     margin: 10px;
 }
