@@ -1,5 +1,6 @@
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
+let apiPage = 1;
 
+dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
 
 var addLine = document.getElementById('plus-button')
@@ -69,44 +70,6 @@ function getUserGoals(){
     })
 }
 
-
-
-// function getUserNotes(){
-//     console.log(Yay);
-//     $.ajax({
-//         type: "GET",
-//         url: "/api/notes/",
-//         dataType: "json",
-//         data: {
-//             text: '${note.text}'
-//         }
-//     })
-// }
-
-// getUserNotes.text 
-
-$('.myapi').click( function() {
-    console.log('dude')
-    $.ajax({
-        url: "/api/notes/",
-        dataType: "json",
-        success :  function (data) {
-            $('#b1').text( data[0].text);
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
-
 function addGoalsToDashboard(goals){
 for (goal of goals){
     document.querySelector('.goal-card').insertAdjacentHTML('afterbegin', goalHTML(goal))
@@ -162,6 +125,51 @@ function goalHTML() {
                     </div>
     `
 }
+
+
+function noteHtml() {
+    return `   
+    <div class="item item-blue" id="blue"> ${note.text} </div>
+`
+}
+
+function postNoteToJournal(note){
+    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+// function postNewNotes(){
+
+//     let note = {
+//         text: $()
+//     }
+// }
+
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addNotesToJournal(response);
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+function addNotesToJournal(notes){
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+}
+ 
+loadNotes()
 
 // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
