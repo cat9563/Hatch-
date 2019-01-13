@@ -10,7 +10,11 @@ var submitTasks = document.getElementById('save-changes')
 submitTasks.addEventListener('click', postNewTask)
 
 var saveGoal = document.getElementById('save-goal')
-saveGoal.addEventListener('click', postNewGoal)
+saveGoal.addEventListener('click', function() {
+    postNewGoal();
+    closeModal();
+})
+
 
 // var showTasks = document.getElementById('expand')
 // showTasks.addEventListener('click', loadTasks)
@@ -56,7 +60,6 @@ function taskHTML(task) {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(){
-    let checklist = document.getElementById('checklist')
     let task = {
         author: 1,
         goal: 1,
@@ -130,7 +133,6 @@ function loadGoals() {
 }
 
 loadGoals()
-console.log('line 116')
 loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
@@ -145,9 +147,20 @@ function postNewGoal() {
         data: JSON.stringify(goal), 
         contentType: 'application/json'
     }).then(function() {
+        $('.goal-container').empty();
         loadGoals();
+        // closeModal();
     });
 
+}
+
+// function closeModal(){
+//     document.getElementById('newGoalModal').classList.remove('modal-backdrop fade show')
+// }
+
+function closeModal() {
+    let modal = document.getElementById('newGoalModal')
+    modal.classList.remove('modal-backdrop', 'fade', 'show');
 }
 
 
@@ -191,7 +204,7 @@ function goalHTML(goal) {
 <!-- END of checklist within modal body -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-canges'>Save</button>
+                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
                                             </div>
                                         </div>
                                     </div>
