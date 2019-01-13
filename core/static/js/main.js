@@ -19,11 +19,26 @@ saveGoal.addEventListener('click', postNewGoal)
 function addTask() {
     if (addLine) {
             var newEl = document.createElement('li');
-            newEl.innerHTML = taskHTML()
+            newEl.innerHTML = newTaskLineHTML()
             var position = document.getElementById('checklist');
-        position.appendChild(newEl)
-        }}
+        position.prepend(newEl)
+        }
+    // loadTasks()
+}
         
+function newTaskLineHTML(task) {
+    return `
+    <div class='input-group mb-3' id='checklist-task'>
+            <div class='input-group-prepend'>
+                <div class='input-group-text'>
+                <input type='checkbox' aria-label='Checkbox for following text input'>
+                </div>
+                <input type='text' class='form-control' aria-label='Text input with checkbox'></input>
+            </div>
+        </div>
+        `
+}
+
 
 function taskHTML(task) {
     return `
@@ -38,9 +53,8 @@ function taskHTML(task) {
         `
 }
 
-{/* <input type='text' class='form-control' aria-label='Text input with checkbox' ${ task.text }></input> */}
 
-// POST request to API to save tasks and calls addTaskToList
+// POST request to API to save tasks and calls loadTasks
 function postNewTask(){
     let task = {
         author: 1,
@@ -52,8 +66,8 @@ function postNewTask(){
         method: 'POST',
         data: JSON.stringify(task), 
         contentType: 'application/json'
-    }).then(function (task) {
-        addTaskToList(task);
+    }).then(function() {
+        loadTasks();
     });
 
 }
@@ -128,19 +142,11 @@ function postNewGoal() {
         method: 'POST',
         data: JSON.stringify(goal), 
         contentType: 'application/json'
-    }).then(function (goal) {
+    }).then(function() {
         loadGoals();
     });
 
 }
-
-// function addGoalToList(){
-//     if (addCard) {
-//         var newEl = document.createElement('div');
-//         newEl.innerHTML = newGoalHTML()
-//         var position = document.getElementById('goal-list');
-//     position.appendChild(newEl)
-//     }}
 
 
 function goalHTML(goal) {
