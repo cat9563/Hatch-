@@ -67,7 +67,7 @@ footer ul li {
 }
 
 .container {
-    /* border: 5px dotted black; */
+    border: 5px dotted black; 
     display: inline-block;
     /* margin: 10px; */
     padding: 0px;

@@ -1,5 +1,6 @@
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
+let apiPage = 1;
 
+dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
 
 var addLine = document.getElementById('plus-button')
@@ -124,6 +125,76 @@ function goalHTML() {
                     </div>
     `
 }
+
+// let isNoteIdEven = function(note){
+    //     let note = ${note.id}
+    //     return (note%2 === 0 ) ? true : false;
+    // }
+    
+    // alert(isNoteIdEven(note[0]))
+    
+    // psuedo code if note.id % 1 
+    // return   <div class="item item-blue" id="blue"> ${note.text} </div>
+    // else 
+    //return   <div class="item item-blue" id="pink"> ${note.text} </div>
+
+
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
+function noteHtml() {
+    return isEven(note.id)
+}
+
+//gets the container for the notes and adds the notehtml
+function postNoteToJournal(note){
+    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+// function postNewNotes(){
+
+//     let note = {
+//         text: $()
+//     }
+// }
+
+//loads on page load
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+//get request to api 
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addNotesToJournal(response);
+
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+//inserts them individual form the list of notes 
+function addNotesToJournal(notes){
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+}
+
+loadNotes()
 
 // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
