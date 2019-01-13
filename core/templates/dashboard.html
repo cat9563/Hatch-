@@ -35,14 +35,14 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add a new goal!</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Have a new goal?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="input-group mb-3">
-                        <input type="text" id='new-goal-title' class="form-control" placeholder="What's your new goal?" aria-label="What's your new goal?" aria-describedby="basic-addon2">
+                        <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -59,7 +59,7 @@
                                 <h5 class="ib card-title">
                                 {{ goal.title }}</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id='expand'>Expand</button>
 
 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,7 +91,7 @@
 <!-- END of checklist within modal body -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes'>Save changes</button>
+                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
                                             </div>
                                         </div>
                                     </div>
@@ -127,26 +127,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="goal-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 5</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="goal-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 6</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         {% comment %} NOTE CONTAINER {% endcomment %}

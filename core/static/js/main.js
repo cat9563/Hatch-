@@ -12,6 +12,9 @@ submitTasks.addEventListener('click', postNewTask)
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', postNewGoal)
 
+// var showTasks = document.getElementById('expand')
+// showTasks.addEventListener('click', loadTasks)
+
 
 function addTask() {
     if (addLine) {
@@ -22,19 +25,20 @@ function addTask() {
         }}
         
 
-function taskHTML() {
-return `
+function taskHTML(task) {
+    return `
     <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
                 </div>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox'>
+            <p> ${ task.text }</p>
         </div>
         `
 }
 
+{/* <input type='text' class='form-control' aria-label='Text input with checkbox' ${ task.text }></input> */}
 
 // POST request to API to save tasks and calls addTaskToList
 function postNewTask(){
@@ -56,11 +60,30 @@ function postNewTask(){
 
 
 // takes the new task posted to API and also adds the HTML element on the dashboard
-function addTaskToList(task){
+function addTaskToList(tasks){
+    for (task of tasks)
     document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task));
 }
 
 
+function getUserTasks(){
+    $.ajax({
+        method: 'GET',
+        url: `/api/tasks/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addTaskToList(response);
+
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
+    })
+}
+
+function loadTasks() {
+    getUserTasks(apiPage);
+    apiPage =+ 1;
+}
 
     // GET request to API for goals
 function getUserGoals(){
@@ -91,6 +114,8 @@ function loadGoals() {
 }
 
 loadGoals()
+console.log('line 116')
+loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -121,12 +146,12 @@ function postNewGoal() {
 function goalHTML(goal) {
     return `
     <div class="goal-card">
-                            <div class="card-body">
+                            <div class="card-body" data-id="${ goal.id }" data-title="${ goal.title }" data-author="${ goal.author }">
 <!-- Goal title as button to open modal -->                            
                                 <h5 class="ib card-title"> ${ goal.title }</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
                                 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id='expand'>Expand</button>
 
 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -158,7 +183,7 @@ function goalHTML(goal) {
 <!-- END of checklist within modal body -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-canges'>Save changes</button>
+                                                <button type="button" class="btn btn-primary" id='save-canges'>Save</button>
                                             </div>
                                         </div>
                                     </div>
@@ -171,8 +196,8 @@ function goalHTML(goal) {
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
-    console.log(csrftoken);
-    console.log('Inside setupCSRFAjax function')
+    // console.log(csrftoken);
+    // console.log('Inside setupCSRFAjax function')
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -180,12 +205,12 @@ function setupCSRFAjax () {
         }
       }
     })
-    console.log('do we make it to end of setupCSRFAjax?')
+    // console.log('do we make it to end of setupCSRFAjax?')
 }
 
 function csrfSafeMethod(method){
 // these HTTP methods do not require CSRF protection
-console.log('do we make it into csrfSafeMethod?')
+// console.log('do we make it into csrfSafeMethod?')
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
