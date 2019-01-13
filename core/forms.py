@@ -1,5 +1,5 @@
 from django import forms
-from core.models import User
+from core.models import User, Goal
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
@@ -18,3 +18,8 @@ class EditProfileForm(UserChangeForm):
             'username',
             'email',
         ]
+
+
+# class CreateGoalForm(forms.Form):
+#     title = forms.CharField(label="What's your Goal", max_length=255)
+

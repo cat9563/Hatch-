@@ -9,6 +9,9 @@ addLine.addEventListener('click', addTask)
 var submitTasks = document.getElementById('save-changes')
 submitTasks.addEventListener('click', postNewTask)
 
+var saveGoal = document.getElementById('save-goal')
+saveGoal.addEventListener('click', postNewGoal)
+
 
 function addTask() {
     if (addLine) {
@@ -33,14 +36,8 @@ return `
 }
 
 
-function addTaskToList(task){
-    document.getElementById('checklist').insertAdjacentHTML('afterbegin', taskHTML(task));
-    
-}
-
-
+// POST request to API to save tasks and calls addTaskToList
 function postNewTask(){
-
     let task = {
         author: 1,
         goal: 1,
@@ -57,11 +54,15 @@ function postNewTask(){
 
 }
 
-function loadGoals() {
-    getUserGoals(apiPage);
-    apiPage =+ 1;
+
+// takes the new task posted to API and also adds the HTML element on the dashboard
+function addTaskToList(task){
+    document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task));
 }
 
+
+
+    // GET request to API for goals
 function getUserGoals(){
     $.ajax({
         method: 'GET',
@@ -71,18 +72,51 @@ function getUserGoals(){
         console.log(response)
         addGoalsToDashboard(response);
 
-        // scene.update();
     }).fail(function(response){
         console.log("There was an issue getting the user's goals.");
     })
 }
 
+// Iterates over goals received from API, inserts the goalHTML onto page for each
+function addGoalsToDashboard(goals){
+    for (goal of goals)
+        document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal))
+}
+
+
+// Called at page load
+function loadGoals() {
+    getUserGoals(apiPage);
+    apiPage =+ 1;
+}
+
 loadGoals()
 
-function addGoalsToDashboard(goals){
-for (goal of goals)
-    document.getElementById('goal-list').insertAdjacentHTML('afterbegin', goalHTML(goal))
+// POST request to save new Goal to API, then add it to list on dashboard
+function postNewGoal() {
+    let goal = {
+        author: 1,
+        title: $('#new-goal-title').val()
+    }
+    $.ajax({
+        url: '/api/goals/',
+        method: 'POST',
+        data: JSON.stringify(goal), 
+        contentType: 'application/json'
+    }).then(function (goal) {
+        loadGoals();
+    });
+
 }
+
+// function addGoalToList(){
+//     if (addCard) {
+//         var newEl = document.createElement('div');
+//         newEl.innerHTML = newGoalHTML()
+//         var position = document.getElementById('goal-list');
+//     position.appendChild(newEl)
+//     }}
+
 
 function goalHTML(goal) {
     return `
@@ -135,19 +169,6 @@ function goalHTML(goal) {
     `
 }
 
-// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-
-// function csrfSafeMethod(method) {
-//     // these HTTP methods do not require CSRF protection
-//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-// }
-// $.ajaxSetup({
-//     beforeSend: function(xhr, settings) {
-//         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-//         }
-//     }
-// });
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
     console.log(csrftoken);
