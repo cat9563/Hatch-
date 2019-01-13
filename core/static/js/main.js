@@ -56,6 +56,7 @@ function taskHTML(task) {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(){
+    let checklist = document.getElementById('checklist')
     let task = {
         author: 1,
         goal: 1,
@@ -67,6 +68,7 @@ function postNewTask(){
         data: JSON.stringify(task), 
         contentType: 'application/json'
     }).then(function() {
+        $(".checklist").empty();
         loadTasks();
     });
 
