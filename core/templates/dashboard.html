@@ -25,15 +25,14 @@
     <div class="lg-container">
         <div class="container ib col1of2">
 <!--  GOAL CONTAINER -->
-            <div class="goal-container" style="margin: 10px"><center>Goal Container</center>
+            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
                 <div class="row d-flex justify-content-center">
                     <div class="col col-sm-6">
-                       <div class="goal-card">
+                       <div class="goal-card" data-goal="{{ goal.id }}">
                             <div class="card-body">                 
                                 <h5 class="ib card-title">
                                 {{ goal.title }}</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <p class="card-text">{{ goal.description }}</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
 <!-- Modal -->

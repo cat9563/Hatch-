@@ -1,5 +1,5 @@
 let apiPage = 1;
-
+let controller, scene;
 dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
 
@@ -40,10 +40,11 @@ function addTaskToList(task){
 
 
 function postNewTask(){
+
     let task = {
         author: 1,
         goal: 1,
-        text: "fucking work please"
+        text: $('#new-task-text').val()
     }
     $.ajax({
         url: '/api/tasks/',
@@ -56,33 +57,41 @@ function postNewTask(){
 
 }
 
+function loadGoals() {
+    getUserGoals(apiPage);
+    apiPage =+ 1;
+}
+
 function getUserGoals(){
     $.ajax({
         method: 'GET',
-        url: "api/goals/"
-    })
-    .done(function(response){
+        url: `/api/goals/`,
+        contentType: 'application/json'
+    }).done(function(response){
         console.log(response)
-        document.querySelector('.goal-card').innerHTML = "";
-        addGoalsToDashboard(response.results)
+        addGoalsToDashboard(response);
+
+        // scene.update();
     }).fail(function(response){
         console.log("There was an issue getting the user's goals.");
     })
 }
 
-function addGoalsToDashboard(goals){
-for (goal of goals){
-    document.querySelector('.goal-card').insertAdjacentHTML('afterbegin', goalHTML(goal))
-}}
+loadGoals()
 
-function goalHTML() {
+function addGoalsToDashboard(goals){
+for (goal of goals)
+    document.getElementById('goal-list').insertAdjacentHTML('afterbegin', goalHTML(goal))
+}
+
+function goalHTML(goal) {
     return `
     <div class="goal-card">
                             <div class="card-body">
 <!-- Goal title as button to open modal -->                            
-                                <h5 class="ib card-title">{{ goal.title }}</h5>
+                                <h5 class="ib card-title"> ${ goal.title }</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
+                                
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
 <!-- Modal -->
@@ -90,7 +99,7 @@ function goalHTML() {
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{ goal.title }}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">${ goal.title }</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
