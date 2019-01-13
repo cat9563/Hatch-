@@ -126,10 +126,22 @@ function goalHTML() {
     `
 }
 
-
+// let isNoteIdEven = function(note){
+    //     let note = ${note.id}
+    //     return (note%2 === 0 ) ? true : false;
+    // }
+    
+    // alert(isNoteIdEven(note[0]))
+    
+    // psuedo code if note.id % 1 
+    // return   <div class="item item-blue" id="blue"> ${note.text} </div>
+    // else 
+    //return   <div class="item item-blue" id="pink"> ${note.text} </div>
 function noteHtml() {
+    
     return `   
     <div class="item item-blue" id="blue"> ${note.text} </div>
+    <div class="item item-pink" id="pink"> ${note.text} </div>
 `
 }
 
@@ -162,6 +174,7 @@ function getUserNotes(){
         console.log(response)
         addNotesToJournal(response);
 
+
     }).fail(function(response){
         console.log("try again");
     })
@@ -172,7 +185,7 @@ function addNotesToJournal(notes){
     for (note of notes)
     document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
 }
- 
+
 loadNotes()
 
 // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
