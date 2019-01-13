@@ -137,12 +137,20 @@ function goalHTML() {
     // return   <div class="item item-blue" id="blue"> ${note.text} </div>
     // else 
     //return   <div class="item item-blue" id="pink"> ${note.text} </div>
+
+
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
 function noteHtml() {
-    
-    return `   
-    <div class="item item-blue" id="blue"> ${note.text} </div>
-    <div class="item item-pink" id="pink"> ${note.text} </div>
-`
+    return isEven(note.id)
 }
 
 //gets the container for the notes and adds the notehtml
