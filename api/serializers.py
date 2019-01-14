@@ -30,12 +30,14 @@ class GoalSerializer(serializers.ModelSerializer):
                     'id', 
                     'author', 
                     'title',
-                    'tasks', 
                     'goal_detail_link',
-                    'created_at')
+                    'created_at',
+                    'tasks',)
 
 class TaskSerializer(serializers.ModelSerializer):
     # goal = GoalSerializer(many=False, required=False, read_only=True)
+    task_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='task-detail')
 
     class Meta:
         model = Task
@@ -43,12 +45,15 @@ class TaskSerializer(serializers.ModelSerializer):
                     'id',
                     'author',
                     'goal',
-                    'text')
+                    'text',
+                    'task_detail_link')
 
 
 class NoteSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     goals = GoalSerializer(many=True, required=False)
+    note_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='note-detail')
 
     class Meta:
         model = Note
@@ -57,9 +62,12 @@ class NoteSerializer(serializers.ModelSerializer):
                     'author', 
                     'goals',
                     'text',
+                    'note_detail_link',
                     'created_at')
 
 class EventSerializer(serializers.ModelSerializer):
+    event_detail_link = serializers.HyperlinkedIdentityField(
+        view_name='event-detail')
 
     class Meta:
         model = Event
@@ -74,6 +82,7 @@ class EventSerializer(serializers.ModelSerializer):
                     'date',
                     'time',
                     'link',
+                    'event_detail_link',
                     'created_at')
 
 # class ResourceSerializer(serializers.ModelSerializer):

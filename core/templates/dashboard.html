@@ -10,32 +10,20 @@
 
 <div>
 <!-- Header Container -->
-    <div class="lg-container">
+    <div class="card" style="margin-top: 75px; margin-left: 15px; height: 210px; width: 700px; background-color: #fabad0;">
         <div class="row">
-
             <div class="col">
-                <center><img class="rounded-circle" src="{{ user|gravatar:200 }}"/></center>
+                <img class="rounded-circle resize" src="{{ user|gravatar:200 }}"/>
             </div>
-
             <div class="col">
-                <h2>@{{ user.username }}</h2>
-                <h2>{{ user.email }}</h2>
+                <h2>Welcome, {{ user.username }}</h2>
+                <body onload="randomQuote()">
+                    <div id="showQuotes"></div>
             </div>
-
-            <div class="col">
-<!--  Inspirational Quotes -->
-                <div id="showQuotes"></div><br>
-                <button type="button" class="btn btn-success" onClick="randomQuote()">Need Some Inspiration?</button>
-            </div>
-
-            <div class="col">
-                Badges
-            </div>
-
         </div>
     </div>
 <!-- Large Container that holds goal container and note container -->
-    <div class="lg-container">
+    {% comment %} <div class="lg-container"> {% endcomment %}
         <div class="container ib col1of2">
 <!--  GOAL CONTAINER -->
             <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
@@ -137,21 +125,23 @@
         </div>
 
         {% comment %} NOTE CONTAINER {% endcomment %}
-        <div class="container" style="margin: 10px" id="journal"><center>Note Container</center>
+        {% comment %} <div class="container" style="margin: 10px" id="journal"><center>Note Container</center> {% endcomment %}
             <div class="col-md-12 col-sm-6 my-col">
-            <div class="row">
-                <div class="container" id="noteList">
+                <div class="row">
+                    <p><center>Note Container</center></p>
+                    <div class="container" id="journal"></div>
                 </div>
-            </div>
-        </div>
+        {% comment %} </div> {% endcomment %}
     </div>
     </div>
-       <div class="container col2of2">
-            <h1>MY JOURNEY PROGRESS</h1>
+       <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
+       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
+            <h1><center>MY JOURNEY PROGRESS</center></h1>
             <div class="container-clear">
                 <canvas id="myChart"></canvas>
             </div>
-        </div>
+       </div>
+      </div>
     </div>
 </div> 
 

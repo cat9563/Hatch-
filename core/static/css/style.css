@@ -43,7 +43,7 @@ footer ul li {
 /* news feed */
 
 .carousel-item {
-  /* height: 100vh; */
+  /* max-height: 750px; */
   max-height: 600px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
@@ -73,6 +73,10 @@ footer ul li {
     padding: 0px;
 }
 
+/* img.resize {
+    max-width:90%;
+    max-height:90%;
+} */
 
 .goal-container {
     border: 5px dotted black;
@@ -161,11 +165,11 @@ footer ul li {
     overflow: scroll;
 } */
 
-.card {
+/* .card {
     margin: 4px;
     border: #ff3052 solid 2px;
     height: 50px;
-}
+} */
 
 .gu-mirror {
     position: fixed !important;
