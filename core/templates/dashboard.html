@@ -73,9 +73,14 @@
                                             </div>
 <!-- Checklist within the modal body -->
                                             <div class="modal-body">
+                                            <div class="progress">
+                                                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    <span id="current-progress"></span>
+                                                </div>
+                                            </div>
                                                 <button id='plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none" class='checklist'>                                     
-                                                <li><div class="input-group mb-3" id='checklist-task'>
+                                                {% comment %} <li><div class="input-group mb-3" id='checklist-task'>
                                                     <div class="input-group-prepend">
                                         
                                                         <div class="input-group-text">
@@ -85,16 +90,12 @@
                                                         <input type="text" class="form-control" aria-label="Text input with checkbox"
                                                         id='new-task-text'>
                                                 </div>
-                                                </li>
+                                                </li> {% endcomment %}
                                                 </ul>
                                             </div>
 <!-- END of checklist within modal body -->                                            
                                             <div class="modal-footer">
-                                            <div class="progress">
-                                                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                                    <span id="current-progress"></span>
-                                                </div>
-                                            </div>
+
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
                                             </div>

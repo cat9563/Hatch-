@@ -15,6 +15,10 @@ saveGoal.addEventListener('click', function() {
     closeModal();
 })
 
+// let checkTask = document.getElementById('checkbox')
+// checkTask.addEventListener('click', function() {
+// console.log('checked!')
+// })
 
 // var showTasks = document.getElementById('expand')
 // showTasks.addEventListener('click', loadTasks)
@@ -37,7 +41,7 @@ function newTaskLineHTML(task) {
                 <div class='input-group-text'>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
                 </div>
-                <input type='text' class='form-control' aria-label='Text input with checkbox'></input>
+                <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'></input>
             </div>
         </div>
         `
@@ -49,7 +53,7 @@ function taskHTML(task) {
     <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                <input type='checkbox' aria-label='Checkbox for following text input'>
+                <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox'>
                 </div>
             </div>
             <p> ${ task.text }</p>
@@ -81,9 +85,21 @@ function postNewTask(){
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
     for (task of tasks)
-    document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task));
-}
+    document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task)
+    )}
 
+
+// // function clickEvent() {
+// //     let checkboxes = document.querySelectorAll('input.checkbox')
+// //     console.log(checkboxes)
+// //         for (checkbox in checkboxes)
+// //         // if (checkbox) {
+// //         addEventListener('input', console.log('checked!'))
+// // }
+// let checklist = document.querySelectorAll('div.checklist')
+// let checkboxes = checklist.querySelectorAll('input.checkbox')
+// checkboxes.forEach(element => { console.log(element)})
+    
 
 function getUserTasks(){
     $.ajax({
@@ -93,6 +109,7 @@ function getUserTasks(){
     }).done(function(response){
         console.log(response)
         addTaskToList(response);
+        // clickEvent();
 
     }).fail(function(response){
         console.log("There was an issue getting the user's goals.");
@@ -102,6 +119,8 @@ function getUserTasks(){
 function loadTasks() {
     getUserTasks(apiPage);
     apiPage =+ 1;
+
+
 }
 
     // GET request to API for goals
@@ -192,7 +211,7 @@ function goalHTML(goal) {
                                                     <div class="input-group-prepend">
                                         
                                                         <div class="input-group-text">
-                                                        <input type="checkbox" aria-label="Checkbox for following text input">
+                                                        <input type="checkbox" aria-label="Checkbox for following text input" id='checkbox'>
                                                         </div>
                                                     </div>
                                                         <input type="text" class="form-control" aria-label="Text input with checkbox"
