@@ -22,14 +22,26 @@
       </div>
     </div> {% endcomment %}
 
-<div>
-   <button class="api">click me </button> 
-</div>
-<div id="jsonresp" style="margin-top: 100px">
-   <p><label> can I show my note text</label> <span id="my_text"></span></p>
-</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-number" data-type="plus" data-toggle="modal" data-target="#exampleModalCenter">
+  +
+</button>
 
-
+<!-- Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <label for="message-text" class="col-form-label">Journal Entry</label>
+        <textarea class="form-control" id="message-text"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
