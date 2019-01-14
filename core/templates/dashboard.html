@@ -1,4 +1,6 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load app_tags %}
+
 {% block title %}
     Dashboard - {{ block.super }} 
 {% endblock title %}
@@ -10,15 +12,26 @@
 <!-- Header Container -->
     <div class="lg-container">
         <div class="row">
-            <div class="col">Profile picture</div>
+
             <div class="col">
-                <div class="col">Username</div>
-                <div class="col">Email address</div>
+                <center><img class="rounded-circle" src="{{ user|gravatar:200 }}"/></center>
             </div>
+
             <div class="col">
-                <div class="col">Motivate Me!</div>
-                <div class="col">Badges</div>
+                <h2>@{{ user.username }}</h2>
+                <h2>{{ user.email }}</h2>
             </div>
+
+            <div class="col">
+<!--  Inspirational Quotes -->
+                <div id="showQuotes"></div><br>
+                <button type="button" class="btn btn-success" onClick="randomQuote()">Need Some Inspiration?</button>
+            </div>
+
+            <div class="col">
+                Badges
+            </div>
+
         </div>
     </div>
 <!-- Large Container that holds goal container and note container -->
@@ -151,11 +164,6 @@
     </div>
     </div>
        <div class="container col2of2">
-            <div class="row">
-                <div class="col col-10 col-justify-content-center"> 
-                    Meter Container
-                </div>
-            </div>
             <h1>MY JOURNEY PROGRESS</h1>
             <div class="container-clear">
                 <canvas id="myChart"></canvas>
