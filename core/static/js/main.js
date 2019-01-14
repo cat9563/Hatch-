@@ -1,5 +1,6 @@
+let apiPage = 1;
+let controller, scene;
 dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
-
 
 
 var addLine = document.getElementById('plus-button')
@@ -39,10 +40,11 @@ function addTaskToList(task){
 
 
 function postNewTask(){
+
     let task = {
         author: 1,
         goal: 1,
-        text: "fucking work please"
+        text: $('#new-task-text').val()
     }
     $.ajax({
         url: '/api/tasks/',
@@ -55,33 +57,41 @@ function postNewTask(){
 
 }
 
+function loadGoals() {
+    getUserGoals(apiPage);
+    apiPage =+ 1;
+}
+
 function getUserGoals(){
     $.ajax({
         method: 'GET',
-        url: "api/goals/"
-    })
-    .done(function(response){
+        url: `/api/goals/`,
+        contentType: 'application/json'
+    }).done(function(response){
         console.log(response)
-        document.querySelector('.goal-card').innerHTML = "";
-        addGoalsToDashboard(response.results)
+        addGoalsToDashboard(response);
+
+        // scene.update();
     }).fail(function(response){
         console.log("There was an issue getting the user's goals.");
     })
 }
 
-function addGoalsToDashboard(goals){
-for (goal of goals){
-    document.querySelector('.goal-card').insertAdjacentHTML('afterbegin', goalHTML(goal))
-}}
+loadGoals()
 
-function goalHTML() {
+function addGoalsToDashboard(goals){
+for (goal of goals)
+    document.getElementById('goal-list').insertAdjacentHTML('afterbegin', goalHTML(goal))
+}
+
+function goalHTML(goal) {
     return `
     <div class="goal-card">
                             <div class="card-body">
 <!-- Goal title as button to open modal -->                            
-                                <h5 class="ib card-title">{{ goal.title }}</h5>
+                                <h5 class="ib card-title"> ${ goal.title }</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
+                                
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
 <!-- Modal -->
@@ -89,7 +99,7 @@ function goalHTML() {
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{ goal.title }}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">${ goal.title }</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -124,6 +134,76 @@ function goalHTML() {
                     </div>
     `
 }
+
+// let isNoteIdEven = function(note){
+    //     let note = ${note.id}
+    //     return (note%2 === 0 ) ? true : false;
+    // }
+    
+    // alert(isNoteIdEven(note[0]))
+    
+    // psuedo code if note.id % 1 
+    // return   <div class="item item-blue" id="blue"> ${note.text} </div>
+    // else 
+    //return   <div class="item item-blue" id="pink"> ${note.text} </div>
+
+
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
+function noteHtml() {
+    return isEven(note.id)
+}
+
+//gets the container for the notes and adds the notehtml
+function postNoteToJournal(note){
+    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+// function postNewNotes(){
+
+//     let note = {
+//         text: $()
+//     }
+// }
+
+//loads on page load
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+//get request to api 
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addNotesToJournal(response);
+
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+//inserts them individual form the list of notes 
+function addNotesToJournal(notes){
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+}
+
+loadNotes()
 
 // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 

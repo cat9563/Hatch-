@@ -38,15 +38,14 @@
     <div class="lg-container">
         <div class="container ib col1of2">
 <!--  GOAL CONTAINER -->
-            <div class="goal-container" style="margin: 10px"><center>Goal Container</center>
+            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
                 <div class="row d-flex justify-content-center">
                     <div class="col col-sm-6">
-                       <div class="goal-card">
+                       <div class="goal-card" data-goal="{{ goal.id }}">
                             <div class="card-body">                 
                                 <h5 class="ib card-title">
                                 {{ goal.title }}</h5>
 <!-- Modal text on front of card, not associated with checklist -->                                
-                                <p class="card-text">{{ goal.description }}</p>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Expand</button>
 
 <!-- Modal -->
@@ -138,26 +137,10 @@
         </div>
 
         {% comment %} NOTE CONTAINER {% endcomment %}
-        <div class="container" style="margin: 10px"><center>Note Container</center>
+        <div class="container" style="margin: 10px" id="journal"><center>Note Container</center>
             <div class="col-md-12 col-sm-6 my-col">
             <div class="row">
-                <div class="container">
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my projectdk</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my projectdk</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
+                <div class="container" id="noteList">
                 </div>
             </div>
         </div>
