@@ -4,17 +4,25 @@ let apiPage = 1;
 let controller, scene;
 
 loadGoals()
-
-
-
-var submitTasks = document.getElementById('save-changes')
-submitTasks.addEventListener('click', postNewTask)
+loadTasks()
+addTask()
 
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
     postNewGoal();
     closeModal();
 })
+
+var saveTask = document.getElementById('save-changes')
+saveTask.addEventListener('click', function() {
+    postNewTask();
+})
+
+// var addLine = document.getElementById('the-plus-button')
+// addLine.addEventListener('click', function() {
+//     addTask()
+// })
+
 
 // let checkTask = document.getElementById('checkbox')
 // checkTask.addEventListener('click', function() {
@@ -26,13 +34,17 @@ saveGoal.addEventListener('click', function() {
 
 
 function addTask() {
+    let addLine = document.getElementById('the-plus-button')
     if (addLine) {
             var newEl = document.createElement('li');
             newEl.innerHTML = newTaskLineHTML()
             var position = document.getElementById('checklist');
         position.prepend(newEl)
         }
-    // loadTasks()
+    let submitTasks = document.getElementById('save-changes')
+    if (submitTasks) {
+        submitTasks.addEventListener('click', postNewTask)
+    }
 }
         
 function newTaskLineHTML(task) {
@@ -78,9 +90,11 @@ function postNewTask(){
         method: 'POST',
         data: JSON.stringify(task), 
         contentType: 'application/json'
+    
     }).then(function() {
+        console.log('end of ajax post, should then empty checklist')
         $(".checklist").empty();
-        loadTasks();
+        addTaskToList();
     });
 
 }
@@ -91,8 +105,8 @@ function addTaskToList(tasks){
     for (task of tasks)
         document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
-    let addLine = document.getElementById('plus-button')
-    addLine.addEventListener('click', addTask)
+    // let addLine = document.getElementById('plus-button')
+    // addLine.addEventListener('click', addTask)
     }
 
 
@@ -215,7 +229,7 @@ function goalHTML(goal) {
                                             </div>
 <!-- Checklist within the modal body -->
                                             <div class="modal-body">
-                                                <button id='plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
+                                                <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none">                                     
                                                 </ul>
                                             </div>
@@ -284,3 +298,4 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     // modal.find('#exampleModalLabel').text('goal ' + goal)
     console.log("goal", goal)
   })
+
