@@ -30,7 +30,7 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
                 +Goal</button>
 
-<!-- Modal -->
+<!-- Modal to create a new goal -->
                 <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -52,26 +52,22 @@
                     </div>
                 </div>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col col-sm-6">
-                       <div class="goal-card" data-goal="{{ goal.id }}">
-                            <div class="card-body">                 
-                                <h5 class="ib card-title">
-                                This is a goal.</h5>
-<!-- Modal text on front of card, not associated with checklist -->                                
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id='expand'>Expand</button>
+            </div>
+<!-- End of modal to create a new goal-->
 
-<!-- Modal -->
+
+<!-- Modal for viewing checklist of tasks -->
+<!--Modal HEADER-->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">This is also a goal.</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">"{{ goal.title }}"</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
                                             </div>
-<!-- Checklist within the modal body -->
+<!--Modal BODY - CHECKLIST-->
                                             <div class="modal-body">
                                             <div class="progress">
                                                 <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
@@ -80,20 +76,10 @@
                                             </div>
                                                 <button id='plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none" class='checklist'>                                     
-                                                {% comment %} <li><div class="input-group mb-3" id='checklist-task'>
-                                                    <div class="input-group-prepend">
-                                        
-                                                        <div class="input-group-text">
-                                                        <input type="checkbox" aria-label="Checkbox for following text input">
-                                                        </div>
-                                                    </div>
-                                                        <input type="text" class="form-control" aria-label="Text input with checkbox"
-                                                        id='new-task-text'>
-                                                </div>
-                                                </li> {% endcomment %}
+                                           
                                                 </ul>
                                             </div>
-<!-- END of checklist within modal body -->                                            
+<!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
 
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -102,38 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col col-sm-6">
-                    <div class="goal-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 2</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="goal-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 3</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="goal-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Goal 4</h5>
-                        <p class="card-text">It's a broader card with text below as a natural lead-in.</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--End of modal for viewing checklist of tasks-->
 
         {% comment %} NOTE CONTAINER {% endcomment %}
         <div class="container" style="margin: 10px"><center>Note Container</center>

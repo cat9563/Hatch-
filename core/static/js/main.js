@@ -19,9 +19,9 @@ saveGoal.addEventListener('click', function() {
 // checkTask.addEventListener('click', function() {
 // console.log('checked!')
 // })
+loadGoals()
 
-// var showTasks = document.getElementById('expand')
-// showTasks.addEventListener('click', loadTasks)
+
 
 
 function addTask() {
@@ -64,8 +64,11 @@ function taskHTML(task) {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(){
+    // let et = document.getElementsByClassName('card-body');
+    // let pk = et.getAttribute['data-goal'].value;
+
     let task = {
-        author: 1,
+        author:1,
         goal: 1,
         text: $('#new-task-text').val()
     }
@@ -142,17 +145,21 @@ function getUserGoals(){
 function addGoalsToDashboard(goals){
     for (goal of goals)
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal))
+        console.log('Goals have loaded...')
+    var showTasks = document.getElementById('expand')
+    showTasks.addEventListener('click', loadTasks)
 }
 
 
 // Called at page load
 function loadGoals() {
+    console.log("Loading goals...")
     getUserGoals(apiPage);
     apiPage =+ 1;
 }
 
-loadGoals()
-loadTasks()
+// loadGoals()
+// loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -186,17 +193,15 @@ function closeModal() {
 function goalHTML(goal) {
     return `
     <div class="goal-card">
-                            <div class="card-body" data-id="${ goal.id }" data-title="${ goal.title }" data-author="${ goal.author }">
-<!-- Goal title as button to open modal -->                            
-                                <h5 class="ib card-title"> ${ goal.title }</h5>
-<!-- Modal text on front of card, not associated with checklist -->                                
-                                
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id='expand'>Expand</button>
-
-<!-- Modal -->
+                            <div class="card-body" data-goal="${ goal.id }" data-title="${ goal.title }" data-author="${ goal.author }">  
+                                <h5 class="ib card-title"> ${ goal.title }</h5>                               
+<!-- Expand button, connected to goal.id -->                                
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#exampleModal" id='expand'>Expand</button>
+<!-- Modal with checklist of tasks -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
+<!-- Modal header should reflect the goal.title, same as on goal card -->
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">${ goal.title }</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -207,20 +212,9 @@ function goalHTML(goal) {
                                             <div class="modal-body">
                                                 <button id='plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none">                                     
-                                                <li><div class="input-group mb-3" id='checklist-task'>
-                                                    <div class="input-group-prepend">
-                                        
-                                                        <div class="input-group-text">
-                                                        <input type="checkbox" aria-label="Checkbox for following text input" id='checkbox'>
-                                                        </div>
-                                                    </div>
-                                                        <input type="text" class="form-control" aria-label="Text input with checkbox"
-                                                        id='new-task-text'>
-                                                </div>
-                                                </li>
                                                 </ul>
                                             </div>
-<!-- END of checklist within modal body -->                                            
+<!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
@@ -274,3 +268,14 @@ return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 }
 
 setupCSRFAjax()
+
+
+$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var goal = button.data('goal') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    // modal.find('#exampleModalLabel').text('goal ' + goal)
+    console.log("goal", goal)
+  })
