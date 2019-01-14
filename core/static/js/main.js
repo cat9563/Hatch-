@@ -3,8 +3,9 @@ dragula([document.getElementById("left-defaults"), document.getElementById("righ
 let apiPage = 1;
 let controller, scene;
 
-var addLine = document.getElementById('plus-button')
-addLine.addEventListener('click', addTask)
+loadGoals()
+
+
 
 var submitTasks = document.getElementById('save-changes')
 submitTasks.addEventListener('click', postNewTask)
@@ -19,7 +20,7 @@ saveGoal.addEventListener('click', function() {
 // checkTask.addEventListener('click', function() {
 // console.log('checked!')
 // })
-loadGoals()
+
 
 
 
@@ -88,8 +89,11 @@ function postNewTask(){
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
     for (task of tasks)
-    document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task)
-    )}
+        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+        console.log('Tasks have loaded!')
+    let addLine = document.getElementById('plus-button')
+    addLine.addEventListener('click', addTask)
+    }
 
 
 // // function clickEvent() {
@@ -148,6 +152,7 @@ function addGoalsToDashboard(goals){
         console.log('Goals have loaded...')
     var showTasks = document.getElementById('expand')
     showTasks.addEventListener('click', loadTasks)
+
 }
 
 
