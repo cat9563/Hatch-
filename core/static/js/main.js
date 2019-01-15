@@ -1,10 +1,7 @@
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
-
 let apiPage = 1;
 let controller, scene;
+dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
-loadGoals()
-loadTasks()
 
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
@@ -187,7 +184,7 @@ function postNewGoal() {
     let goal = {
         author: 1,
         title: $('#new-goal-title').val()
-    }
+    }    
     $.ajax({
         url: '/api/goals/',
         method: 'POST',
@@ -249,6 +246,76 @@ function goalHTML(goal) {
     `
 }
 
+// let isNoteIdEven = function(note){
+    //     let note = ${note.id}
+    //     return (note%2 === 0 ) ? true : false;
+    // }
+    
+    // alert(isNoteIdEven(note[0]))
+    
+    // psuedo code if note.id % 1 
+    // return   <div class="item item-blue" id="blue"> ${note.text} </div>
+    // else 
+    //return   <div class="item item-blue" id="pink"> ${note.text} </div>
+
+
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
+function noteHtml() {
+    return isEven(note.id)
+}
+
+//gets the container for the notes and adds the notehtml
+function postNoteToJournal(note){
+    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+// function postNewNotes(){
+
+//     let note = {
+//         text: $()
+//     }
+// }
+
+//loads on page load
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+//get request to api 
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addNotesToJournal(response);
+
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+//inserts them individual form the list of notes 
+function addNotesToJournal(notes){
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+}
+
+
+// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
 function loadProgressBar() {
     var current_progress = 0;
@@ -263,14 +330,11 @@ function loadProgressBar() {
     }, 1000);
   };
 
-loadProgressBar()
 
 
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
-    // console.log(csrftoken);
-    // console.log('Inside setupCSRFAjax function')
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -288,16 +352,23 @@ return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
 
-setupCSRFAjax()
+$(document).ready(function () {
+    setupCSRFAjax()
+    loadNotes()
+    loadGoals()
+    loadTasks()    
+    loadProgressBar()
+})
 
 
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var goal = button.data('goal') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    // modal.find('#exampleModalLabel').text('goal ' + goal)
-    console.log("goal", goal)
-  })
+
+// $('#exampleModal').on('show.bs.modal', function (event) {
+//     var button = $(event.relatedTarget) // Button that triggered the modal
+//     var goal = button.data('goal') // Extract info from data-* attributes
+//     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+//     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+//     var modal = $(this)
+//     // modal.find('#exampleModalLabel').text('goal ' + goal)
+//     console.log("goal", goal)
+//   })
 

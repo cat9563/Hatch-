@@ -16,6 +16,12 @@ footer {
     /* border-top: 2px black dashed; */
     display: block;
     text-align: center;
+    padding-top: 20px;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
 }
 
 footer ul li {
@@ -35,8 +41,19 @@ footer ul li {
 }
 
 /* news feed */
-.carousel-caption {
-    ;
+
+.carousel-item {
+  /* max-height: 750px; */
+  max-height: 600px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.carousel h1 {
+    font-size: 35px;
 }
 
 /* dashboard */
@@ -50,12 +67,16 @@ footer ul li {
 }
 
 .container {
-    /* border: 5px dotted black; */
+    border: 5px dotted black; 
     display: inline-block;
     /* margin: 10px; */
     padding: 0px;
 }
 
+/* img.resize {
+    max-width:90%;
+    max-height:90%;
+} */
 
 .goal-container {
     border: 5px dotted black;
@@ -67,6 +88,10 @@ footer ul li {
 .container-clear {
     margin: 10px;
 }
+
+/* .profile-container {
+    padding-top: 75px;
+} */
 
 .row {
     /* border: 3px dashed blue; */
@@ -140,11 +165,11 @@ footer ul li {
     overflow: scroll;
 } */
 
-.card {
+/* .card {
     margin: 4px;
     border: #ff3052 solid 2px;
     height: 50px;
-}
+} */
 
 .gu-mirror {
     position: fixed !important;
