@@ -5,7 +5,6 @@ let controller, scene;
 
 loadGoals()
 loadTasks()
-addTask()
 
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
@@ -79,7 +78,6 @@ function taskHTML(task) {
 function postNewTask(){
     // let et = document.getElementsByClassName('card-body');
     // let pk = et.getAttribute['data-goal'].value;
-
     let task = {
         author:1,
         goal: 1,
@@ -102,11 +100,15 @@ function postNewTask(){
 
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
+    let checklist = document.getElementById('checklist')
+    $(".checklist").empty();
     for (task of tasks)
-        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+        // document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+        checklist.insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
-    // let addLine = document.getElementById('plus-button')
-    // addLine.addEventListener('click', addTask)
+        addTask()
+        // let addLine = document.getElementById('the-plus-button')
+        // addLine.addEventListener('click', addTask)
     }
 
 
