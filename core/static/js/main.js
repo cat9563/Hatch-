@@ -91,8 +91,8 @@ function postNewTask(){
     
     }).then(function() {
         console.log('end of ajax post, should then empty checklist')
-        $(".checklist").empty();
-        addTaskToList();
+        document.getElementById('checklist').innerHTML = ""
+        loadTasks();
     });
 
 }
@@ -100,11 +100,11 @@ function postNewTask(){
 
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
-    let checklist = document.getElementById('checklist')
+    // let checklist = document.getElementById('checklist')
     $(".checklist").empty();
     for (task of tasks)
-        // document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-        checklist.insertAdjacentHTML('beforeend', taskHTML(task))
+        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+        // checklist.insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
         addTask()
         // let addLine = document.getElementById('the-plus-button')
