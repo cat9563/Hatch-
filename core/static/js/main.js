@@ -17,11 +17,6 @@ saveTask.addEventListener('click', function() {
     postNewTask();
 })
 
-// var addLine = document.getElementById('the-plus-button')
-// addLine.addEventListener('click', function() {
-//     addTask()
-// })
-
 
 // let checkTask = document.getElementById('checkbox')
 // checkTask.addEventListener('click', function() {
@@ -76,8 +71,7 @@ function taskHTML(task) {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(){
-    // let et = document.getElementsByClassName('card-body');
-    // let pk = et.getAttribute['data-goal'].value;
+
     let task = {
         author:1,
         goal: 1,
@@ -100,15 +94,11 @@ function postNewTask(){
 
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
-    // let checklist = document.getElementById('checklist')
     $(".checklist").empty();
     for (task of tasks)
         document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-        // checklist.insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
         addTask()
-        // let addLine = document.getElementById('the-plus-button')
-        // addLine.addEventListener('click', addTask)
     }
 
 
@@ -142,8 +132,6 @@ function getUserTasks(){
 function loadTasks() {
     getUserTasks(apiPage);
     apiPage =+ 1;
-
-
 }
 
     // GET request to API for goals
@@ -179,8 +167,6 @@ function loadGoals() {
     apiPage =+ 1;
 }
 
-// loadGoals()
-// loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -201,9 +187,6 @@ function postNewGoal() {
 
 }
 
-// function closeModal(){
-//     document.getElementById('newGoalModal').classList.remove('modal-backdrop fade show')
-// }
 
 function closeModal() {
     let modal = document.getElementById('newGoalModal')
