@@ -4,7 +4,7 @@ let apiPage = 1;
 let controller, scene;
 
 loadGoals()
-loadTasks()
+addTask()
 
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
@@ -12,10 +12,10 @@ saveGoal.addEventListener('click', function() {
     closeModal();
 })
 
-var saveTask = document.getElementById('save-changes')
-saveTask.addEventListener('click', function() {
-    postNewTask();
-})
+// var saveTask = document.getElementById('save-changes')
+// saveTask.addEventListener('click', function() {
+//     postNewTask();
+// })
 
 
 // let checkTask = document.getElementById('checkbox')
@@ -28,7 +28,8 @@ saveTask.addEventListener('click', function() {
 
 
 function addTask() {
-    var theButton = document.getElementsByName('the-plus-button')[0];
+    console.log('inside addTask')
+    var theButton = document.getElementById('the-plus-button');
     if (theButton) {
     theButton.addEventListener('click', function(){
         var newEl = document.createElement('li');
@@ -70,11 +71,11 @@ function taskHTML(task) {
 
 
 // POST request to API to save tasks and calls loadTasks
-function postNewTask(){
-
+function postNewTask(event){
+    console.log(event);
     let task = {
         author:1,
-        goal: 1,
+        goal: 5,
         text: $('#new-task-text').val()
     }
     $.ajax({
@@ -95,10 +96,10 @@ function postNewTask(){
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
     $(".checklist").empty();
-    for (task of tasks)
+    for (let task of tasks)
         document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
-        addTask()
+        // addTask()
     }
 
 
@@ -195,7 +196,7 @@ function closeModal() {
 
 function goalHTML(goal) {
     return `
-    <div class="goal-card">
+    <div class="goal-card" id="${ goal.id }">
         <div class="card-body" data-author="${ goal.author }">  
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
 <!-- Expand button, connected to goal.id -->                                

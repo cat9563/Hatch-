@@ -25,10 +25,11 @@
     <div class="lg-container">
         <div class="container ib col1of2">
 <!--  GOAL CONTAINER -->
-            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
+<!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
                 +Goal</button>
+            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
+
 
 <!-- Modal to create a new goal -->
                 <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
@@ -82,7 +83,7 @@
                     <div class="modal-footer">
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
+                        <button type="button" class="btn btn-primary" id='save-changes' data-goal="{{ goal.pk }}">Save</button>
                     </div>
                 </div>
             </div>
@@ -95,7 +96,7 @@
             <div class="row">
                 <div class="container">
                     <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my projectdk</div>
+                    <div class="item item-pink">I am so excited about my project</div>
                     <div class="item item-blue">Flex item 1</div>
                     <div class="item item-pink">I am so excited about my project</div>
                     <div class="item item-blue">Flex item 1</div>
