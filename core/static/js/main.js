@@ -184,7 +184,6 @@ function postNewGoal() {
         loadGoals();
         // closeModal();
     });
-
 }
 
 
@@ -197,43 +196,12 @@ function closeModal() {
 function goalHTML(goal) {
     return `
     <div class="goal-card">
-                            <div class="card-body" data-goal="${ goal.id }" data-title="${ goal.title }" data-author="${ goal.author }">  
-                                <h5 class="ib card-title"> ${ goal.title }</h5>                               
+        <div class="card-body" data-author="${ goal.author }">  
+            <h5 class="ib card-title"> ${ goal.title }</h5>                               
 <!-- Expand button, connected to goal.id -->                                
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#exampleModal" id='expand'>Expand</button>
-<!-- Modal with checklist of tasks -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-<!-- Modal header should reflect the goal.title, same as on goal card -->
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">${ goal.title }</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-<!-- Checklist within the modal body -->
-                                            <div class="modal-body" id='checklist-modal'>
-                                                <div class="progress">
-                                                    <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                                    <span id="current-progress"></span>
-                                                     </div>
-                                                </div>
-                                                <button name='the-plus-button' id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                                                <ul id="checklist" style="list-style: none">                                     
-                                                </ul>
-                                            </div>
-<!-- Modal FOOTER -->                                            
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+        </div>
+    </div>
     `
 }
 
@@ -280,13 +248,21 @@ return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 setupCSRFAjax()
 
 
-$('#exampleModal').on('show.bs.modal', function (event) {
+$('#tasksModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var goal = button.data('goal') // Extract info from data-* attributes
+    var goalId = button.data('goal') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    // modal.find('#exampleModalLabel').text('goal ' + goal)
-    console.log("goal", goal)
+    $.ajax({
+        method: "GET",
+        url: `/api/goals/${goalId}/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        modal.find("#tasksModalLabel").text(response.title)
+        addTaskToList(response.tasks);        
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
+    })
   })
 
