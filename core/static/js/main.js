@@ -214,6 +214,11 @@ function goalHTML(goal) {
                                             </div>
 <!-- Checklist within the modal body -->
                                             <div class="modal-body" id='checklist-modal'>
+                                                <div class="progress">
+                                                    <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                                    <span id="current-progress"></span>
+                                                     </div>
+                                                </div>
                                                 <button name='the-plus-button' id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none">                                     
                                                 </ul>
@@ -249,6 +254,7 @@ function loadProgressBar() {
 loadProgressBar()
 
 
+// DO NOT TOUCH ANYTHING BELOW THIS LINE!
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
