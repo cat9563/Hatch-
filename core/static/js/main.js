@@ -3,9 +3,6 @@ dragula([document.getElementById("left-defaults"), document.getElementById("righ
 let apiPage = 1;
 let controller, scene;
 
-loadGoals()
-loadTasks()
-
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
     postNewGoal();
@@ -171,16 +168,12 @@ function addGoalsToDashboard(goals){
 
 }
 
-
 // Called at page load
 function loadGoals() {
     console.log("Loading goals...")
     getUserGoals(apiPage);
     apiPage =+ 1;
 }
-
-// loadGoals()
-// loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -263,7 +256,7 @@ function loadProgressBar() {
     }, 1000);
   };
 
-loadProgressBar()
+//NOTES SECTION
 
 //checks to see if num is even and assigns html accordingly 
 function isEven(num) {
@@ -285,12 +278,34 @@ function postNoteToJournal(note){
     noteHtml(note));
 }
 
-// function postNewNotes(){
+var saveNotes = document.getElementById('saveNote')
+saveNotes.addEventListener('click', function() {
+    postNote();
+})
 
-//     let note = {
-//         text: $()
-//     }
-// }
+
+// function postNewNotes()
+
+function postNote(){
+    // let et = document.getElementsByClassName('card-body');
+    // let pk = et.getAttribute['data-goal'].value;
+    let task = {
+        note: 1,
+        text: $('#message-text').val()
+    }
+    $.ajax({
+        url: '/api/notes/',
+        method: 'POST',
+        data: JSON.stringify(task), 
+        contentType: 'application/json'
+    
+    }).then(function() {
+        console.log('end of ajax post, should then empty checklist')
+        document.getElementById('noteList').innerHTML = ""
+        loadNotes();
+    });
+
+}
 
 //loads on page load
 function loadNotes(){
@@ -320,7 +335,15 @@ function addNotesToJournal(notes){
     document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
 }
 
-loadNotes()
+
+// function addNotesToJournal(notes){
+//     for (note of notes)
+//         document.getElementById('noteList').insertAdjacentHTML('beforeend', noteHTML(note))
+//         console.log('Goals have loaded...')
+//     var showNotes = document.getElementById('message-text')
+//     showNotes.addEventListener('click', loadNotes)
+
+// }
 
 
 
@@ -344,8 +367,14 @@ function csrfSafeMethod(method){
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
+$(document).ready(function () {
+    setupCSRFAjax()
+    loadNotes()
+    loadGoals()
+    loadTasks()    
+    loadProgressBar()
+})
 
-setupCSRFAjax()
 
 
 $('#exampleModal').on('show.bs.modal', function (event) {

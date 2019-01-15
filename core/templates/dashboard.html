@@ -91,8 +91,9 @@
 <!--End of modal for viewing checklist of tasks-->
 
         {% comment %} NOTE CONTAINER {% endcomment %}
-        <div class="container" style="margin: 10px" id="journal"><center>Note Container</center>
+        <div class="container" style="margin: 10px" id="journal">
             <div class="col-md-12 col-sm-6 my-col">
+            <center>Note Container</center>
             <div class="row">
                 <div class="container" id="noteList">
                    
@@ -114,7 +115,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
       </div>
     </div>
   </div>
