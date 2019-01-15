@@ -33,18 +33,18 @@ saveTask.addEventListener('click', function() {
 
 
 function addTask() {
-    let addLine = document.getElementById('the-plus-button')
-    if (addLine) {
-            var newEl = document.createElement('li');
-            newEl.innerHTML = newTaskLineHTML()
-            var position = document.getElementById('checklist');
+    var theButton = document.getElementsByName('the-plus-button')[0];
+    if (theButton) {
+    theButton.addEventListener('click', function(){
+        var newEl = document.createElement('li');
+        newEl.innerHTML = newTaskLineHTML()
+        var position = document.getElementById('checklist');
         position.prepend(newEl)
-        }
+    
     let submitTasks = document.getElementById('save-changes')
     if (submitTasks) {
         submitTasks.addEventListener('click', postNewTask)
-    }
-}
+    }})}}
         
 function newTaskLineHTML(task) {
     return `
@@ -230,8 +230,8 @@ function goalHTML(goal) {
                                                     </button>
                                             </div>
 <!-- Checklist within the modal body -->
-                                            <div class="modal-body">
-                                                <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
+                                            <div class="modal-body" id='checklist-modal'>
+                                                <button name='the-plus-button' id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none">                                     
                                                 </ul>
                                             </div>
