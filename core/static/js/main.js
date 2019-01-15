@@ -274,7 +274,7 @@ function noteHtml() {
 
 //gets the container for the notes and adds the notehtml
 function postNoteToJournal(note){
-    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    document.getElementById("journal").insertAdjacentHTML('afterbegin',
     noteHtml(note));
 }
 
@@ -287,21 +287,21 @@ saveNotes.addEventListener('click', function() {
 // function postNewNotes()
 
 function postNote(){
-    // let et = document.getElementsByClassName('card-body');
-    // let pk = et.getAttribute['data-goal'].value;
-    let task = {
+    let note = {
         note: 1,
         text: $('#message-text').val()
     }
     $.ajax({
         url: '/api/notes/',
         method: 'POST',
-        data: JSON.stringify(task), 
+        data: JSON.stringify(note), 
         contentType: 'application/json'
     
     }).then(function() {
         console.log('end of ajax post, should then empty checklist')
-        document.getElementById('noteList').innerHTML = ""
+        document.getElementById('journal').innerHTML = ""
+        $('#message-text').val("");
+        console.log("should be empty")
         loadNotes();
     });
 
@@ -320,7 +320,6 @@ function getUserNotes(){
         url: `/api/notes/`,
         contentType: 'application/json'
     }).done(function(response){
-        console.log(response)
         addNotesToJournal(response);
 
 
@@ -331,21 +330,12 @@ function getUserNotes(){
 
 //inserts them individual form the list of notes 
 function addNotesToJournal(notes){
+    console.log("notes:", notes)
+    document.getElementById('journal').innerHTML = ""
     for (note of notes)
     document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+    console.log(typeof document.getElementById('journal'))
 }
-
-
-// function addNotesToJournal(notes){
-//     for (note of notes)
-//         document.getElementById('noteList').insertAdjacentHTML('beforeend', noteHTML(note))
-//         console.log('Goals have loaded...')
-//     var showNotes = document.getElementById('message-text')
-//     showNotes.addEventListener('click', loadNotes)
-
-// }
-
-
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
