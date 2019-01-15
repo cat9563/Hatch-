@@ -265,6 +265,63 @@ function loadProgressBar() {
 
 loadProgressBar()
 
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
+function noteHtml() {
+    return isEven(note.id)
+}
+
+//gets the container for the notes and adds the notehtml
+function postNoteToJournal(note){
+    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+// function postNewNotes(){
+
+//     let note = {
+//         text: $()
+//     }
+// }
+
+//loads on page load
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+//get request to api 
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        console.log(response)
+        addNotesToJournal(response);
+
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+//inserts them individual form the list of notes 
+function addNotesToJournal(notes){
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+}
+
+loadNotes()
+
 
 
 function setupCSRFAjax () {

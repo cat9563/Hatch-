@@ -91,30 +91,34 @@
 <!--End of modal for viewing checklist of tasks-->
 
         {% comment %} NOTE CONTAINER {% endcomment %}
-        <div class="container" style="margin: 10px"><center>Note Container</center>
+        <div class="container" style="margin: 10px" id="journal"><center>Note Container</center>
             <div class="col-md-12 col-sm-6 my-col">
             <div class="row">
-                <div class="container">
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my projectdk</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my projectdk</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
-                    <div class="item item-blue">Flex item 1</div>
-                    <div class="item item-pink">I am so excited about my project</div>
+                <div class="container" id="noteList">
+                   
                 </div>
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
+  +
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <label for="message-text" class="col-form-label">Journal Entry</label>
+        <textarea class="form-control" id="message-text"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
        <div class="container col2of2">
             <div class="row">
