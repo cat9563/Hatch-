@@ -100,6 +100,25 @@
                 </div>
         {% comment %} </div> {% endcomment %}
     </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
+  +
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="note-input">
+        <label for="message-text" class="col-form-label">Journal Entry</label>
+        <textarea class="form-control" id="message-text"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
        <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
        {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}

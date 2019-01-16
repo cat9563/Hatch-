@@ -2,7 +2,6 @@ let apiPage = 1;
 let controller, scene;
 dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
-
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
     postNewGoal();
@@ -168,16 +167,12 @@ function addGoalsToDashboard(goals){
 
 }
 
-
 // Called at page load
 function loadGoals() {
     console.log("Loading goals...")
     getUserGoals(apiPage);
     apiPage =+ 1;
 }
-
-// loadGoals()
-// loadTasks()
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -246,18 +241,22 @@ function goalHTML(goal) {
     `
 }
 
-// let isNoteIdEven = function(note){
-    //     let note = ${note.id}
-    //     return (note%2 === 0 ) ? true : false;
-    // }
-    
-    // alert(isNoteIdEven(note[0]))
-    
-    // psuedo code if note.id % 1 
-    // return   <div class="item item-blue" id="blue"> ${note.text} </div>
-    // else 
-    //return   <div class="item item-blue" id="pink"> ${note.text} </div>
+// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
+function loadProgressBar() {
+    var current_progress = 0;
+    var interval = setInterval(function() {
+        current_progress += 10;
+        $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% Complete");
+        if (current_progress >= 100)
+            clearInterval(interval);
+    }, 1000);
+  };
+
+//NOTES SECTION
 
 //checks to see if num is even and assigns html accordingly 
 function isEven(num) {
@@ -275,16 +274,39 @@ function noteHtml() {
 
 //gets the container for the notes and adds the notehtml
 function postNoteToJournal(note){
-    document.getElementById("noteList").insertAdjacentHTML('afterbegin',
+    document.getElementById("journal").insertAdjacentHTML('afterbegin',
     noteHtml(note));
 }
 
-// function postNewNotes(){
+var saveNotes = document.getElementById('saveNote')
+saveNotes.addEventListener('click', function() {
+    postNote();
+})
 
-//     let note = {
-//         text: $()
-//     }
-// }
+
+// function postNewNotes()
+
+function postNote(){
+    let note = {
+        note: 1,
+        text: $('#message-text').val()
+    }
+    $.ajax({
+        url: '/api/notes/',
+        method: 'POST',
+        data: JSON.stringify(note), 
+        contentType: 'application/json'
+    
+    }).then(function() {
+        console.log('end of ajax post, should then empty checklist')
+        document.getElementById('journal').innerHTML = ""
+        $('#message-text').val("");
+        console.log("should be empty")
+        loadNotes();
+    });
+
+}
+
 
 //loads on page load
 function loadNotes(){
@@ -299,7 +321,6 @@ function getUserNotes(){
         url: `/api/notes/`,
         contentType: 'application/json'
     }).done(function(response){
-        console.log(response)
         addNotesToJournal(response);
 
 
@@ -310,28 +331,12 @@ function getUserNotes(){
 
 //inserts them individual form the list of notes 
 function addNotesToJournal(notes){
+    console.log("notes:", notes)
+    document.getElementById('journal').innerHTML = ""
     for (note of notes)
     document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+    console.log(typeof document.getElementById('journal'))
 }
-
-
-// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-
-function loadProgressBar() {
-    var current_progress = 0;
-    var interval = setInterval(function() {
-        current_progress += 10;
-        $("#dynamic")
-        .css("width", current_progress + "%")
-        .attr("aria-valuenow", current_progress)
-        .text(current_progress + "% Complete");
-        if (current_progress >= 100)
-            clearInterval(interval);
-    }, 1000);
-  };
-
-
-
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
@@ -351,7 +356,6 @@ function csrfSafeMethod(method){
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
-
 $(document).ready(function () {
     setupCSRFAjax()
     loadNotes()
@@ -359,7 +363,6 @@ $(document).ready(function () {
     loadTasks()    
     loadProgressBar()
 })
-
 
 
 // $('#exampleModal').on('show.bs.modal', function (event) {
