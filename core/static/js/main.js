@@ -8,6 +8,7 @@ loadGoals();
 addTask();
 
 
+
 function loadGoals() {
     console.log("Loading goals...")
     getUserGoals(apiPage);
@@ -36,10 +37,11 @@ function addTask() {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(event){
+    console.log($('#save-changes').attr('data-goal'))
     // console.log(event);
     let task = {
         author:1,
-        goal: 5,
+        goal: $('#save-changes').attr('data-goal'),
         text: $('#new-task-text').val()
     }
     $.ajax({
@@ -50,8 +52,9 @@ function postNewTask(event){
     
     }).done(function() {
         // console.log('end of ajax post, should then empty checklist')
-        document.getElementById('checklist').innerHTML = ""
-        loadTasks();
+        document.getElementById('checklist').innerHTML = "";
+        // loadTasks();
+        getModalTasks();
 
     }).fail(function() {
         console.log("There was an issue getting the user's tasks.")
@@ -90,6 +93,7 @@ function addGoalsToDashboard(goals){
 
 // loadTasks->getUserTasks->addTaskToList->taskHTML
 function loadTasks() {
+    getCorrectTasks();
     getUserTasks(apiPage);
     apiPage =+ 1;
 }
@@ -171,7 +175,6 @@ function goalHTML(goal) {
     `
 }
 
-// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
 function taskHTML(task) {
     return `
@@ -348,24 +351,47 @@ $(document).ready(function () {
 })
 
 
+function getCorrectTasks () {
+    console.log('Inside getCorrectTasks')
+    $('#tasksModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget) // Button that triggered the modal
+        let goalId = button.data('goal') // Extract info from data-* attributes
+        let modal = $(this)
 
-$('#tasksModal').on('show.bs.modal', function (event) {
-    let button = $(event.relatedTarget) // Button that triggered the modal
-    let goalId = button.data('goal') // Extract info from data-* attributes
-    let modal = $(this)
+        $.ajax({
+            method: "GET",
+            url: `/api/goals/${goalId}/`,
+            contentType: 'application/json'
 
-    $.ajax({
-        method: "GET",
-        url: `/api/goals/${goalId}/`,
-        contentType: 'application/json'
+        }).done(function(response){
+            modal.find("#tasksModalLabel").text(response.title)
+            console.log(response.tasks)
+            addTaskToList(response.tasks);  
+            modal.find("#save-changes").attr('data-goal', goalId)
 
-    }).done(function(response){
-        modal.find("#tasksModalLabel").text(response.title)
-        addTaskToList(response.tasks);  
-
-    }).fail(function(response){
-        console.log("There was an issue getting the user's goals.");
+        }).fail(function(response){
+            console.log("There was an issue getting the user's goals.");
+        })
     })
-})
+}
 
+function getModalTasks () {
+        // let button = $(event.relatedTarget) // Button that triggered the modal
+        let goalId = $('#save-changes').attr('data-goal') // Extract info from data-* attributes
+        let modal = $(this)
 
+        $.ajax({
+            method: "GET",
+            url: `/api/goals/${goalId}/`,
+            contentType: 'application/json'
+
+        }).done(function(response){
+            modal.find("#tasksModalLabel").text(response.title)
+            console.log(response.tasks)
+            addTaskToList(response.tasks);  
+            modal.find("#save-changes").attr('data-goal', goalId)
+
+        }).fail(function(response){
+            console.log("There was an issue getting the user's goals.");
+        })
+    }
