@@ -1,82 +1,45 @@
-let apiPage = 1;
-let controller, scene;
+// Drag & Drop capabilities to be added into goal and note containers
 dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
-var saveGoal = document.getElementById('save-goal')
-saveGoal.addEventListener('click', function() {
-    postNewGoal();
-    closeModal();
-})
+let apiPage = 1;
+let controller, scene;
 
-var saveTask = document.getElementById('save-changes')
-saveTask.addEventListener('click', function() {
-    postNewTask();
-})
-
-// var addLine = document.getElementById('the-plus-button')
-// addLine.addEventListener('click', function() {
-//     addTask()
-// })
+loadGoals();
+addTask();
 
 
-// let checkTask = document.getElementById('checkbox')
-// checkTask.addEventListener('click', function() {
-// console.log('checked!')
-// })
-
-
-
-
+function loadGoals() {
+    console.log("Loading goals...")
+    getUserGoals(apiPage);
+    apiPage =+ 1;
+}
 
 function addTask() {
-    var theButton = document.getElementsByName('the-plus-button')[0];
+    console.log('inside addTask')
+    let theButton = document.getElementById('the-plus-button');
+
     if (theButton) {
-    theButton.addEventListener('click', function(){
-        var newEl = document.createElement('li');
-        newEl.innerHTML = newTaskLineHTML()
-        var position = document.getElementById('checklist');
-        position.prepend(newEl)
-    
-    let submitTasks = document.getElementById('save-changes')
-    if (submitTasks) {
-        submitTasks.addEventListener('click', postNewTask)
-    }})}}
+        theButton.addEventListener('click', function(){
+            let newEl = document.createElement('li');
+            newEl.innerHTML = newTaskLineHTML();
+            let position = document.getElementById('checklist');
+            position.prepend(newEl);
         
-function newTaskLineHTML(task) {
-    return `
-    <div class='input-group mb-3' id='checklist-task'>
-            <div class='input-group-prepend'>
-                <div class='input-group-text'>
-                <input type='checkbox' aria-label='Checkbox for following text input'>
-                </div>
-                <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'></input>
-            </div>
-        </div>
-        `
+            let submitTasks = document.getElementById('save-changes');
+
+            if (submitTasks) {
+                submitTasks.addEventListener('click', postNewTask)
+            }
+        });
+    }
 }
-
-
-function taskHTML(task) {
-    return `
-    <div class='input-group mb-3' id='checklist-task'>
-            <div class='input-group-prepend'>
-                <div class='input-group-text'>
-                <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox'>
-                </div>
-            </div>
-            <p> ${ task.text }</p>
-        </div>
-        `
-}
-
 
 // POST request to API to save tasks and calls loadTasks
-function postNewTask(){
-    // let et = document.getElementsByClassName('card-body');
-    // let pk = et.getAttribute['data-goal'].value;
+function postNewTask(event){
+    // console.log(event);
     let task = {
         author:1,
-        goal: 1,
+        goal: 5,
         text: $('#new-task-text').val()
     }
     $.ajax({
@@ -85,40 +48,52 @@ function postNewTask(){
         data: JSON.stringify(task), 
         contentType: 'application/json'
     
-    }).then(function() {
-        console.log('end of ajax post, should then empty checklist')
+    }).done(function() {
+        // console.log('end of ajax post, should then empty checklist')
         document.getElementById('checklist').innerHTML = ""
         loadTasks();
+
+    }).fail(function() {
+        console.log("There was an issue getting the user's tasks.")
     });
 
 }
 
 
-// takes the new task posted to API and also adds the HTML element on the dashboard
-function addTaskToList(tasks){
-    // let checklist = document.getElementById('checklist')
-    $(".checklist").empty();
-    for (task of tasks)
-        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-        // checklist.insertAdjacentHTML('beforeend', taskHTML(task))
-        console.log('Tasks have loaded!')
-        addTask()
-        // let addLine = document.getElementById('the-plus-button')
-        // addLine.addEventListener('click', addTask)
+// GET request to API for goals
+function getUserGoals(){
+    $.ajax({
+        method: 'GET',
+        url: `/api/goals/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        // console.log(response)
+        addGoalsToDashboard(response);
+
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
+    })
+}
+
+
+// Iterates over goals received from API, inserts the goalHTML onto page for each
+function addGoalsToDashboard(goals){
+    for (let goal of goals) {
+        document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
+
+        // console.log('Goals have loaded...')
+        let showTasks = document.getElementById('expand');
+        showTasks.addEventListener('click', loadTasks)
     }
+}
 
 
-// // function clickEvent() {
-// //     let checkboxes = document.querySelectorAll('input.checkbox')
-// //     console.log(checkboxes)
-// //         for (checkbox in checkboxes)
-// //         // if (checkbox) {
-// //         addEventListener('input', console.log('checked!'))
-// // }
-// let checklist = document.querySelectorAll('div.checklist')
-// let checkboxes = checklist.querySelectorAll('input.checkbox')
-// checkboxes.forEach(element => { console.log(element)})
-    
+// loadTasks->getUserTasks->addTaskToList->taskHTML
+function loadTasks() {
+    getUserTasks(apiPage);
+    apiPage =+ 1;
+}
+
 
 function getUserTasks(){
     $.ajax({
@@ -131,48 +106,30 @@ function getUserTasks(){
         // clickEvent();
 
     }).fail(function(response){
-        console.log("There was an issue getting the user's goals.");
+        console.log("There was an issue getting the user's tasks.");
     })
 }
 
-function loadTasks() {
-    getUserTasks(apiPage);
-    apiPage =+ 1;
 
+// takes the new task posted to API and also adds the HTML element on the dashboard
+function addTaskToList(tasks){
+    $(".checklist").empty();
 
+    for (let task of tasks) {
+        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+        console.log('Tasks have loaded!')
+        // addTask()
+    }
 }
 
-    // GET request to API for goals
-function getUserGoals(){
-    $.ajax({
-        method: 'GET',
-        url: `/api/goals/`,
-        contentType: 'application/json'
-    }).done(function(response){
-        console.log(response)
-        addGoalsToDashboard(response);
 
-    }).fail(function(response){
-        console.log("There was an issue getting the user's goals.");
-    })
-}
+// find save-goal button and listen for click to run functions
+var saveGoal = document.getElementById('save-goal');
+saveGoal.addEventListener('click', function() {
+    postNewGoal();
+    closeModal();
+})
 
-// Iterates over goals received from API, inserts the goalHTML onto page for each
-function addGoalsToDashboard(goals){
-    for (goal of goals)
-        document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal))
-        console.log('Goals have loaded...')
-    var showTasks = document.getElementById('expand')
-    showTasks.addEventListener('click', loadTasks)
-
-}
-
-// Called at page load
-function loadGoals() {
-    console.log("Loading goals...")
-    getUserGoals(apiPage);
-    apiPage =+ 1;
-}
 
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
@@ -185,72 +142,76 @@ function postNewGoal() {
         method: 'POST',
         data: JSON.stringify(goal), 
         contentType: 'application/json'
-    }).then(function() {
+
+    }).then(function(response) {
         $('.goal-container').empty();
         loadGoals();
-        // closeModal();
-    });
 
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
+    });
 }
 
-// function closeModal(){
-//     document.getElementById('newGoalModal').classList.remove('modal-backdrop fade show')
-// }
 
 function closeModal() {
-    let modal = document.getElementById('newGoalModal')
+    let modal = document.getElementById('newGoalModal');
     modal.classList.remove('modal-backdrop', 'fade', 'show');
 }
 
-
+        
 function goalHTML(goal) {
     return `
-    <div class="goal-card">
-                            <div class="card-body" data-goal="${ goal.id }" data-title="${ goal.title }" data-author="${ goal.author }">  
-                                <h5 class="ib card-title"> ${ goal.title }</h5>                               
-<!-- Expand button, connected to goal.id -->                                
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#exampleModal" id='expand'>Expand</button>
-<!-- Modal with checklist of tasks -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-<!-- Modal header should reflect the goal.title, same as on goal card -->
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">${ goal.title }</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-<!-- Checklist within the modal body -->
-                                            <div class="modal-body" id='checklist-modal'>
-                                                <button name='the-plus-button' id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                                                <ul id="checklist" style="list-style: none">                                     
-                                                </ul>
-                                            </div>
-<!-- Modal FOOTER -->                                            
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="goal-card" id="${ goal.id }">
+        <div class="card-body" data-author="${ goal.author }">  
+            <h5 class="ib card-title"> ${ goal.title }</h5>                               
+            <!-- Expand button, connected to goal.id -->                                
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+        </div>
+    </div>
     `
 }
 
 // var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
+function taskHTML(task) {
+    return `
+    <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group-prepend'>
+            <div class='input-group-text'>
+                <input type='checkbox' aria-label='Checkbox for following text  input'class='checkbox'>
+            </div>
+        </div>
+        <p> ${ task.text }</p>
+    </div>
+        `
+}
+
+
+function newTaskLineHTML(task) {
+    return `
+    <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group-prepend'>
+            <div class='input-group-text'>
+                <input type='checkbox' aria-label='Checkbox for following text input'>
+            </div>
+            <input type='text' class='form-control' aria-label='Text input withcheckbox' id='new-task-text'></input>
+        </div>
+    </div>
+        `
+}
+
+
+// Work in progress, needs to be communicating with tasks in checklist
 function loadProgressBar() {
-    var current_progress = 0;
-    var interval = setInterval(function() {
+    let current_progress = 0;
+    let interval = setInterval(function() {
         current_progress += 10;
+
         $("#dynamic")
-        .css("width", current_progress + "%")
-        .attr("aria-valuenow", current_progress)
-        .text(current_progress + "% Complete");
+            .css("width", current_progress + "%")
+            .attr("aria-valuenow", current_progress)
+            .text(current_progress + "% Complete");
+
         if (current_progress >= 100)
             clearInterval(interval);
     }, 1000);
@@ -338,8 +299,30 @@ function addNotesToJournal(notes){
     console.log(typeof document.getElementById('journal'))
 }
 
+// // function clickEvent() {
+// //     let checkboxes = document.querySelectorAll('input.checkbox')
+// //     console.log(checkboxes)
+// //         for (checkbox in checkboxes)
+// //         // if (checkbox) {
+// //         addEventListener('input', console.log('checked!'))
+// // }
+// let checklist = document.querySelectorAll('div.checklist')
+// let checkboxes = checklist.querySelectorAll('input.checkbox')
+// checkboxes.forEach(element => { console.log(element)})
+    
+
+// let checkTask = document.getElementById('checkbox')
+// checkTask.addEventListener('click', function() {
+// console.log('checked!')
+// })
+
+
+
+// PLEASE DO NOT TOUCH ANYTHING BELOW THIS LINE!
+
 function setupCSRFAjax () {
-    var csrftoken = Cookies.get('csrftoken')
+    let csrftoken = Cookies.get('csrftoken');
+
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -365,13 +348,24 @@ $(document).ready(function () {
 })
 
 
-// $('#exampleModal').on('show.bs.modal', function (event) {
-//     var button = $(event.relatedTarget) // Button that triggered the modal
-//     var goal = button.data('goal') // Extract info from data-* attributes
-//     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-//     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-//     var modal = $(this)
-//     // modal.find('#exampleModalLabel').text('goal ' + goal)
-//     console.log("goal", goal)
-//   })
+
+$('#tasksModal').on('show.bs.modal', function (event) {
+    let button = $(event.relatedTarget) // Button that triggered the modal
+    let goalId = button.data('goal') // Extract info from data-* attributes
+    let modal = $(this)
+
+    $.ajax({
+        method: "GET",
+        url: `/api/goals/${goalId}/`,
+        contentType: 'application/json'
+
+    }).done(function(response){
+        modal.find("#tasksModalLabel").text(response.title)
+        addTaskToList(response.tasks);  
+
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
+    })
+})
+
 
