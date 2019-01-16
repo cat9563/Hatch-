@@ -16,13 +16,13 @@ function loadGoals() {
 
 function addTask() {
     console.log('inside addTask')
-    var theButton = document.getElementById('the-plus-button');
+    let theButton = document.getElementById('the-plus-button');
 
     if (theButton) {
         theButton.addEventListener('click', function(){
-            var newEl = document.createElement('li');
+            let newEl = document.createElement('li');
             newEl.innerHTML = newTaskLineHTML();
-            var position = document.getElementById('checklist');
+            let position = document.getElementById('checklist');
             position.prepend(newEl);
         
             let submitTasks = document.getElementById('save-changes');
@@ -36,7 +36,7 @@ function addTask() {
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(event){
-    console.log(event);
+    // console.log(event);
     let task = {
         author:1,
         goal: 5,
@@ -48,10 +48,13 @@ function postNewTask(event){
         data: JSON.stringify(task), 
         contentType: 'application/json'
     
-    }).then(function() {
-        console.log('end of ajax post, should then empty checklist')
+    }).done(function() {
+        // console.log('end of ajax post, should then empty checklist')
         document.getElementById('checklist').innerHTML = ""
         loadTasks();
+
+    }).fail(function() {
+        console.log("There was an issue getting the user's tasks.")
     });
 
 }
@@ -64,7 +67,7 @@ function getUserGoals(){
         url: `/api/goals/`,
         contentType: 'application/json'
     }).done(function(response){
-        console.log(response)
+        // console.log(response)
         addGoalsToDashboard(response);
 
     }).fail(function(response){
@@ -78,13 +81,14 @@ function addGoalsToDashboard(goals){
     for (let goal of goals) {
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
 
-        console.log('Goals have loaded...')
-        var showTasks = document.getElementById('expand')
+        // console.log('Goals have loaded...')
+        let showTasks = document.getElementById('expand');
         showTasks.addEventListener('click', loadTasks)
     }
 }
 
 
+// loadTasks->getUserTasks->addTaskToList->taskHTML
 function loadTasks() {
     getUserTasks(apiPage);
     apiPage =+ 1;
@@ -102,9 +106,10 @@ function getUserTasks(){
         // clickEvent();
 
     }).fail(function(response){
-        console.log("There was an issue getting the user's goals.");
+        console.log("There was an issue getting the user's tasks.");
     })
 }
+
 
 // takes the new task posted to API and also adds the HTML element on the dashboard
 function addTaskToList(tasks){
@@ -118,8 +123,7 @@ function addTaskToList(tasks){
 }
 
 
-
-
+// find save-goal button and listen for click to run functions
 var saveGoal = document.getElementById('save-goal');
 saveGoal.addEventListener('click', function() {
     postNewGoal();
@@ -137,36 +141,21 @@ function postNewGoal() {
         method: 'POST',
         data: JSON.stringify(goal), 
         contentType: 'application/json'
-    }).then(function() {
+
+    }).then(function(response) {
         $('.goal-container').empty();
         loadGoals();
-        // closeModal();
+
+    }).fail(function(response){
+        console.log("There was an issue getting the user's goals.");
     });
 }
 
 
 function closeModal() {
-    let modal = document.getElementById('newGoalModal')
+    let modal = document.getElementById('newGoalModal');
     modal.classList.remove('modal-backdrop', 'fade', 'show');
 }
-
-
-
-// var saveTask = document.getElementById('save-changes')
-// saveTask.addEventListener('click', function() {
-//     postNewTask();
-// })
-
-
-// let checkTask = document.getElementById('checkbox')
-// checkTask.addEventListener('click', function() {
-// console.log('checked!')
-// })
-
-
-
-
-
 
         
 function goalHTML(goal) {
@@ -210,10 +199,10 @@ function newTaskLineHTML(task) {
 }
 
 
-
+// Work in progress, needs to be communicating with tasks in checklist
 function loadProgressBar() {
-    var current_progress = 0;
-    var interval = setInterval(function() {
+    let current_progress = 0;
+    let interval = setInterval(function() {
         current_progress += 10;
 
         $("#dynamic")
@@ -242,12 +231,17 @@ loadProgressBar()
 // checkboxes.forEach(element => { console.log(element)})
     
 
+// let checkTask = document.getElementById('checkbox')
+// checkTask.addEventListener('click', function() {
+// console.log('checked!')
+// })
 
 
-// DO NOT TOUCH ANYTHING BELOW THIS LINE!
+
+// PLEASE DO NOT TOUCH ANYTHING BELOW THIS LINE!
 
 function setupCSRFAjax () {
-    var csrftoken = Cookies.get('csrftoken')
+    let csrftoken = Cookies.get('csrftoken');
     // console.log(csrftoken);
     // console.log('Inside setupCSRFAjax function')
     $.ajaxSetup({
@@ -271,18 +265,19 @@ setupCSRFAjax()
 
 
 $('#tasksModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var goalId = button.data('goal') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
+    let button = $(event.relatedTarget) // Button that triggered the modal
+    let goalId = button.data('goal') // Extract info from data-* attributes
+    let modal = $(this)
+
     $.ajax({
         method: "GET",
         url: `/api/goals/${goalId}/`,
         contentType: 'application/json'
+
     }).done(function(response){
         modal.find("#tasksModalLabel").text(response.title)
-        addTaskToList(response.tasks);        
+        addTaskToList(response.tasks);  
+
     }).fail(function(response){
         console.log("There was an issue getting the user's goals.");
     })
