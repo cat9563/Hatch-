@@ -19,7 +19,7 @@ class TaskSerializer(serializers.ModelSerializer):
                     'task_detail_link')
 
 class GoalSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    # author = serializers.StringRelatedField(read_only=True)
     tasks = TaskSerializer(many=True, read_only=True)
     goal_detail_link = serializers.HyperlinkedIdentityField(
         view_name='goal-detail')
