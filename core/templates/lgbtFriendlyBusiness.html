@@ -22,66 +22,13 @@
       </div>
     </div> {% endcomment %}
 
- 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-  +
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <label for="message-text" class="col-form-label">Journal Entry</label>
-        <textarea class="form-control" id="message-text"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
+<div>
+   <button class="api">click me </button> 
 </div>
- {% comment %} NOTE CONTAINER {% endcomment %}
-        {% comment %} <div class="container" style="margin: 10px" id="journal"><center>Note Container</center> {% endcomment %}
-            <div class="col-md-12 col-sm-6 my-col">
-            <div class="addNote">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-                +
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-body">
-                        <label for="message-text" class="col-form-label">Journal Entry</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save</button>
-                    </div>
-                    </div>
-                </div>
-            </div> 
-        </div>
-    <div class="row">
-        <p><center>Note Container</center></p>
-        <div class="container" id="journal"></div>
-    </div>
-        {% comment %} </div> {% endcomment %}
-    </div>
-    </div>
-       <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
-       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
-            <h1><center>MY JOURNEY PROGRESS</center></h1>
-            <div class="container-clear">
-                <canvas id="myChart"></canvas>
-            </div>
-       </div>
-      </div>
-    </div>
-</div> 
+<div id="jsonresp" style="margin-top: 100px">
+   <p><label> can I show my note text</label> <span id="my_text"></span></p>
+</div>
+
 
             
 {% endblock content %}

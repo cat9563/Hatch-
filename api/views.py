@@ -13,12 +13,13 @@ from api.serializers import (
     EventSerializer, 
     # ResourceSerializer
 )
+
+from rest_framework import generics
 from rest_framework.reverse import reverse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly, IsAuthenticated)
 from django.views.decorators.csrf import ensure_csrf_cookie
-from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import (
     BasePermission,
@@ -56,20 +57,16 @@ class GoalListCreateView(generics.ListCreateAPIView):
 class GoalDetailView(generics.RetrieveDestroyAPIView):
     """
     Retrieves details of one goal
-    Allows users to destroy their goals
+    Allows only users to destroy their goals
     """
     queryset = Goal.objects.all()
     serializer_class = GoalSerializer
     permission_classes = (IsAuthenticated,)
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
-
 class TaskListView(generics.ListCreateAPIView):
     """
-    Retrieves list of tasks
-    Allows users to submit new tasks
+    Retrieves list of all tasks
+    Allows logged in user to submit new task
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -82,7 +79,7 @@ class TaskListView(generics.ListCreateAPIView):
 class TaskDetailView(generics.RetrieveDestroyAPIView):
     """
     Retrieves details of one task
-    Allows users to destroy their tasks
+    Allows only users to destroy their tasks
     """
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -90,8 +87,8 @@ class TaskDetailView(generics.RetrieveDestroyAPIView):
 
 class NoteListView(generics.ListCreateAPIView):
     """
-    Retrieves list of notes
-    Allows users to submit new notes
+    Retrieves list of all notes
+    Allows logged in user to submit new note
     """
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
@@ -100,10 +97,19 @@ class NoteListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+class NoteDetailView(generics.RetrieveDestroyAPIView):
+    """
+    Retrieves details of one note
+    Allows only users to destroy their notes
+    """
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    permission_classes = (IsAuthenticated,)
+
 class EventListView(generics.ListCreateAPIView):
     """
-    Retrieves list of events
-    Allows users to submit new events
+    Retrieves list of all events
+    Allows logged in user to submit new event
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -111,6 +117,15 @@ class EventListView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+class EventDetailView(generics.RetrieveDestroyAPIView):
+    """
+    Retrieves details of one event
+    Allows only users to destroy their events
+    """
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = (IsAuthenticated,)
 
 # class ResourceListView(generics.ListCreateAPIView):
 #     """

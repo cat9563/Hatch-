@@ -1,7 +1,6 @@
-dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
-
 let apiPage = 1;
 let controller, scene;
+dragula([document.getElementById("left-defaults"), document.getElementById("right-defaults")]);
 
 var saveGoal = document.getElementById('save-goal')
 saveGoal.addEventListener('click', function() {
@@ -180,7 +179,7 @@ function postNewGoal() {
     let goal = {
         author: 1,
         title: $('#new-goal-title').val()
-    }
+    }    
     $.ajax({
         url: '/api/goals/',
         method: 'POST',
@@ -242,6 +241,7 @@ function goalHTML(goal) {
     `
 }
 
+// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
 function loadProgressBar() {
     var current_progress = 0;
@@ -307,6 +307,7 @@ function postNote(){
 
 }
 
+
 //loads on page load
 function loadNotes(){
     getUserNotes(apiPage);
@@ -339,8 +340,6 @@ function addNotesToJournal(notes){
 
 function setupCSRFAjax () {
     var csrftoken = Cookies.get('csrftoken')
-    // console.log(csrftoken);
-    // console.log('Inside setupCSRFAjax function')
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -366,14 +365,13 @@ $(document).ready(function () {
 })
 
 
-
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var goal = button.data('goal') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    // modal.find('#exampleModalLabel').text('goal ' + goal)
-    console.log("goal", goal)
-  })
+// $('#exampleModal').on('show.bs.modal', function (event) {
+//     var button = $(event.relatedTarget) // Button that triggered the modal
+//     var goal = button.data('goal') // Extract info from data-* attributes
+//     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+//     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+//     var modal = $(this)
+//     // modal.find('#exampleModalLabel').text('goal ' + goal)
+//     console.log("goal", goal)
+//   })
 
