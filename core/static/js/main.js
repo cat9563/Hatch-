@@ -130,12 +130,13 @@ saveGoal.addEventListener('click', function() {
     closeModal();
 })
 
+
 // POST request to save new Goal to API, then add it to list on dashboard
 function postNewGoal() {
     let goal = {
         author: 1,
         title: $('#new-goal-title').val()
-    }
+    }    
     $.ajax({
         url: '/api/goals/',
         method: 'POST',
@@ -170,6 +171,7 @@ function goalHTML(goal) {
     `
 }
 
+// var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
 function taskHTML(task) {
     return `
@@ -215,9 +217,87 @@ function loadProgressBar() {
     }, 1000);
   };
 
-loadProgressBar()
+//NOTES SECTION
+
+//checks to see if num is even and assigns html accordingly 
+function isEven(num) {
+    if (num % 2 === 0) {
+        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+    } else {
+        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+    }
+}
+
+//inserts note.id to alteranate colors 
+function noteHtml() {
+    return isEven(note.id)
+}
+
+//gets the container for the notes and adds the notehtml
+function postNoteToJournal(note){
+    document.getElementById("journal").insertAdjacentHTML('afterbegin',
+    noteHtml(note));
+}
+
+var saveNotes = document.getElementById('saveNote')
+saveNotes.addEventListener('click', function() {
+    postNote();
+})
 
 
+// function postNewNotes()
+
+function postNote(){
+    let note = {
+        note: 1,
+        text: $('#message-text').val()
+    }
+    $.ajax({
+        url: '/api/notes/',
+        method: 'POST',
+        data: JSON.stringify(note), 
+        contentType: 'application/json'
+    
+    }).then(function() {
+        console.log('end of ajax post, should then empty checklist')
+        document.getElementById('journal').innerHTML = ""
+        $('#message-text').val("");
+        console.log("should be empty")
+        loadNotes();
+    });
+
+}
+
+
+//loads on page load
+function loadNotes(){
+    getUserNotes(apiPage);
+    apiPage =+ 1;
+}
+
+//get request to api 
+function getUserNotes(){
+    $.ajax({
+        method: "GET",
+        url: `/api/notes/`,
+        contentType: 'application/json'
+    }).done(function(response){
+        addNotesToJournal(response);
+
+
+    }).fail(function(response){
+        console.log("try again");
+    })
+}
+
+//inserts them individual form the list of notes 
+function addNotesToJournal(notes){
+    console.log("notes:", notes)
+    document.getElementById('journal').innerHTML = ""
+    for (note of notes)
+    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+    console.log(typeof document.getElementById('journal'))
+}
 
 // // function clickEvent() {
 // //     let checkboxes = document.querySelectorAll('input.checkbox')
@@ -242,8 +322,7 @@ loadProgressBar()
 
 function setupCSRFAjax () {
     let csrftoken = Cookies.get('csrftoken');
-    // console.log(csrftoken);
-    // console.log('Inside setupCSRFAjax function')
+
     $.ajaxSetup({
       beforeSend: function (xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -260,8 +339,14 @@ function csrfSafeMethod(method){
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
+$(document).ready(function () {
+    setupCSRFAjax()
+    loadNotes()
+    loadGoals()
+    loadTasks()    
+    loadProgressBar()
+})
 
-setupCSRFAjax()
 
 
 $('#tasksModal').on('show.bs.modal', function (event) {
@@ -282,4 +367,5 @@ $('#tasksModal').on('show.bs.modal', function (event) {
         console.log("There was an issue getting the user's goals.");
     })
 })
+
 
