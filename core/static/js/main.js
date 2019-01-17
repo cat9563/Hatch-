@@ -66,11 +66,11 @@ function postNewTask(event){
 // DELETE task
 function deleteTask() {
     console.log("Inside deleteTask")
-    $('#delete').on('click', function (event) {
-        let deleteButton = $(event.currentTarget)
-        console.log(event)
-        // console.log(deleteButton.attr('data-task'))
-        var taskID = deleteButton.data('task')
+    $( 'div' ).find( "button.delete" ).on('click', function (event) {
+        
+        console.log('OHAI')
+        console.log($("button.delete").data())
+        let taskID = $("button.delete").data('task')
         console.log(taskID)
 
         $.ajax({
@@ -86,8 +86,7 @@ function deleteTask() {
         }).fail(function() {
             console.log("There was an issue getting the user's tasks.")
         });
-    })
-};
+    })};
 
 
 
@@ -153,7 +152,7 @@ function addTaskToList(tasks){
         console.log('Tasks have loaded!')
     }
     deleteTask();
-    }
+}
 
 
 // find save-goal button and listen for click to run functions
@@ -214,9 +213,9 @@ function taskHTML(task) {
                 <input type='checkbox' aria-label='Checkbox for following text  input'class='checkbox'>
             </div>
         </div>
-        <p> ${ task.text }</p>
+        <p> ${ task.text } </p>
         <button type='button' class='btn' data-task="${ task.id }" id='edit' style="float: right">&#9997</button>
-        <button type='button' id='delete' class='btn' data-task="${ task.id }">&#128465</button>
+        <button type='button' id='delete' class='delete btn' data-task="${ task.id }">&#128465</button>
     </div>
         `
 }
@@ -406,7 +405,7 @@ function getCorrectTasks () {
         })
         
     })
-    deleteTask();
+    // deleteTask();
 }
 
 function getModalTasks () {
