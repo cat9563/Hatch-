@@ -9,6 +9,7 @@ addTask();
 
 
 
+
 function loadGoals() {
     console.log("Loading goals...")
     getUserGoals(apiPage);
@@ -61,6 +62,34 @@ function postNewTask(event){
     });
 
 }
+
+// DELETE task
+function deleteTask() {
+    console.log("Inside deleteTask")
+    $('#delete').on('click', function (event) {
+        let deleteButton = $(event.currentTarget)
+        console.log(event)
+        // console.log(deleteButton.attr('data-task'))
+        var taskID = deleteButton.data('task')
+        console.log(taskID)
+
+        $.ajax({
+            method: 'DELETE',
+            url: `/api/tasks/${taskID}/`,
+        
+        }).done(function() {
+            document.getElementById('checklist').innerHTML = "";
+            console.log('cleared checklist')
+            // loadTasks();
+            getModalTasks();
+
+        }).fail(function() {
+            console.log("There was an issue getting the user's tasks.")
+        });
+    })
+};
+
+
 
 
 // GET request to API for goals
@@ -122,9 +151,9 @@ function addTaskToList(tasks){
     for (let task of tasks) {
         document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
-        // addTask()
     }
-}
+    deleteTask();
+    }
 
 
 // find save-goal button and listen for click to run functions
@@ -133,6 +162,7 @@ saveGoal.addEventListener('click', function() {
     postNewGoal();
     closeModal();
 })
+
 
 
 // POST request to save new Goal to API, then add it to list on dashboard
@@ -169,7 +199,7 @@ function goalHTML(goal) {
         <div class="card-body" data-author="${ goal.author }">  
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
             <!-- Expand button, connected to goal.id -->                                
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+            <button type="button" class="btn" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
         </div>
     </div>
     `
@@ -185,6 +215,8 @@ function taskHTML(task) {
             </div>
         </div>
         <p> ${ task.text }</p>
+        <button type='button' class='btn' data-task="${ task.id }" id='edit' style="float: right">&#9997</button>
+        <button type='button' id='delete' class='btn' data-task="${ task.id }">&#128465</button>
     </div>
         `
 }
@@ -372,7 +404,9 @@ function getCorrectTasks () {
         }).fail(function(response){
             console.log("There was an issue getting the user's goals.");
         })
+        
     })
+    deleteTask();
 }
 
 function getModalTasks () {
