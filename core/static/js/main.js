@@ -205,20 +205,31 @@ function newTaskLineHTML(task) {
 
 
 // Work in progress, needs to be communicating with tasks in checklist
-function loadProgressBar() {
-    let current_progress = 0;
-    let interval = setInterval(function() {
-        current_progress += 10;
+// function loadProgressBar() {
+//     let current_progress = 0;
+//     let interval = setInterval(function() {
+//         current_progress += 10;
 
-        $("#dynamic")
-            .css("width", current_progress + "%")
-            .attr("aria-valuenow", current_progress)
-            .text(current_progress + "% Complete");
+//         $("#dynamic")
+//             .css("width", current_progress + "%")
+//             .attr("aria-valuenow", current_progress)
+//             .text(current_progress + "% Complete");
 
-        if (current_progress >= 100)
-            clearInterval(interval);
-    }, 1000);
-  };
+//         if (current_progress >= 100)
+//             clearInterval(interval);
+//     }, 1000);
+//   };
+
+$('input').on('click', function(){
+    var valeur = 0;
+    $('input:checked').each(function(){
+        if ( $(this).attr('value') > valeur )
+        {
+            valeur =  $(this).attr('value');
+        }
+    });
+    $('.progress-bar').css('width', valeur+'%').attr('aria-valuenow', valeur);    
+});
 
 //NOTES SECTION
 
