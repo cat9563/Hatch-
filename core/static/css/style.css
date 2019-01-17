@@ -67,7 +67,7 @@ footer ul li {
 }
 
 .container {
-    border: 5px dotted black; 
+    /* border: 5px dotted black;  */
     display: inline-block;
     /* margin: 10px; */
     padding: 0px;
@@ -79,8 +79,8 @@ footer ul li {
 } */
 
 .goal-container {
-    border: 5px dotted black;
-    display: inline-block;
+    /* border: 5px dotted black; */
+    /* display: inline-block; */
     /* margin: 10px; */
     padding: 0px;
 }
@@ -216,11 +216,16 @@ footer ul li {
   }
 
 /* Notes css */
-.container {
+
+.container-fluid{
+    height: 500px;
+    overflow: scroll;
+}
+/* .container {
     padding: 2rem 0rem;
     overflow: scroll;
     height: 500px;
-  }
+  } */
   
   h4 {
     margin: 2rem 0rem;
@@ -267,4 +272,15 @@ footer ul li {
 .signup-form {
     padding-left: 25px;
     padding-top: 25px;
+}
+
+/* dashboard chart */
+
+#goalChart {
+    margin-top: 10px; 
+    height: 215px; 
+    width: 425px;
+    display: flex;
+
+    /*background-color: #e0f5ff;*/
 }
