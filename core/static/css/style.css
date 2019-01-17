@@ -101,6 +101,9 @@ body{
     /* display: inline-block; */
     /* margin: 10px; */
     padding: 0px;
+    height: 400px;
+    overflow: scroll;
+    
 }
 
 .container-clear {
@@ -169,6 +172,8 @@ body{
     border: #ff3052 solid 2px;
     overflow: scroll;
     height: 200px;
+    width: 200px;
+    background-color: #f5a8b8;
     
 }
 
