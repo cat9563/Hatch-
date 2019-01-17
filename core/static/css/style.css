@@ -12,7 +12,7 @@
 } */
 
 footer {
-    background-color: lavender;
+    background-color: #f5a8b8;
     /* border-top: 2px black dashed; */
     display: block;
     text-align: center;
@@ -24,16 +24,34 @@ footer {
     height: 65px;
 }
 
+a {
+    color: #2E0E10
+}
+
 footer ul li {
     display: inline;
     margin-left: 10px;
     margin-right: 10px;
 }
 
+body{
+    background-color: #EBF0ff
+}
+
+#journal{
+    height: 300px;
+    overflow: scroll;
+}
+
 /* customize navbar */
 
 .bg-dark {
-    background-color: rgb(91, 206, 250) !important;
+    background-color: #87c5dd !important;
+    color: #fff
+}
+
+.nav-link{
+    color: #fff !important;
 }
 
 .dropdown-item {
@@ -67,7 +85,7 @@ footer ul li {
 }
 
 .container {
-    border: 5px dotted black; 
+    /* border: 5px dotted black;  */
     display: inline-block;
     /* margin: 10px; */
     padding: 0px;
@@ -79,8 +97,8 @@ footer ul li {
 } */
 
 .goal-container {
-    border: 5px dotted black;
-    display: inline-block;
+    /* border: 5px dotted black; */
+    /* display: inline-block; */
     /* margin: 10px; */
     padding: 0px;
 }
@@ -148,7 +166,7 @@ footer ul li {
 
 .goal-card {
     margin: 4px;
-    /* border: #ff3052 solid 2px; */
+    border: #ff3052 solid 2px;
     overflow: scroll;
     height: 200px;
     
@@ -216,11 +234,16 @@ footer ul li {
   }
 
 /* Notes css */
-.container {
+
+.container-fluid{
+    height: 500px;
+    overflow: scroll;
+}
+/* .container {
     padding: 2rem 0rem;
     overflow: scroll;
     height: 500px;
-  }
+  } */
   
   h4 {
     margin: 2rem 0rem;
@@ -267,4 +290,15 @@ footer ul li {
 .signup-form {
     padding-left: 25px;
     padding-top: 25px;
+}
+
+/* dashboard chart */
+
+#goalChart {
+    margin-top: 10px; 
+    height: 215px; 
+    width: 425px;
+    display: flex;
+
+    /*background-color: #e0f5ff;*/
 }
