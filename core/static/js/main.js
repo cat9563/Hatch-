@@ -69,7 +69,7 @@ function deleteTask() {
     $('#delete').on('click', function (event) {
         let deleteButton = $(event.currentTarget)
         console.log(event)
-        // console.log(deleteButton.attr('data-task'))
+        console.log(deleteButton.attr('data-task'))
         var taskID = deleteButton.data('task')
         console.log(taskID)
 
@@ -86,8 +86,7 @@ function deleteTask() {
         }).fail(function() {
             console.log("There was an issue getting the user's tasks.")
         });
-    })
-};
+    })};
 
 
 
@@ -151,9 +150,12 @@ function addTaskToList(tasks){
     for (let task of tasks) {
         document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
         console.log('Tasks have loaded!')
+
+        let deleteButton = document.getElementById('delete');
+        deleteButton.addEventListener('click', deleteTask)
     }
-    deleteTask();
-    }
+    // deleteTask();
+}
 
 
 // find save-goal button and listen for click to run functions
@@ -406,7 +408,7 @@ function getCorrectTasks () {
         })
         
     })
-    deleteTask();
+    // deleteTask();
 }
 
 function getModalTasks () {
