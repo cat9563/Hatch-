@@ -12,7 +12,7 @@
 } */
 
 footer {
-    background-color: lavender;
+    background-color: #f5a8b8;
     /* border-top: 2px black dashed; */
     display: block;
     text-align: center;
@@ -24,16 +24,34 @@ footer {
     height: 65px;
 }
 
+a {
+    color: #2E0E10
+}
+
 footer ul li {
     display: inline;
     margin-left: 10px;
     margin-right: 10px;
 }
 
+body{
+    background-color: #EBF0ff
+}
+
+#journal{
+    height: 300px;
+    overflow: scroll;
+}
+
 /* customize navbar */
 
 .bg-dark {
-    background-color: rgb(91, 206, 250) !important;
+    background-color: #87c5dd !important;
+    color: #fff
+}
+
+.nav-link{
+    color: #fff !important;
 }
 
 .dropdown-item {
@@ -148,7 +166,7 @@ footer ul li {
 
 .goal-card {
     margin: 4px;
-    /* border: #ff3052 solid 2px; */
+    border: #ff3052 solid 2px;
     overflow: scroll;
     height: 200px;
     

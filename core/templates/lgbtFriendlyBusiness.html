@@ -1,140 +1,140 @@
 {% extends 'base.html' %} 
+{% load app_tags %}
 {% block title %}
     lgbt Business - {{ block.super }} 
 {% endblock title %}
 
 {% block content %}
  
-<div class="container-fluid">
-  <h1>Basic Grid Structure</h1>
-  <p>Resize the browser window to see the effect.</p>
-  <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
-  
-  <div class="container-fluid">
-    <!-- Control the column width, and how they should appear on different devices -->
-    <div class="row">
-            <div class="col-sm-6" style="background-color:yellow;">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                        +Goal</button>
-                    <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
-                            <!-- Modal to create a new goal -->
-                                    <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="newGoalModalTitle">Have a new goal?</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="input-group mb-3">
-                                                <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                        <!-- End of modal to create a new goal-->
 
-                        <!-- Modal for viewing checklist of tasks -->
-                        <!--Modal HEADER-->
-                                <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog" aria-labelledby="tasksModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="tasksModalLabel">Sample title</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                        <!--Modal BODY - CHECKLIST-->
-                                            <div class="modal-body" >
-                                                <div class="progress">
-                                                    <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                                        <span id="current-progress"></span>
-                                                    </div>
-                                                </div>
-                                                <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                                                <ul id="checklist" style="list-style: none" class='checklist'>
-                                                </ul>
-                                            </div>
-                        <!-- Modal FOOTER -->                                            
-                                            <div class="modal-footer">
 
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-            <!--endofgoal--></div>
-            <div class="col-sm-6" style="background-color:orange;"> 
+
+            
+{% endblock content %}
+
+{% comment %} <p>Dashboard Content</p> {% endcomment %}
+
+<div>
+<!-- Header Container -->
+    <div class="card" style="margin-top: 75px; margin-left: 15px; height: 210px; width: 700px; background-color: #fabad0;">
+        <div class="row">
+            <div class="col">
+                <img class="rounded-circle resize" src="{{ user|gravatar:200 }}"/>
+            </div>
+            <div class="col">
+                <h2>Welcome, {{ user.username }}</h2>
+                <body onload="randomQuote()">
+                    <div id="showQuotes"></div>
+            </div>
+        </div>
+    </div>
+<!-- Large Container that holds goal container and note container -->
+    {% comment %} <div class="lg-container"> {% endcomment %}
+        <div class="container ib col1of2">
+<!--  GOAL CONTAINER -->
+<!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
+                +Goal</button>
+            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
+
+
+<!-- Modal to create a new goal -->
+                <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newGoalModalTitle">Have a new goal?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                        <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+<!-- End of modal to create a new goal-->
+
+
+<!-- Modal for viewing checklist of tasks -->
+<!--Modal HEADER-->
+        <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog" aria-labelledby="tasksModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tasksModalLabel">Sample title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+<!--Modal BODY - CHECKLIST-->
+                    <div class="modal-body" >
+                        <div class="progress">
+                            <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                <span id="current-progress"></span>
+                            </div>
+                        </div>
+                        <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
+                        <ul id="checklist" style="list-style: none" class='checklist'>
+                        </ul>
+                    </div>
+<!-- Modal FOOTER -->                                            
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--End of modal for viewing checklist of tasks-->
+
+        {% comment %} NOTE CONTAINER {% endcomment %}
+        {% comment %} <div class="container" style="margin: 10px" id="journal"><center>Note Container</center> {% endcomment %}
+            <div class="col-md-12 col-sm-6 my-col">
+
                 <div class="row">
                     <p><center>Note Container</center></p>
                     <div class="container" id="journal"></div>
-                </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-        +
-        </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-body" id="note-input">
-                <label for="message-text" class="col-form-label">Journal Entry</label>
-                <textarea class="form-control" id="message-text"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
-            </div>
-            </div>
-        </div>
-        </div>
+                </div>
+        {% comment %} </div> {% endcomment %}
     </div>
-          
-    </div><!--endofnotediv-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
+  +
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" id="note-input">
+        <label for="message-text" class="col-form-label">Journal Entry</label>
+        <textarea class="form-control" id="message-text"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
+      </div>
     </div>
-    <br>
-    
-    <div class="row">
-      <div class="col-sm-12" style="background-color:yellow;"><div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
+  </div>
+</div>
+    </div>
+       <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
        {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
             <h1><center>MY JOURNEY PROGRESS</center></h1>
             <div class="container-clear">
                 <canvas id="myChart"></canvas>
             </div>
        </div>
+      </div>
     </div>
-    
-    </div>
-    <br>
-
-    <!-- Or let Bootstrap automatically handle the layout -->
-    <div class="row">
-      <div class="col-sm" style="background-color:yellow;">25%</div>
-      <div class="col-sm" style="background-color:orange;">25%</div>
-      <div class="col-sm" style="background-color:yellow;">25%</div>
-      <div class="col-sm" style="background-color:orange;">25%</div>
-    </div>
-    <br>
-    
-    <div class="row">
-      <div class="col" style="background-color:yellow;">25%</div>
-      <div class="col" style="background-color:orange;">25%</div>
-      <div class="col" style="background-color:yellow;">25%</div>
-      <div class="col" style="background-color:orange;">25%</div>
-    </div>
-  </div>
-</div>
-
-
-            
-{% endblock content %}
+</div> 
