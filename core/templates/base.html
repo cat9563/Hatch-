@@ -22,7 +22,35 @@
 <body>
 <header>
     {% block header %}
-      <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a href="{% url 'home' %}" class="navbar-brand">Hatch</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-stretch" id="navbar7">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'resources' %}">Resources</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    <a class="nav-link" href="{% url 'auth_logout' %}">Logout</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'registration_register' %}">Register</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+
+
+      {% comment %} <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
         <a href="{% url 'home' %}" class="navbar-brand">Hatch</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
             <span class="navbar-toggler-icon"></span>
@@ -34,7 +62,6 @@
                     You've Arrived 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'localEvents' %}">Local Events</a>
                     <a class="dropdown-item" href="{% url 'resources' %}">Resources</a>
                     <div class="dropdown-divider"></div>
                     {% if user.is_authenticated %}
@@ -62,7 +89,9 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> {% endcomment %}
+
+    
     {% endblock header %}
 </header>
 
@@ -71,8 +100,7 @@
 <footer>
     {% block footer %}
         <ul>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'ourteam' %}">Our Team</a></li>
             <li><a href="{% url 'terms' %}">Terms</a></li>
             <li><a href="{% url 'privacy' %}">Privacy</a></li>
         </ul>
