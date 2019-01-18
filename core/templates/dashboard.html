@@ -7,7 +7,7 @@
 
 <body>
 {% block content %}
-    <div class="container-fluid">
+<div class="container-fluid">
   <h1>Basic Grid Structure</h1>
   <p>Resize the browser window to see the effect.</p>
   <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
@@ -148,23 +148,18 @@
                                         </div>
                                     </div>
                                 </div>
-            <!--endofgoal--></div>
-            <div class="col-sm-6" style="background-color:#f5a8b8"> 
-            {% comment %} <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;"> {% endcomment %}
-       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
-           
-            <div class="container-clear">
-                <canvas id="myChart"></canvas>
-            </div>
-       {% comment %} </div> {% endcomment %}
-       
-               
-          
-    </div><!--endofnotediv-->
-    </div>
-    <br>
-    
-   
+            <!--end of goal container--></div>
+<!--START OF JOURNEY PROGRESS TRACKER -->
+    <div class="col-sm-6" style="background-color:#f5a8b8"> 
+                
+                {% comment %} <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;"> {% endcomment %}
+        {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
+            
+        <div class="container-clear">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div><!-- END OF JOURNEY PROGRESS TRACKER -->
+</div>
 
      {% comment %} <div class="row">
       <div class="col-sm-4" style="background-color:yellow;"></div>
@@ -189,5 +184,7 @@
       <div class="col" style="background-color:orange;">25%</div>
     </div>
   </div> {% endcomment %}
+  
 </div>
+
 {% endblock content %}

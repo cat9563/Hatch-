@@ -302,3 +302,7 @@ body{
 
     /*background-color: #e0f5ff;*/
 }
+
+.fr {
+    float: right;
+}
