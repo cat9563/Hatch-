@@ -34,35 +34,9 @@
     </div>
 </div>
 
-.goal-card-container {
-  display: flex;
-  justify-content: start;
-}
-.goal-id {
-  width: 20px;
-  display: flex;
-  justify-content: flex-start;
-}
-.goal-card {
-  border: 1px solid #fff;
-  width: 300px;
-  height: 300px;
-}
-.card-body {
-  border: 1px solid #fff;
-  width: 300px;
-  height: 300px;
-}
-.card-title {
-  border: 1px solid #fff;
-  width: 300px;
-  height: 300px;
-}
-
-            
 {% endblock content %}
 
- <div class="container">
+ {% comment %} <div class="container">
         <div class="goal-card" id="${ goal.id }">
             <div class="card-body" data-author="${ goal.author }">  
                 <h5 class="ib card-title"> ${ goal.title }</h5>  
@@ -87,4 +61,4 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
             </div>   
         </div>
-    </div>
+    </div> {% endcomment %}

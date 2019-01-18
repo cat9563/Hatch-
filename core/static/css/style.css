@@ -61,10 +61,6 @@ body{
 
 /* news feed */
 
-.myCarousel {
-    
-}
-
 .carousel-item {
   /* max-height: 750px; */
   max-height: 600px;
@@ -131,7 +127,7 @@ body{
 } */
 
 .row {
-    /* border: 3px dashed blue; */
+    /* border: 3px dashed blue; 
     /* display: inline-block; */
     width: 100%;
     padding: 0px;
