@@ -61,6 +61,10 @@ body{
 
 /* news feed */
 
+.myCarousel {
+    
+}
+
 .carousel-item {
   /* max-height: 750px; */
   max-height: 600px;
