@@ -328,7 +328,7 @@ overflow: scroll;
 
 #myChart{
     border-radius: 10px;
-    background-color: lightblue;
+    background-color: #ebf0ff;
     /* width: 627px !important; */
     padding-left: 35px; 
     height: 312px !important;

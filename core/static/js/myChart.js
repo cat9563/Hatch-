@@ -32,10 +32,10 @@ var myChart = new Chart(ctx, {
             label: '',
             data: [completegoals, incompletegoals],
             backgroundColor: [
-                'green',
-                'yellow'
+                '#011326',
+                '#87c5dd'
             ],
-            borderWidth: 2
+            borderWidth: 0
         }]
     },
     options: {
