@@ -239,7 +239,7 @@ function taskHTML(task) {
     <div class='input-group mb-3' id='checklist-task'>
         <div class='input-group-prepend'>
             <div class='input-group-text'>
-                <input type='checkbox' aria-label='Checkbox for following text  input'class='checkbox'>
+                <input type='checkbox' aria-label='Checkbox for following text  input' class='checkbox'>
             </div>
         </div>
         <p> ${ task.text } </p>
