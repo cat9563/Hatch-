@@ -68,7 +68,6 @@ function deleteTask() {
     console.log("Inside deleteTask")
     $( 'div' ).find( "button.delete" ).on('click', function (event) {
         
-        console.log('OHAI')
         console.log($("button.delete").data())
         let taskID = $("button.delete").data('task')
         console.log(taskID)
@@ -116,6 +115,7 @@ function addGoalsToDashboard(goals){
         let showTasks = document.getElementById('expand');
         showTasks.addEventListener('click', loadTasks)
     }
+    deleteGoal();
 }
 
 
@@ -186,6 +186,31 @@ function postNewGoal() {
 }
 
 
+// DELETE goal
+function deleteGoal() {
+    console.log("Inside deleteGoal")
+    $( 'div' ).find( "button.deletegoal" ).on('click', function (event) {
+        
+        console.log($("button.deletegoal").data())
+        let goalID = $("button.deletegoal").data('goal')
+        console.log(goalID)
+
+        $.ajax({
+            method: 'DELETE',
+            url: `/api/goals/2/`,
+        
+        }).done(function() {
+            document.getElementById('goal-list').innerHTML = "";
+            console.log('cleared goal-list')
+            // loadTasks();
+            loadGoals()
+
+        }).fail(function() {
+            console.log("There was an issue getting the user's goals.")
+        });
+    })};
+
+
 function closeModal() {
     let modal = document.getElementById('newGoalModal');
     modal.classList.remove('modal-backdrop', 'fade', 'show');
@@ -197,8 +222,12 @@ function goalHTML(goal) {
     <div class="goal-card" id="${ goal.id }">
         <div class="card-body" data-author="${ goal.author }">  
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
-            <!-- Expand button, connected to goal.id -->                                
-            <button type="button" class="btn" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
+            <!-- Expand button, connected to goal.id -->                   
+            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
+            
+            <!-- Edit & Delete buttons, connected to goal id -->
+            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>&#9997</button>
+            <button type='button' id='deletegoal' class='delete btn fr' data-goal="${ goal.id }">&#128465</button>
         </div>
     </div>
     `
@@ -214,8 +243,8 @@ function taskHTML(task) {
             </div>
         </div>
         <p> ${ task.text } </p>
-        <button type='button' class='btn' data-task="${ task.id }" id='edit' style="float: right">&#9997</button>
-        <button type='button' id='delete' class='delete btn' data-task="${ task.id }">&#128465</button>
+        <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
+        <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
     </div>
         `
 }
@@ -235,20 +264,43 @@ function newTaskLineHTML(task) {
 }
 
 
+function changeCheck() {
+    // find the checkbox input field(s) for the specific goal
+    let boxes = $( 'div' ).find( 'checkbox.checkbox' )
+    let numOfBoxes = boxes.length
+    let listID = $('#checklist').attr('data-list')
+        
+        console.log(boxes)
+        console.log(numOfBoxes)
+        console.log(listID)
+    // determine if it has attribute 'checked' or not
+    // if checked, event will remove attribute checked
+    // if not checked, event will add attribute checked
+}
+
+
+
+// Function to do the math to calculate the user's progress
+function calculateProgress() {
+    // x = num of tasks total for goal
+    // y = number of checked input fields
+    // current progress = (y / x) * 100
+    // function should return current progress value
+
+}
+
 // Work in progress, needs to be communicating with tasks in checklist
 function loadProgressBar() {
-    let current_progress = 0;
-    let interval = setInterval(function() {
-        current_progress += 10;
+    // take result of calculateProgress function and set to current progress value
+    // let current_progress = calculateProgress();
+    let current_progress = 50;
+    // minimum value being 0
+    // maximum value being 100
+    $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% Complete");
 
-        $("#dynamic")
-            .css("width", current_progress + "%")
-            .attr("aria-valuenow", current_progress)
-            .text(current_progress + "% Complete");
-
-        if (current_progress >= 100)
-            clearInterval(interval);
-    }, 1000);
   };
 
 //NOTES SECTION
@@ -384,6 +436,7 @@ $(document).ready(function () {
 
 function getCorrectTasks () {
     console.log('Inside getCorrectTasks')
+    changeCheck()
     $('#tasksModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let goalId = button.data('goal') // Extract info from data-* attributes
@@ -399,13 +452,11 @@ function getCorrectTasks () {
             console.log(response.tasks)
             addTaskToList(response.tasks);  
             modal.find("#save-changes").attr('data-goal', goalId)
-
         }).fail(function(response){
             console.log("There was an issue getting the user's goals.");
         })
         
     })
-    // deleteTask();
 }
 
 function getModalTasks () {

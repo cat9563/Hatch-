@@ -7,7 +7,7 @@
 
 <body>
 {% block content %}
-    <div class="container-fluid">
+<div class="container-fluid">
   <h1>Basic Grid Structure</h1>
   <p>Resize the browser window to see the effect.</p>
   <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
@@ -31,11 +31,12 @@
      </div>
       <div class="col-sm-8">
        <div class="row">
-                    <div class="container" id="journal"></div>
-                </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-        +
-        </button>
+            <div class="container" id="journal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" style='float:right' data-target="#addNote">+
+                </button>
+            </div>
+        </div>
+
 
 
 <!-- Modal for viewing checklist of tasks -->
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                         <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                        <ul id="checklist" style="list-style: none" class='checklist'>
+                        <ul id="checklist" style="list-style: none" class='checklist' data-list="{{ goal.id }}">
                         </ul>
                     </div>
 <!-- Modal FOOTER -->                                            
@@ -90,7 +91,7 @@
     <div class="row">
             <div class="col-sm-6" style="background-color:#2e0e10; color:#fff;">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                        +Goal</button>
+                        +Goal</button><br>
                     <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
                             <!-- Modal to create a new goal -->
                                     <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
@@ -148,23 +149,18 @@
                                         </div>
                                     </div>
                                 </div>
-            <!--endofgoal--></div>
-            <div class="col-sm-6" style="background-color:#f5a8b8"> 
-            {% comment %} <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;"> {% endcomment %}
-       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
-           
-            <div class="container-clear">
-                <canvas id="myChart"></canvas>
-            </div>
-       {% comment %} </div> {% endcomment %}
-       
-               
-          
-    </div><!--endofnotediv-->
-    </div>
-    <br>
-    
-   
+            <!--end of goal container--></div>
+<!--START OF JOURNEY PROGRESS TRACKER -->
+    <div class="col-sm-6" style="background-color:#f5a8b8"> 
+                
+                {% comment %} <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;"> {% endcomment %}
+        {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
+            
+        <div class="container-clear">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div><!-- END OF JOURNEY PROGRESS TRACKER -->
+</div>
 
      {% comment %} <div class="row">
       <div class="col-sm-4" style="background-color:yellow;"></div>
@@ -189,5 +185,7 @@
       <div class="col" style="background-color:orange;">25%</div>
     </div>
   </div> {% endcomment %}
+  
 </div>
+
 {% endblock content %}
