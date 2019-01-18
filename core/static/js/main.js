@@ -4,8 +4,8 @@ dragula([document.getElementById("left-defaults"), document.getElementById("righ
 let apiPage = 1;
 let controller, scene;
 
-loadGoals();
-addTask();
+// loadGoals();
+// addTask();
 
 
 
@@ -111,9 +111,10 @@ function addGoalsToDashboard(goals){
     for (let goal of goals) {
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
 
-        // console.log('Goals have loaded...')
-        let showTasks = document.getElementById('expand');
-        showTasks.addEventListener('click', loadTasks)
+        
+    let showTasks = document.getElementById('expand');
+    console.log('Listening for expand click...')
+    showTasks.addEventListener('click', loadTasks)
     }
     deleteGoal();
 }
@@ -197,7 +198,7 @@ function deleteGoal() {
 
         $.ajax({
             method: 'DELETE',
-            url: `/api/goals/2/`,
+            url: `/api/goals/${goalID}/`,
         
         }).done(function() {
             document.getElementById('goal-list').innerHTML = "";
@@ -227,7 +228,7 @@ function goalHTML(goal) {
             
             <!-- Edit & Delete buttons, connected to goal id -->
             <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>&#9997</button>
-            <button type='button' id='deletegoal' class='delete btn fr' data-goal="${ goal.id }">&#128465</button>
+            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">&#128465</button>
         </div>
     </div>
     `
@@ -425,13 +426,7 @@ function csrfSafeMethod(method){
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
-$(document).ready(function () {
-    setupCSRFAjax()
-    loadNotes()
-    loadGoals()
-    loadTasks()    
-    loadProgressBar()
-})
+
 
 
 function getCorrectTasks () {
@@ -479,3 +474,13 @@ function getModalTasks () {
             console.log("There was an issue getting the user's goals.");
         })
     }
+
+$(document).ready(function () {
+    setupCSRFAjax();
+    loadNotes();
+    loadGoals();
+    loadTasks();
+    addTask(); 
+    deleteTask();  
+    loadProgressBar()
+})
