@@ -5,136 +5,86 @@
 {% endblock title %}
 
 {% block content %}
- 
+ <div class='photo-grid-container'>
+  <div class='photo-grid'>
+    <div class='photo-grid-item first-item'>
+      <img src='images/one.svg'/>
+    </div>
+    <div class='photo-grid-item'>
+      <img src='images/two.svg'/>
+    </div>
+    <div class='photo-grid-item'>
+      <img src='images/three.svg'/>
+    </div>
+  </div>
+</div>
 
+<div class="goal-card-container">
+    <div class="goal-id">
+        <div class="goal-card" id="${ goal.id }">
+         </div>
+        <div class="card-body" data-author="${ goal.author }"> 
+         </div>
+        <div class="card-title"> 
+            <h5 class="ib card-title"> ${ goal.title }</h5>  
+                <!-- Expand button, connected to goal.id -->   
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+        </div>   
 
+    </div>
+</div>
+
+.goal-card-container {
+  display: flex;
+  justify-content: start;
+}
+.goal-id {
+  width: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+.goal-card {
+  border: 1px solid #fff;
+  width: 300px;
+  height: 300px;
+}
+.card-body {
+  border: 1px solid #fff;
+  width: 300px;
+  height: 300px;
+}
+.card-title {
+  border: 1px solid #fff;
+  width: 300px;
+  height: 300px;
+}
 
             
 {% endblock content %}
 
-{% comment %} <p>Dashboard Content</p> {% endcomment %}
-
-<div>
-<!-- Header Container -->
-    <div class="card" style="margin-top: 75px; margin-left: 15px; height: 210px; width: 700px; background-color: #fabad0;">
-        <div class="row">
-            <div class="col">
-                <img class="rounded-circle resize" src="{{ user|gravatar:200 }}"/>
-            </div>
-            <div class="col">
-                <h2>Welcome, {{ user.username }}</h2>
-                <body onload="randomQuote()">
-                    <div id="showQuotes"></div>
+ <div class="container">
+        <div class="goal-card" id="${ goal.id }">
+            <div class="card-body" data-author="${ goal.author }">  
+                <h5 class="ib card-title"> ${ goal.title }</h5>  
+                <div class="align-self-end p-2 bd-highlight" style="background-color:blue;">          
+                    <!-- Expand button, connected to goal.id -->                                
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+                </div>   
             </div>
         </div>
     </div>
-<!-- Large Container that holds goal container and note container -->
-    {% comment %} <div class="lg-container"> {% endcomment %}
-        <div class="container ib col1of2">
-<!--  GOAL CONTAINER -->
-<!-- Button trigger modal -->
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                +Goal</button>
-            <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
 
 
-<!-- Modal to create a new goal -->
-                <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newGoalModalTitle">Have a new goal?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-group mb-3">
-                        <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
-                    </div>
-                    </div>
-                </div>
-                </div>
+     <div class="goal-card-container">
+        <div class="goal-id">
+            <div class="goal-card" id="${ goal.id }">
             </div>
-<!-- End of modal to create a new goal-->
-
-
-<!-- Modal for viewing checklist of tasks -->
-<!--Modal HEADER-->
-        <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog" aria-labelledby="tasksModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tasksModalLabel">Sample title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-<!--Modal BODY - CHECKLIST-->
-                    <div class="modal-body" >
-                        <div class="progress">
-                            <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                <span id="current-progress"></span>
-                            </div>
-                        </div>
-                        <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                        <ul id="checklist" style="list-style: none" class='checklist'>
-                        </ul>
-                    </div>
-<!-- Modal FOOTER -->                                            
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
-                    </div>
-                </div>
+            <div class="card-body" data-author="${ goal.author }"> 
             </div>
+            <div class="card-title"> 
+                <h5 class="ib card-title"> ${ goal.title }</h5>  
+                    <!-- Expand button, connected to goal.id -->   
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+            </div>   
         </div>
-<!--End of modal for viewing checklist of tasks-->
-
-        {% comment %} NOTE CONTAINER {% endcomment %}
-        {% comment %} <div class="container" style="margin: 10px" id="journal"><center>Note Container</center> {% endcomment %}
-            <div class="col-md-12 col-sm-6 my-col">
-
-                <div class="row">
-                    <p><center>Note Container</center></p>
-                    <div class="container" id="journal"></div>
-
-                </div>
-        {% comment %} </div> {% endcomment %}
     </div>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-  +
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body" id="note-input">
-        <label for="message-text" class="col-form-label">Journal Entry</label>
-        <textarea class="form-control" id="message-text"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-    </div>
-       <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;">
-       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
-            <h1><center>MY JOURNEY PROGRESS</center></h1>
-            <div class="container-clear">
-                <canvas id="myChart"></canvas>
-            </div>
-       </div>
-      </div>
-    </div>
-</div> 

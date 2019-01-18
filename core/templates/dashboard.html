@@ -14,36 +14,30 @@
   <div class="container-fluid">
     <!-- Control the column width, and how they should appear on different devices -->
      <div class="row" class="d-flex justify-content-start" >
-     <div class="col-sm-4">
-        <div class="card" style="height: 321px; width: 321px; background-color: #f5a8b8;">
-        <div class="row">
-            <div class="col">
-                <img class="rounded-circle resize" src="{{ user|gravatar:100 }}"/>
-            </div>
-            <div class="col">
-                <h2>Welcome, {{ user.username }}</h2>
-                <body onload="randomQuote()">
-                    <div id="showQuotes"></div>
+        <div class="col-sm-4">
+            <div class="profile-card">
+                <div class="row">
+                    <div class="col" id="profile-image">
+                        <img class="rounded-circle resize" src="{{ user|gravatar:100 }}"/>
+                    </div>
+                    <div class="col" id="user-name">
+                        <h2>Welcome, {{ user.username }}</h2>
+                    </div>
+                    <div class="col" id="quote">
+                        <body onload="randomQuote()">
+                        <div id="showQuotes"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-     </div>
-      <div class="col-sm-8">
-           {% comment %} <div class="card" style="margin-top: 10px; height: 425px; width: 700px; background-color: #e0f5ff;"> {% endcomment %}
-       {% comment %} <div class="card" style="margin-top: 10px; height: 600px; width: 1000px; background-color: #e0f5ff;"> {% endcomment %}
-           
+        <div class="col-sm-8">
             <div class="container-clear">
                 <canvas id="myChart"></canvas>
             </div>
-       {% comment %} </div> {% endcomment %}
-       
-               
-          
-    </div><!--endofnotediv-->
-    </div>
-    
+        </div><!--endofnotediv-->
+     </div>
     <div class="row">
-            <div class="col-sm-12" style="background-color:#2e0e10; color:#fff;">
+            <div class="col-sm-5" id="goal-home">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
                         +Goal</button>
                     <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
@@ -96,7 +90,6 @@
                                             </div>
                         <!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
-
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
                                             </div>
@@ -104,9 +97,10 @@
                                     </div>
                                 </div>
             <!--endofgoal--></div>
-            </div>
-            </br>
-            <div class="col-sm-12" style="background-color:#f5a8b8"> 
+            <div class="col-sm-.5" style="background-color: #fff;">Test</div>
+            
+            <div class="col-sm-5" style="background-color:#f5a8b8"> 
+            <br></br>
             <div class="row">
                     <div class="container" id="journal"></div>
                 </div>

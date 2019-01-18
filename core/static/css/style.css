@@ -35,7 +35,7 @@ footer ul li {
 }
 
 body{
-    background-color: #EBF0ff
+    background-color: #EBF0ff;
 }
 
 #journal{
@@ -96,16 +96,6 @@ body{
     max-height:90%;
 } */
 
-.goal-container {
-    /* border: 5px dotted black; */
-    /* display: inline-block; */
-    /* margin: 10px; */
-    padding: 0px;
-    height: 400px;
-    overflow: scroll;
-    
-}
-
 .container-clear {
     margin: 10px;
 }
@@ -128,7 +118,7 @@ body{
 } */
 
 .ib {
-    display: inline-block;
+    display: flex;
 }
 
 .dflex {
@@ -167,16 +157,6 @@ body{
     display: block;
 }
 
-.goal-card {
-    margin: 4px;
-    border: #ff3052 solid 2px;
-    overflow: scroll;
-    height: 200px;
-    width: 200px;
-    background-color: #f5a8b8;
-    
-}
-
 .card-body2 {
     padding: 2px;
     border: solid purple 2px;
@@ -188,11 +168,7 @@ body{
     overflow: scroll;
 } */
 
-/* .card {
-    margin: 4px;
-    border: #ff3052 solid 2px;
-    height: 50px;
-} */
+
 
 .gu-mirror {
     position: fixed !important;
@@ -241,8 +217,8 @@ body{
 /* Notes css */
 
 .container-fluid{
-    height: 500px;
-    overflow: scroll;
+    height: 300px;
+    
 }
 /* .container {
     padding: 2rem 0rem;
@@ -307,3 +283,111 @@ body{
 
     /*background-color: #e0f5ff;*/
 }
+
+/* JS CHART */
+
+.profile-card{
+    border-radius: 10px;
+    height: 314px;
+    /* width: 548px; */
+    background-color: #f5a8b8;
+    /* padding-top: 26px; */
+    /* margin-top: 8px;
+    margin-left: -15px; */
+}
+
+#myChart{
+    border-radius: 10px;
+    background-color: lightblue;
+    /* width: 627px !important; */
+    padding-left: 35px; 
+    height: 312px !important;
+    /* padding-top: 20px;
+    /* margin-left: 158px; */
+}
+
+#profile-image{
+    padding-top: 38px;
+
+}
+
+#user-name{
+    padding-right: 70px;
+    padding-top: 50px;
+}
+
+#quote {
+    /* padding: 20px; */
+    padding-top: 30px;
+    font-family: cursive;
+    font-size: 20px;
+    overflow: scroll;
+}
+
+.goal-card {
+    margin: 4px;
+    border: #ff3052 solid 2px;
+    overflow: scroll; 
+    height: 175px;
+    width: 175px;
+    background-color: #f5a8b8;
+    
+}
+
+#goal-home{
+    background-color:#2e0e10; 
+    color:#fff;
+    border-radius: 10px;
+    margin-right: 140px;
+}
+
+.goal-container {
+    /* border: 5px dotted black; */
+    /* display: inline-block; */
+    /* margin: 10px; */
+    /* padding: 0px;
+    height: 400px;
+    overflow: scroll; */
+    background-color:#2e0e10; 
+    color:#fff;
+    border-radius: 10px;
+    margin-right: 140px;
+    
+}
+
+
+/* #expand{
+    display: flex;
+    padding-bottom: 1px;
+    justify-content: end;
+} */
+
+/* my experiment */
+
+/* .goal-card-container {
+    display: flex;
+    justify-content: start;
+  }
+  .goal-id {
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .goal-card {
+    margin: 4px;
+    border: #ff3052 solid 2px;
+    /* overflow: scroll; */
+    /* height: 175px;
+    width: 175px;
+    background-color: #f5a8b8;
+  }
+  .card-body {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+  }
+  .card-title {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+  } */ */

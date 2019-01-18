@@ -167,9 +167,11 @@ function goalHTML(goal) {
     return `
     <div class="goal-card" id="${ goal.id }">
         <div class="card-body" data-author="${ goal.author }">  
-            <h5 class="ib card-title"> ${ goal.title }</h5>                               
-            <!-- Expand button, connected to goal.id -->                                
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+            <h5 class="ib card-title"> ${ goal.title }</h5>  
+            <div class="d-flex justify-content-end">          
+                <!-- Expand button, connected to goal.id -->                                
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Expand</button>
+            </div>   
         </div>
     </div>
     `
