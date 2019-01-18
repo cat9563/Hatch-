@@ -264,20 +264,35 @@ function newTaskLineHTML(task) {
 }
 
 
+function changeCheck() {
+    // find the checkbox input field(s) for the specific goal
+    // determine if it has attribute 'checked' or not
+    // if checked, event will remove attribute checked
+    // if not checked, event will add attribute checked
+}
+
+
+// Function to do the math to calculate the user's progress
+function calculateProgress() {
+    // x = num of tasks total for goal
+    // y = number of checked input fields
+    // current progress = (y / x) * 100
+    // function should return current progress value
+
+}
+
 // Work in progress, needs to be communicating with tasks in checklist
 function loadProgressBar() {
-    let current_progress = 0;
-    let interval = setInterval(function() {
-        current_progress += 10;
+    // take result of calculateProgress function and set to current progress value
+    // let current_progress = calculateProgress();
+    let current_progress = 50;
+    // minimum value being 0
+    // maximum value being 100
+    $("#dynamic")
+        .css("width", current_progress + "%")
+        .attr("aria-valuenow", current_progress)
+        .text(current_progress + "% Complete");
 
-        $("#dynamic")
-            .css("width", current_progress + "%")
-            .attr("aria-valuenow", current_progress)
-            .text(current_progress + "% Complete");
-
-        if (current_progress >= 100)
-            clearInterval(interval);
-    }, 1000);
   };
 
 //NOTES SECTION
