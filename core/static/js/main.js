@@ -309,9 +309,15 @@ function loadProgressBar() {
 //checks to see if num is even and assigns html accordingly 
 function isEven(num) {
     if (num % 2 === 0) {
-        return ` <div class="item item-blue" id="blue"> ${note.text} </div>`;
+        return ` <div class="item item-blue" id="blue"> 
+                    ${note.text} 
+                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
+                </div>`;
     } else {
-        return `<div class="item item-pink" id="pink"> ${note.text} </div>`;
+        return `<div class="item item-pink" id="pink"> 
+                    ${note.text} 
+                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
+                    </div>`;
     }
 }
 
@@ -331,6 +337,28 @@ saveNotes.addEventListener('click', function() {
     postNote();
 })
 
+// DELETE note
+function deleteNote() {
+    console.log("Inside deleteNote")
+    $( 'div' ).find( "button.deletenote" ).on('click', function (event) {
+        
+        console.log($("button.deletenote").data())
+        let noteID = $("button.deletenote").data('note')
+        console.log(noteID)
+
+        $.ajax({
+            method: 'DELETE',
+            url: `/api/notes/${noteID}/`,
+        
+        }).done(function() {
+            document.getElementById('notelist').innerHTML = "";
+            console.log('cleared notelist')
+            // getModalTasks();
+
+        }).fail(function() {
+            console.log("There was an issue getting the user's notes.")
+        });
+    })};
 
 // function postNewNotes()
 
@@ -381,9 +409,11 @@ function getUserNotes(){
 function addNotesToJournal(notes){
     console.log("notes:", notes)
     document.getElementById('journal').innerHTML = ""
-    for (note of notes)
-    document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
-    console.log(typeof document.getElementById('journal'))
+    for (note of notes) {
+        document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
+        console.log(typeof document.getElementById('journal'))
+    }
+    deleteNote();
 }
 
 // // function clickEvent() {
