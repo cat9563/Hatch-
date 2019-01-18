@@ -266,10 +266,18 @@ function newTaskLineHTML(task) {
 
 function changeCheck() {
     // find the checkbox input field(s) for the specific goal
+    let boxes = $( 'div' ).find( 'checkbox.checkbox' )
+    let numOfBoxes = boxes.length
+    let listID = $('#checklist').attr('data-list')
+        
+        console.log(boxes)
+        console.log(numOfBoxes)
+        console.log(listID)
     // determine if it has attribute 'checked' or not
     // if checked, event will remove attribute checked
     // if not checked, event will add attribute checked
 }
+
 
 
 // Function to do the math to calculate the user's progress
@@ -428,6 +436,7 @@ $(document).ready(function () {
 
 function getCorrectTasks () {
     console.log('Inside getCorrectTasks')
+    changeCheck()
     $('#tasksModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let goalId = button.data('goal') // Extract info from data-* attributes
@@ -443,7 +452,6 @@ function getCorrectTasks () {
             console.log(response.tasks)
             addTaskToList(response.tasks);  
             modal.find("#save-changes").attr('data-goal', goalId)
-
         }).fail(function(response){
             console.log("There was an issue getting the user's goals.");
         })
