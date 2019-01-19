@@ -230,6 +230,18 @@ function goalHTML(goal) {
             <button type='button' id='deletegoal' class='delete btn fr' data-goal="${ goal.id }">&#128465</button>
         </div>
     </div>
+
+    <div class="col-xl-3 col-sm-6 py-2" id="${ goal.id }">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body bg-success" id="${ goal.author }">
+                <div class="rotate">
+                    <i class="fa fa-user fa-4x"></i>
+                </div>
+                <h6 class="text-uppercase">${ goal.title }</h6>
+                <h1 class="display-4">${ goal.id } goal id for test</h1>
+            </div>
+        </div>
+    </div>
     `
 }
 

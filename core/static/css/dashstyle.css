@@ -1,15 +1,6 @@
-.container{
-    margin-top:150px;
-    background-color: pink;
-    border:#fe1abc solid 2px;
-} 
-
-.container-fluid {
-    margin-bottom: 500px;
-}
-
 body, html {
     height:100%;
+    margin-bottom: 1100px;
   }
   
   /*
@@ -90,5 +81,10 @@ body, html {
       -ms-transform: rotate(-44deg);
       transform: rotate(-44deg);
        background-color: #f5a8b8 !important;
+  }
+
+  #goals-things {
+      height: 500px;
+      overflow: scroll;
   }
   
