@@ -7,3 +7,101 @@
     <h1> Contact </h1>
     <p> Contact content </p>
 {% endblock content %}
+
+    <div class="row">
+        <div class="col-sm-4 py-2">
+            <div class="card text-white h-100">
+                <div class="card-body">
+                    <h6 class="display-4">Welcome</h6>
+                    <h1 class="display-6">{{ user.username }} !</h1>
+                        <body onload="randomQuote()">
+                {% comment %} <div id="showQuotes"></div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 py-2">
+            <div class="card text-white h-100">
+                <div class="card-body">
+                <h1 class="display-4 d-none d-sm-block">
+                Transition your way!!
+                </h1>
+                <p class="lead d-none d-sm-block">You can do what you set your mind too!</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <row>
+        <div class="col-lg-6 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div> 
+        <div class="col-lg-6 py-1">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                </ul> 
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <br>
+                    <div role="tabpanel" class="tab-pane active" id="home1">
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="profile1">
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="messages1">
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="settings1">
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-6">
+                <div class="card card-default card-body">
+                    <ul id="tabsJustified" class="nav nav-tabs nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Quikies(needs name)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="" data-target="#tab2" data-toggle="tab">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-target="#tab3" data-toggle="tab">More</a>
+                        </li>
+                    </ul>
+                    <!--/tabs-->
+                    <br>
+                    <div id="tabsJustifiedContent" class="tab-content">
+                        <div class="tab-pane" id="tab1">
+                            <div class="list-group">
+                                <a href="" class="list-group-item"><span class="float-right label label-success">51</span> Home Link</a>
+                                <a href="" class="list-group-item"><span class="float-right label label-success">8</span> Link 2</a>
+                                <a href="" class="list-group-item"><span class="float-right label label-success">23</span> Link 3</a>
+                                <a href="" class="list-group-item text-muted">Link n..</a>
+                            </div>
+                        </div>
+                        <div class="tab-pane active" id="tab2">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h1 "text-uppercase">{{ user.username }}</h1>
+                                    <p><div id="showQuotes"></div></p>
+                                </div>
+                                <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
+                            </div>
+                            <hr>
+                            <a href="javascript:;" class="btn btn-info btn-block">Read More Profiles</a>
+                            <div class="spacer5"></div>
+                        </div>
+                    </div>
+                    <!--/tabs content-->
+                </div><!--/card-->
+            </div><!--/col-->
+            <div class="col-lg-6">
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                </div>
+                <p class="mt-4">
+                    <a href="/go/KrUO8QpyXP/bootstrao-4-dashboard" target="_ext">Get this Bootstrap 4 admin dashboard at Codeply</a>
+                </p>
+            </div><!--/col-->
+    </div>

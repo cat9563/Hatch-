@@ -50,7 +50,7 @@
             </div>
             <!--/row-->
 
-            <a id="more"></a>
+            {% comment %} <a id="more"></a>
             <hr>
             <h2 class="sub-header mt-5">Use card decks for equal height rows of cards</h2>
             <div class="mb-3">
@@ -64,7 +64,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
+            
             <!--/row-->
        
             {% comment %} <a id="flexbox"></a>
@@ -82,36 +83,28 @@
                 </div>
             </div> {% endcomment %}
             
-
-  <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="myChart"></canvas>
+       
+            {% comment %} <div class="col-md-6 py-1">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
-            </div>
-        </div> 
+            </div>  {% endcomment %}
 
 
             <!--/card-columns-->
 
-            {% comment %} <a id="layouts"></a> 
+        <a id="layouts"></a> 
              <hr> 
-         <h2 class="sub-header mt-5">Interesting layouts and elements</h2>
+         <h2 class="sub-header mt-5">Track Your Progress</h2>
+         <hr>
             <div class="row mb-3">
                 <div class="col-lg-6">
+                    <!--took out card here if this is moved profile card moves to the right of the screen -->
+                  
 
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            Bye .well, .panel &amp; .thumbnail
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">Replaced with .card</h4>
-                            <p class="card-text"> <canvas id="myChart"></canvas> </p>
-                            
-                        </div>
-                    </div> 
-
-                </div> {% endcomment %}
+                </div>
                 <div class="col-lg-6">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
@@ -134,13 +127,13 @@
                     <div class="card card-default card-body">
                         <ul id="tabsJustified" class="nav nav-tabs nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Quikies(needs name)</a>
+                                <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">My Resources</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="" data-target="#tab2" data-toggle="tab">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="" data-target="#tab3" data-toggle="tab">More</a>
+                                <a class="nav-link" href="" data-target="#tab3" data-toggle="tab">My Progress</a>
                             </li>
                         </ul>
                         <!--/tabs-->
@@ -148,7 +141,7 @@
                         <div id="tabsJustifiedContent" class="tab-content">
                             <div class="tab-pane" id="tab1">
                                 <div class="list-group">
-                                    <a href="" class="list-group-item"><span class="float-right label label-success">51</span> Home Link</a>
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">9</span> Home Link</a>
                                     <a href="" class="list-group-item"><span class="float-right label label-success">8</span> Link 2</a>
                                     <a href="" class="list-group-item"><span class="float-right label label-success">23</span> Link 3</a>
                                     <a href="" class="list-group-item text-muted">Link n..</a>
@@ -163,20 +156,44 @@
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
                                 <hr>
-                                <a href="javascript:;" class="btn btn-info btn-block">Read More Profiles</a>
+                                <a href="javascript:;" class="btn btn-info btn-block">Add a Goal</a>
+                                 <a href="javascript:;" class="btn btn-info btn-block">Create a Journal Entry</a>
                                 <div class="spacer5"></div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                            
+                                 <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h4 class="card-title">You are AMAZING!</h4>
+                                        {% comment %} <p class="card-text"> <canvas id="myChart"></canvas> </p>   {% endcomment %}
+                                    </div>
+                                </div>
+                                  
                             </div>
                         </div>
                         <!--/tabs content-->
                     </div><!--/card-->
                 </div><!--/col-->
                 <div class="col-lg-6">
-                    <div id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Bye .well, .panel &amp; .thumbnail
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Replaced with .card</h4>
+                            <p class="card-text"> <canvas id="myChart"></canvas> </p>  
+                        </div>
+                    </div>
+
+                </div>
+                
+                    {% comment %} <div id="accordion" role="tablist" aria-multiselectable="true">
                     </div>
                     <p class="mt-4">
                         <a href="/go/KrUO8QpyXP/bootstrao-4-dashboard" target="_ext">Get this Bootstrap 4 admin dashboard at Codeply</a>
                     </p>
-                </div><!--/col-->
+                </div><!--/col--> {% endcomment %}
             </div><!--/row-->
 
         </div>

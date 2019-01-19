@@ -4,6 +4,10 @@
     border:#fe1abc solid 2px;
 } 
 
+.container-fluid {
+    margin-bottom: 500px;
+}
+
 body, html {
     height:100%;
   }

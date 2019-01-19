@@ -40,8 +40,8 @@ var myChart = new Chart(ctx, {
     },
     options: {
         cutoutPercentage: 80,
-        rotation: 1 * Math.PI,
-        circumference: 1 * Math.PI,
+        // rotation: 1 * Math.PI,
+        // circumference: 1 * Math.PI,
     }
 });
 
