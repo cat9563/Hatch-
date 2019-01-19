@@ -69,7 +69,30 @@
 
     {% block content %}{% endblock content %}
 
-<footer>
+ {% comment %} {% block footer %}
+<footer class="bg-dark text-white mt-4">
+   
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Footer</h5></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">I stay at the bottom of the viewport! <span class="small"><br>Unless the page content pushes me further.</span></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-right small align-self-end">©2017 Brand, Inc.</div>
+        </div>
+    </div>
+    
+</footer>
+ {% endblock footer %} {% endcomment %}
+
+
+
+]<footer>
     {% block footer %}
         <ul>
             <li><a href="{% url 'about' %}">About</a></li>
@@ -78,7 +101,7 @@
             <li><a href="{% url 'privacy' %}">Privacy</a></li>
         </ul>
     {% endblock footer %}
-</footer>
+</footer> 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>

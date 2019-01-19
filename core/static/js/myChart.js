@@ -45,6 +45,28 @@ var myChart = new Chart(ctx, {
     }
 });
 
+
+//Crystal Dashboard testing this
+// donut 3
+var chDonutData3 = {
+    labels: ['Angular', 'React', 'Other'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,3),
+        borderWidth: 0,
+        data: [21, 45, 55, 33]
+      }
+    ]
+};
+var chDonut3 = document.getElementById("chDonut3");
+if (chDonut3) {
+  new Chart(chDonut3, {
+      type: 'pie',
+      data: chDonutData3,
+      options: donutOptions
+  });
+}
+
 // $("#renderBtn").click(
 //     function () {
 //         data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
