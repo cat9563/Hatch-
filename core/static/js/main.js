@@ -97,7 +97,6 @@ function getUserGoals(){
         url: `/api/goals/`,
         contentType: 'application/json'
     }).done(function(response){
-        // console.log(response)
         addGoalsToDashboard(response);
 
     }).fail(function(response){
@@ -203,7 +202,6 @@ function deleteGoal() {
         }).done(function() {
             document.getElementById('goal-list').innerHTML = "";
             console.log('cleared goal-list')
-            // loadTasks();
             loadGoals()
 
         }).fail(function() {
@@ -307,23 +305,26 @@ function loadProgressBar() {
 //NOTES SECTION
 
 //checks to see if num is even and assigns html accordingly 
-function isEven(num) {
-    if (num % 2 === 0) {
+// function isEven(num) {
+
+//     }
+// }
+
+//inserts note.id to alteranate colors 
+function noteHtml(note) {
+    if (note.id % 2 === 0) {
         return ` <div class="item item-blue" id="blue"> 
                     ${note.text} 
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
                 </div>`;
-    } else {
+    } 
+    else {
         return `<div class="item item-pink" id="pink"> 
                     ${note.text} 
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
                     </div>`;
-    }
-}
-
-//inserts note.id to alteranate colors 
-function noteHtml() {
-    return isEven(note.id)
+    // return isEven(note.id)
+    };
 }
 
 //gets the container for the notes and adds the notehtml
@@ -351,20 +352,20 @@ function deleteNote() {
             url: `/api/notes/${noteID}/`,
         
         }).done(function() {
-            document.getElementById('notelist').innerHTML = "";
-            console.log('cleared notelist')
-            // getModalTasks();
+            document.getElementById('journal').innerHTML = "";
+            console.log('cleared journal')
+            loadNotes();
 
         }).fail(function() {
             console.log("There was an issue getting the user's notes.")
         });
-    })};
+    });
+};
 
-// function postNewNotes()
 
 function postNote(){
     let note = {
-        note: 1,
+        // note: 1,
         text: $('#message-text').val()
     }
     $.ajax({
@@ -386,6 +387,7 @@ function postNote(){
 
 //loads on page load
 function loadNotes(){
+    console.log("Loading notes...")
     getUserNotes(apiPage);
     apiPage =+ 1;
 }
@@ -407,11 +409,9 @@ function getUserNotes(){
 
 //inserts them individual form the list of notes 
 function addNotesToJournal(notes){
-    console.log("notes:", notes)
-    document.getElementById('journal').innerHTML = ""
-    for (note of notes) {
-        document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note))
-        console.log(typeof document.getElementById('journal'))
+    for (let note of notes) {
+        document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note));
+        console.log('Notes have loaded!')
     }
     deleteNote();
 }
@@ -508,6 +508,7 @@ function getModalTasks () {
 $(document).ready(function () {
     setupCSRFAjax();
     loadNotes();
+    deleteNote();
     loadGoals();
     loadTasks();
     addTask(); 
