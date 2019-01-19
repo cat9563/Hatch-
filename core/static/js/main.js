@@ -189,7 +189,8 @@ function postNewGoal() {
 // DELETE goal
 function deleteGoal() {
     console.log("Inside deleteGoal")
-    $( 'div' ).find( "button.deletegoal" ).on('click', function (event) {
+    console.log($( 'div.goal-card' ).find( "button.deletegoal" ))
+    $( 'div.goal-card' ).find( "button.deletegoal" ).on('click', function (event) {
         
         console.log($("button.deletegoal").data())
         let goalID = $("button.deletegoal").data('goal')
@@ -510,6 +511,7 @@ $(document).ready(function () {
     loadNotes();
     deleteNote();
     loadGoals();
+    deleteGoal();
     loadTasks();
     addTask(); 
     deleteTask();  
