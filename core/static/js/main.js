@@ -148,11 +148,12 @@ function addTaskToList(tasks){
     $(".checklist").empty();
 
         for (let task of tasks) {
+            toggleStatus(task);
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
             console.log('Tasks have loaded!')
+        
+            
         }
-    console.log($('.checklist'))
-    
     function countBoxes() { 
         count = $("input.checkbox").length;
         // console.log($("input.checkbox"))
@@ -258,7 +259,7 @@ function taskHTML(task) {
         <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox'>
+                    <input type='checkbox' aria-label='Checkbox for following text input' id='checkbox' class='checkbox'>
                     <label> ${ task.text } </label>
                 </div>
             </div>
@@ -300,34 +301,54 @@ function newTaskLineHTML(task) {
 }
 
 
-// Add checked to list item when clicked
-function checkItemOnList() {
-    var list = document.getElementById('checklist')
-    var checks = list.getElementsByClassName('checkbox')
+// // Add checked to list item when clicked
+// function checkItemOnList() {
+//     var list = document.getElementById('checklist')
+//     var checks = list.getElementsByClassName('checkbox')
 
-    for ( i=0; i < list.length; i++ ) {
-        if ( checks[i].checked === true) {
-            console.log('checked')
-        }
-    }
-}
-
-
-// function changeCheck() {
-//     // find the checkbox input field(s) for the specific goal
-//     let boxes = $( 'div' ).find( 'checkbox.checkbox' )
-//     let numOfBoxes = boxes.length
-//     let listID = $('#checklist').attr('data-list')
-        
-//         console.log(boxes)
-//         console.log(numOfBoxes)
-//         console.log(listID)
-//     // determine if it has attribute 'checked' or not
-//     // if checked, event will remove attribute checked
-//     // if not checked, event will add attribute checked
+//     for ( i=0; i < list.length; i++ ) {
+//         if ( checks[i].checked === true) {
+//             console.log('checked')
+//         }
+//     }
 // }
 
+function toggleStatus(task) {
+    // if (task.status === false) {
+    //     console.log('for each task')
+    $(".checkbox").on('click', function() {
+        $(".checkbox").toggleClass('check')
+        // $(".checkbox").attr('checked')
+        console.log('changed status')
+        })
+    }
 
+function forLater() {
+            // console.log($('task').attr('status'))
+        let task = {
+            author:1,
+            goal: $('#save-changes').attr('data-goal'),
+            text: $('#new-task-text').val(),
+            status: $('task').attr('status')
+        }
+        // console.log(task)
+            
+            $.ajax({
+                url: `api/tasks/${task.id}/`,
+                method: 'PUT',
+            })
+            // console.log(task.status)
+        
+    if (task.status === true) {
+        $(".checkbox").on('click', function() {
+            $('task').attr({
+                "status" : "false"
+            })
+            // console.log(task.status)
+        })
+    }
+}
+    
 
 // Function to do the math to calculate the user's progress
 function calculateProgress() {
@@ -564,5 +585,5 @@ $(document).ready(function () {
     addTask(); 
     deleteTask();  
     loadProgressBar();
-    checkItemOnList();
+
 })

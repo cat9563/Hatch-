@@ -439,6 +439,10 @@ overflow: scroll;
     float: right;
 }
 
-input:checked + label {
+/* input:checked + label {
+    text-decoration: line-through;
+} */
+
+.check + label {
     text-decoration: line-through;
 }
