@@ -149,9 +149,26 @@ function addTaskToList(tasks){
 
         for (let task of tasks) {
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-            console.log('Tasks have loaded!')}
-        console.log(list)
-        
+            console.log('Tasks have loaded!')
+        }
+    console.log($('.checklist'))
+    
+    function countBoxes() { 
+        count = $("input.checkbox").length;
+        console.log($("input.checkbox"))
+        console.log(count);
+        }
+
+    countBoxes();
+    $(":checkbox").click(countBoxes);
+
+    function countChecked() {
+        checked = $("input.checkbox:checked").length;
+        console.log(checked)
+    }
+
+    countChecked();
+    $(":checkbox").click(countChecked);
     deleteTask();
 }
 
@@ -279,19 +296,19 @@ function checkItemOnList() {
 }
 
 
-function changeCheck() {
-    // find the checkbox input field(s) for the specific goal
-    let boxes = $( 'div' ).find( 'checkbox.checkbox' )
-    let numOfBoxes = boxes.length
-    let listID = $('#checklist').attr('data-list')
+// function changeCheck() {
+//     // find the checkbox input field(s) for the specific goal
+//     let boxes = $( 'div' ).find( 'checkbox.checkbox' )
+//     let numOfBoxes = boxes.length
+//     let listID = $('#checklist').attr('data-list')
         
-        console.log(boxes)
-        console.log(numOfBoxes)
-        console.log(listID)
-    // determine if it has attribute 'checked' or not
-    // if checked, event will remove attribute checked
-    // if not checked, event will add attribute checked
-}
+//         console.log(boxes)
+//         console.log(numOfBoxes)
+//         console.log(listID)
+//     // determine if it has attribute 'checked' or not
+//     // if checked, event will remove attribute checked
+//     // if not checked, event will add attribute checked
+// }
 
 
 
