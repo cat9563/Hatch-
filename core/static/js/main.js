@@ -155,7 +155,7 @@ function addTaskToList(tasks){
     
     function countBoxes() { 
         count = $("input.checkbox").length;
-        console.log($("input.checkbox"))
+        // console.log($("input.checkbox"))
         console.log(count);
         }
 
@@ -253,19 +253,36 @@ function goalHTML(goal) {
 
 
 function taskHTML(task) {
-    return `
-    <div class='input-group mb-3' id='checklist-task'>
-        <div class='input-group-prepend'>
-            <div class='input-group-text'>
-                <input type='checkbox' aria-label='Checkbox for following text  input' class='checkbox'>
-                <label> ${ task.text } </label>
+    if (task.status === false) {
+        return `
+        <div class='input-group mb-3' id='checklist-task'>
+            <div class='input-group-prepend'>
+                <div class='input-group-text'>
+                    <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox'>
+                    <label> ${ task.text } </label>
+                </div>
             </div>
-        </div>
 
-        <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
-        <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
-    </div>
-        `
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+        </div>
+            `
+    }
+    else {
+        return `
+        <div class='input-group mb-3' id='checklist-task'>
+            <div class='input-group-prepend'>
+                <div class='input-group-text'>
+                    <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox' checked>
+                    <label> ${ task.text } </label>
+                </div>
+            </div>
+
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+        </div>
+            `
+    };
 }
 
 
