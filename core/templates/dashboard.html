@@ -88,7 +88,18 @@
                                                 </div>
                                                 <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
                                                 <ul id="checklist" style="list-style: none" class='checklist'>
+                                                                                                <script>
+                                                    var list = document.getElementById('checklist')
+                                                    var checks = list.getElementsByClassName('checkbox')
+
+                                                    for ( i=0; i < list.length; i++ ) {
+                                                        if ( checks[i].checked === true) {
+                                                            console.log('checked')
+                                                        }
+                                                    }
+                                                </script>
                                                 </ul>
+
                                             </div>
                         <!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">

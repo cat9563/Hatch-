@@ -147,10 +147,11 @@ function getUserTasks(){
 function addTaskToList(tasks){
     $(".checklist").empty();
 
-    for (let task of tasks) {
-        document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-        console.log('Tasks have loaded!')
-    }
+        for (let task of tasks) {
+            document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+            console.log('Tasks have loaded!')}
+        console.log(list)
+        
     deleteTask();
 }
 
@@ -240,9 +241,10 @@ function taskHTML(task) {
         <div class='input-group-prepend'>
             <div class='input-group-text'>
                 <input type='checkbox' aria-label='Checkbox for following text  input' class='checkbox'>
+                <label> ${ task.text } </label>
             </div>
         </div>
-        <p> ${ task.text } </p>
+
         <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
         <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
     </div>
@@ -261,6 +263,19 @@ function newTaskLineHTML(task) {
         </div>
     </div>
         `
+}
+
+
+// Add checked to list item when clicked
+function checkItemOnList() {
+    var list = document.getElementById('checklist')
+    var checks = list.getElementsByClassName('checkbox')
+
+    for ( i=0; i < list.length; i++ ) {
+        if ( checks[i].checked === true) {
+            console.log('checked')
+        }
+    }
 }
 
 
@@ -462,7 +477,6 @@ return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 function getCorrectTasks () {
     console.log('Inside getCorrectTasks')
-    changeCheck()
     $('#tasksModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget) // Button that triggered the modal
         let goalId = button.data('goal') // Extract info from data-* attributes
@@ -515,5 +529,6 @@ $(document).ready(function () {
     loadTasks();
     addTask(); 
     deleteTask();  
-    loadProgressBar()
+    loadProgressBar();
+    checkItemOnList();
 })

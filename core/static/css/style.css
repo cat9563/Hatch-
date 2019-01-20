@@ -438,3 +438,7 @@ overflow: scroll;
 .fr {
     float: right;
 }
+
+input:checked + label {
+    color: yellow;
+}
