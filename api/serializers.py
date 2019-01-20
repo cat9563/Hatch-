@@ -16,6 +16,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = (
                     'id',
                     'text',
+                    'status',
                     'task_detail_link')
 
 class GoalSerializer(serializers.ModelSerializer):

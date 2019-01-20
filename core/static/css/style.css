@@ -440,5 +440,5 @@ overflow: scroll;
 }
 
 input:checked + label {
-    color: yellow;
+    text-decoration: line-through;
 }
