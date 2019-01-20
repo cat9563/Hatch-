@@ -47,6 +47,7 @@ class TaskSerializer(serializers.ModelSerializer):
                     'author',
                     'goal',
                     'text',
+                    'status',
                     'task_detail_link')
 
 
