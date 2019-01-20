@@ -50,7 +50,8 @@ body{
 }
 
 .nav-link{
-    color: #fff !important;
+    /* color: #fff !important; */
+    color: #fff;
 }
 
 .dropdown-item {
@@ -58,10 +59,6 @@ body{
 }
 
 /* news feed */
-
-.myCarousel {
-    
-}
 
 .carousel-item {
   /* max-height: 750px; */
