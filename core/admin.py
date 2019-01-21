@@ -42,7 +42,7 @@ class GoalAdmin(admin.ModelAdmin):
 
 class TaskAdmin(admin.ModelAdmin):
     model = Task
-    list_display = ['author', 'goal', 'text']
+    list_display = ['author', 'goal', 'text', 'status']
 
 class NoteAdmin(admin.ModelAdmin):
     model = Task
