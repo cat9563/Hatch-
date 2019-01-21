@@ -67,7 +67,6 @@ function postNewTask(event){
 // DELETE task
 function deleteTask() {
     console.log("Inside deleteTask")
-    // $( 'div' ).find( "button.delete" ).on('click', function (event) {
     $(".delete").on('click', function() {
         console.log($(this))
         console.log($(this).data())
@@ -214,11 +213,10 @@ function postNewGoal() {
 // DELETE goal
 function deleteGoal() {
     console.log("Inside deleteGoal")
-    console.log($( 'div.goal-card' ).find( "button.deletegoal" ))
-    $( 'div.goal-card' ).find( "button.deletegoal" ).on('click', function (event) {
-        
-        console.log($("button.deletegoal").data())
-        let goalID = $("button.deletegoal").data('goal')
+    // console.log($( 'div.goal-card' ).find( "button.deletegoal" ))
+    $('.deletegoal').on('click', function() {
+        console.log($(this).data())
+        let goalID = $(this).data('goal')
         console.log(goalID)
 
         $.ajax({
@@ -452,10 +450,10 @@ saveNotes.addEventListener('click', function() {
 // DELETE note
 function deleteNote() {
     console.log("Inside deleteNote")
-    $( 'div' ).find( "button.deletenote" ).on('click', function (event) {
-        
-        console.log($("button.deletenote").data())
-        let noteID = $("button.deletenote").data('note')
+    $('.deletenote').on('click', function () {
+        console.log($(this))
+        console.log($(this).data())
+        let noteID = $(this).data('note')
         console.log(noteID)
 
         $.ajax({
