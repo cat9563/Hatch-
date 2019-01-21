@@ -113,7 +113,7 @@
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
                                 <hr>
-                                <a href="javascript:;" class="btn btn-info btn-block">Add a Goal</a>
+                                <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
                                 <div class="spacer5"></div>
                             </div>
                             <div class="tab-pane" id="tab3">
@@ -158,10 +158,10 @@
 
                     <div class="card mb-3">
                         <div class="card-header">
-                            This will be a header title with different color
+                           My Overall Progress
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Awesome Title </h5>
+                            <h5 class="card-title"> Hatchling </h5>
                             <p class="card-text"> <canvas id="myChart"></canvas> </p>  
                         </div>
                     </div>
@@ -171,34 +171,26 @@
                 
             
             </div>
+            <p> 
             <hr>
-
-            <a id="more"></a>
-             <div class="jumbotron">
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p class="lead">
-                    <a class="btn btn-success btn-lg btn-getStarted" href="#" role="button">Get Started</a>
-                </p>
-            </div>
+            Our journey isn't an easy one and it is certain that we will encounter plenty of roadblocks along the way. Below we have provided you with a way to keep track of your goals. All of our journyes are unique and will require a high degree of planning. If your journey involves changing your name, surgeries, or hormones you will need to seek out a therapist who is qualified in LGBT issues. 
+        <a id="more"></a>
+            <hr>
             <div class="card">
                 <div class="card-header">
-                    <h1>Never Give Up</h1>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                    +Goal</button>
-                </div>
-
                
-            <!--CARD BODY STARTS-->
-
-                
+                <h1 class="d-flex justify-content-center" "display-4 d-none d-sm-block">
+                Create your goals!
+                </h1>
+                    
+                </div>
                 <div class="card-body">
                  <a id="features"></a>
-            <hr>
-            <p class="lead mt-5">
-                Are you ready for Bootstap 4? It's the 4th generation of this popular responsive framework. Bootstrap 4 will include some interesting 
-                new features such as flexbox, 5 grid sizes (now including xl), cards, `em` sizing, CSS normalization (reboot) and larger font
-                sizes.
-            </p>
+                {% comment %} <div class="d-flex justify-content-end">
+                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
+                    +Goal</button>
+                    </div> {% endcomment %}
+            {% comment %} <hr> {% endcomment %}
             <div class="row my-4">
                 <div class="col-lg-3 col-md-4">
                     <div class="card">
@@ -219,6 +211,7 @@
                 </div>
                 <div class="col-lg-9 col-md-8">
                     <div class="table-responsive">
+                    
                      <div class="col-lg-12">
                          <div class="row mb-3" id='goal-list' >
               
@@ -280,14 +273,15 @@
                              </div>
                         </div><!--endofgoal-->
                         </div>
-                    <p>Your dreams your goals your way</p>
+                        
+                         <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
                       
                     </div>
                 </div>
             </div>
                   
                        
-                </div><!--end of body for card -->
+                <!--end of body for card -->
                 <div class="card-footer">
                     <p>image of a transflag here</p>
                     <p>Button goes up top to the right</p>
