@@ -259,7 +259,7 @@ function taskHTML(task) {
         <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' id='checkbox' class='checkbox'>
+                    <input type='checkbox' aria-label='Checkbox for following text input' id='checkbox' data-task="${ task.id }" class='checkbox'>
                     <label> ${ task.text } </label>
                 </div>
             </div>
@@ -329,8 +329,8 @@ function toggleStatus(task) {
     //         ev.target.classList.toggle('check')
     //     }})}
     // })
-    $(".checkbox").on('click', function() {
-        $(".checkbox").toggleClass('check')
+    $(".checkbox").on('change', function() {
+        $(this).toggleClass('check')
         // $(".checkbox").attr('checked')
         console.log('changed status')
         })}
