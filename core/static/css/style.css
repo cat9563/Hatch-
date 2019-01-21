@@ -38,8 +38,8 @@ body{
 }
 
 #journal{
-    height: 300px;
-    overflow: scroll;
+    height: 400px;
+    /* overflow: scroll; */
 }
 
 /* customize navbar */
@@ -130,7 +130,7 @@ body{
 } */
 
 .row {
-    /* border: 3px dashed blue; */
+    /* border: 3px dashed blue; 
     /* display: inline-block; */
     width: 100%;
     padding: 0px;
@@ -329,7 +329,7 @@ overflow: scroll;
     margin-left: -15px; */
 }
 
-#myChart{
+/* #myChart{
     border-radius: 10px;
     background-color: #ebf0ff;
     /* width: 627px !important; */
@@ -337,7 +337,7 @@ overflow: scroll;
     height: 312px !important;
     /* padding-top: 20px;
     /* margin-left: 158px; */
-}
+} */
 
 #profile-image{
     padding-top: 38px;
@@ -385,16 +385,15 @@ overflow: scroll;
     /* padding: 0px;
     height: 400px;
     overflow: scroll; */
-    color:#fff;
-    border-radius: 10px;
-    margin-right: 140px;
+    /* border-radius: 10px;
+    margin-right: 140px; */
     
 }
 
 #note-home{
     background-color:#011326;
     border-radius: 10px;
-    height: 500px;
+    height: 220px;
     overflow: scroll;
 }
 
@@ -436,4 +435,12 @@ overflow: scroll;
   } */ 
 .fr {
     float: right;
+}
+
+/* input:checked + label {
+    text-decoration: line-through;
+} */
+
+.check + label {
+    text-decoration: line-through;
 }

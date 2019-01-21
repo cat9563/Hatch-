@@ -76,7 +76,7 @@ class TaskListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class TaskDetailView(generics.RetrieveDestroyAPIView):
+class TaskDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieves details of one task
     Allows only users to destroy their tasks
