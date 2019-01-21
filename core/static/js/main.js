@@ -274,7 +274,7 @@ function taskHTML(task) {
         <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' class='checkbox' checked>
+                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" class='checkbox check' checked>
                     <label> ${ task.text } </label>
                 </div>
             </div>
@@ -313,15 +313,28 @@ function newTaskLineHTML(task) {
 //     }
 // }
 
+// THIS IS FROM THE INTERNET
+// // Add a "checked" symbol when clicking on a list item
+// var list = document.querySelector('ul');
+// list.addEventListener('click', function(ev) {
+//   if (ev.target.tagName === 'LI') {
+//     ev.target.classList.toggle('checked');
+//   }
+// }, false);
+
 function toggleStatus(task) {
-    // if (task.status === false) {
-    //     console.log('for each task')
+    // let list = document.querySelector('ul');
+    // list.addEventListener('click', function(ev) {
+    //     if (ev.target === 'input.checkbox') {
+    //         ev.target.classList.toggle('check')
+    //     }})}
+    // })
     $(".checkbox").on('click', function() {
         $(".checkbox").toggleClass('check')
         // $(".checkbox").attr('checked')
         console.log('changed status')
-        })
-    }
+        })}
+    
 
 function forLater() {
             // console.log($('task').attr('status'))
