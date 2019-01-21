@@ -244,7 +244,12 @@ function closeModal() {
 function goalHTML(goal) {
     return `
     <div class="goal-card" id="${ goal.id }">
-        <div class="card-body" data-author="${ goal.author }">  
+        <div class="card-body" data-author="${ goal.author }"> 
+            <div class="progress">
+                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                <span id="current-progress"></span>
+                </div>
+            </div> 
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
             <!-- Expand button, connected to goal.id -->                   
             <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
