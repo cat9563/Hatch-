@@ -40,10 +40,32 @@ var myChart = new Chart(ctx, {
     },
     options: {
         cutoutPercentage: 80,
-        rotation: 1 * Math.PI,
-        circumference: 1 * Math.PI,
+        // rotation: 1 * Math.PI,
+        // circumference: 1 * Math.PI,
     }
 });
+
+
+//Crystal Dashboard testing this
+// donut 3
+var chDonutData3 = {
+    labels: ['Angular', 'React', 'Other'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(0,3),
+        borderWidth: 0,
+        data: [21, 45, 55, 33]
+      }
+    ]
+};
+var chDonut3 = document.getElementById("chDonut3");
+if (chDonut3) {
+  new Chart(chDonut3, {
+      type: 'pie',
+      data: chDonutData3,
+      options: donutOptions
+  });
+}
 
 // $("#renderBtn").click(
 //     function () {
