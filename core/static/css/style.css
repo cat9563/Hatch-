@@ -438,3 +438,11 @@ overflow: scroll;
 .fr {
     float: right;
 }
+
+/* input:checked + label {
+    text-decoration: line-through;
+} */
+
+.check + label {
+    text-decoration: line-through;
+}
