@@ -121,6 +121,10 @@ body{
     width: 170px;
 }
 
+.nav-pills > li > a.active {
+    background-color: #f5a8b8!important;
+}
+
 /* .profile-container {
     padding-top: 75px;
 } */
