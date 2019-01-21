@@ -43,7 +43,8 @@ function postNewTask(event){
     let task = {
         author:1,
         goal: $('#save-changes').attr('data-goal'),
-        text: $('#new-task-text').val()
+        text: $('#new-task-text').val(),
+        status: false,
     }
     $.ajax({
         url: '/api/tasks/',
@@ -86,8 +87,6 @@ function deleteTask() {
             console.log("There was an issue getting the user's tasks.")
         });
     })};
-
-
 
 
 // GET request to API for goals
@@ -143,7 +142,7 @@ function getUserTasks(){
 }
 
 
-// takes the new task posted to API and also adds the HTML element on the dashboard
+// Adds tasks to tasklist, loads progress bar and percent complete based on num of tasks total and num of those tasks that are checked
 function addTaskToList(tasks){
     $(".checklist").empty();
 
@@ -152,19 +151,16 @@ function addTaskToList(tasks){
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
             toggleStatus(task);
             console.log('Tasks have loaded!')
+            
         };
+        changeStatus()
         // count how many items are in the list
-        
-        let checked = 0;
         function countBoxes() { 
             var count = $("input.checkbox").length;
             return count
-            // return count
-        }
+        };
 
-        // let count = $(":checkbox").click(countBoxes);
         let count = countBoxes()
-
         // count how many items are checked
         function countChecked() {
             console.log(count)
@@ -184,16 +180,12 @@ function addTaskToList(tasks){
 }
 
 
-
-
-
 // find save-goal button and listen for click to run functions
 var saveGoal = document.getElementById('save-goal');
 saveGoal.addEventListener('click', function() {
     postNewGoal();
     closeModal();
 })
-
 
 
 // POST request to save new Goal to API, then add it to list on dashboard
@@ -272,8 +264,8 @@ function taskHTML(task) {
         <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' id='checkbox' data-task="${ task.id }" class='checkbox'>
-                    <label> ${ task.text } </label>
+                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
+                    <label id='task-text'> ${ task.text } </label>
                 </div>
             </div>
 
@@ -287,8 +279,8 @@ function taskHTML(task) {
         <div class='input-group mb-3' id='checklist-task'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" class='checkbox check' checked>
-                    <label> ${ task.text } </label>
+                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
+                    <label id='task-text'> ${ task.text } </label>
                 </div>
             </div>
 
@@ -317,64 +309,81 @@ function newTaskLineHTML(task) {
 function toggleStatus(task) {
     $(".checkbox").on('change', function() {
         $(this).toggleClass('check')
-        // $(".checkbox").attr('checked')
-        console.log('changed status')
-        })}
-    
+        let taskID = $("button.delete").data('task')
 
-function forLater() {
-            // console.log($('task').attr('status'))
-        let task = {
-            author:1,
-            goal: $('#save-changes').attr('data-goal'),
-            text: $('#new-task-text').val(),
-            status: $('task').attr('status')
-        }
-        // console.log(task)
-            
+        if ($("input.checkbox:checked")) {
+            let task = {
+                author:1,
+                goal: $('#save-changes').attr('data-goal'),
+                text: 'check testing',
+                status: true,
+            }
             $.ajax({
-                url: `api/tasks/${task.id}/`,
-                method: 'PUT',
+                url: `/api/tasks/${taskID}/`,
+                method: 'put',
+                data: JSON.stringify(task),
+                contentType: 'application/json'
+            }).done(function() {
+                console.log('Should be updated on API...')
             })
-            // console.log(task.status)
-        
-    if (task.status === true) {
-        $(".checkbox").on('click', function() {
-            $('task').attr({
-                "status" : "false"
+        }
+        else {
+            let task = {
+                author:1,
+                goal: $('#save-changes').attr('data-goal'),
+                text: 'testing',
+                status: false,
+            }
+            $.ajax({
+                url: `/api/tasks/${taskID}/`,
+                method: 'put',
+                data: JSON.stringify(task),
+                contentType: 'application/json'
+            }).done(function() {
+                console.log('Should be updated on API...')
             })
-            // console.log(task.status)
-        })
-    }
+        }
+    })
 }
     
 
-// Function to do the math to calculate the user's progress
-function calculateProgress() {
-    // x = num of tasks total for goal
-    // y = number of checked input fields
-    // current progress = (y / x) * 100
-    // function should return current progress value
+function changeStatus() {
+    let tasks = $("input.checkbox")
+        for (let task of tasks) {
+            if ($("#checkbox").hasClass("check")){
+                // $(this).attr("id", "true")
+                console.log($(this))
+            }
+            // else {
+            //     $(this).attr("id", "false")
+            // }
+            
+        }
+        // updateTask()
+    }
+    
 
+// sends PUT request for any task status changes
+function updateTask(task) {
+    // $("#save-changes").addEventListener('click', function() {
+    let task = {
+        author:1,
+        goal: $('#save-changes').attr('data-goal'),
+        text: $('#new-task-text').val(),
+        status: $('#id').val()
+    }   
+    $.ajax({
+        url: `api/tasks/${task.id}/`,
+        method: 'PUT',
+        data: JSON.stringify(task),
+        contentType: 'application/json'
+    }).then(function() {
+        loadTasks()
+    })
 }
-
-// Work in progress, needs to be communicating with tasks in checklist
-function loadProgressBar() {
-    // take result of calculateProgress function and set to current progress value
-    // let current_progress = calculateProgress();
-    let current_progress = 50;
-    // minimum value being 0
-    // maximum value being 100
-
-  };
+    
 
 //NOTES SECTION
-
-//checks to see if num is even and assigns html accordingly 
-// function isEven(num) {
-
-//     }
-// }
 
 //inserts note.id to alteranate colors 
 function noteHtml(note) {
@@ -481,24 +490,6 @@ function addNotesToJournal(notes){
     }
     deleteNote();
 }
-
-// // function clickEvent() {
-// //     let checkboxes = document.querySelectorAll('input.checkbox')
-// //     console.log(checkboxes)
-// //         for (checkbox in checkboxes)
-// //         // if (checkbox) {
-// //         addEventListener('input', console.log('checked!'))
-// // }
-// let checklist = document.querySelectorAll('div.checklist')
-// let checkboxes = checklist.querySelectorAll('input.checkbox')
-// checkboxes.forEach(element => { console.log(element)})
-    
-
-// let checkTask = document.getElementById('checkbox')
-// checkTask.addEventListener('click', function() {
-// console.log('checked!')
-// })
-
 
 
 // PLEASE DO NOT TOUCH ANYTHING BELOW THIS LINE!
