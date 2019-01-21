@@ -150,6 +150,7 @@ function addTaskToList(tasks){
         for (let task of tasks) {
             toggleStatus(task);
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+            toggleStatus(task);
             console.log('Tasks have loaded!')
         
             
