@@ -177,7 +177,7 @@ function postNewGoal() {
         contentType: 'application/json'
 
     }).then(function(response) {
-        $('.goal-container').empty();
+        $('.goal-container').empty(); //
         loadGoals();
 
     }).fail(function(response){
@@ -216,7 +216,7 @@ function closeModal() {
     modal.classList.remove('modal-backdrop', 'fade', 'show');
 }
 
-        
+// old goalHTML kept just in case its needed when we merge and need to fix conflict
 function goalHTML(goal) {
     return `
     <div class="goal-card" id="${ goal.id }">
@@ -230,20 +230,34 @@ function goalHTML(goal) {
             <button type='button' id='deletegoal' class='delete btn fr' data-goal="${ goal.id }">&#128465</button>
         </div>
     </div>
-
-    <div class="col-xl-3 col-sm-6 py-2" id="${ goal.id }">
-        <div class="card bg-success text-white h-100">
-            <div class="card-body bg-success" id="${ goal.author }">
-                <div class="rotate">
-                    <i class="fa fa-user fa-4x"></i>
-                </div>
-                <h6 class="text-uppercase">${ goal.title }</h6>
-                <h1 class="display-4">${ goal.id } goal id for test</h1>
-            </div>
-        </div>
-    </div>
     `
 }
+
+// function goalHTML(goal){
+//     return`
+//     <hr>
+//     <div class="col-xl-3 col-sm-6 py-2" id="${ goal.id }">
+//     <div class="card bg-success text-white h-100">
+//         <div class="card-body bg-success" id="${ goal.author }">
+//             <h1 class="display-5">${ goal.title}</h1>
+//             <hr>
+//             <div class="text-center my-3">Normal Button Group</div>
+//             <div class="text-center">
+//                 <div class="btn-group">
+//                 <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
+//                 <button type='button' class='btn btn-primary' data-goal="${ goal.id }" id='editgoal'>Edit</button>
+//                 <button type='button' id='deletegoal' class='delete btn btn-primary' data-goal="${ goal.id }">Delete</button>
+//                 </div>
+//             </div>
+//                 <!-- Expand button, connected to goal.id -->                   
+               
+                
+//                 <!-- Edit & Delete buttons, connected to goal id -->
+//         </div>
+//     </div>
+//     </div>
+//     `
+// }
 
 
 function taskHTML(task) {
