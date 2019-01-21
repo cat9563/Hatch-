@@ -67,10 +67,11 @@ function postNewTask(event){
 // DELETE task
 function deleteTask() {
     console.log("Inside deleteTask")
-    $( 'div' ).find( "button.delete" ).on('click', function (event) {
-        
-        console.log($("button.delete").data())
-        let taskID = $("button.delete").data('task')
+    // $( 'div' ).find( "button.delete" ).on('click', function (event) {
+    $(".delete").on('click', function() {
+        console.log($(this))
+        console.log($(this).data())
+        let taskID = $(this).data('task')
         console.log(taskID)
 
         $.ajax({
