@@ -251,11 +251,11 @@ function goalHTML(goal) {
             </div> 
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
             <!-- Expand button, connected to goal.id -->                   
-            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
+            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>View Tasks</button>
             
             <!-- Edit & Delete buttons, connected to goal id -->
-            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>&#9997</button>
-            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">&#128465</button>
+            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>Edit</button>
+            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
         </div>
     </div>
     `
@@ -299,8 +299,8 @@ function taskHTML(task) {
                 </div>
             </div>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
         </div>
             `
     }
@@ -314,8 +314,8 @@ function taskHTML(task) {
                 </div>
             </div>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
         </div>
             `
     };
@@ -338,47 +338,55 @@ function newTaskLineHTML(task) {
 
 function toggleStatus(task) {
     $(".checkbox").on('change', function() {
-        $(this).toggleClass('check')
+        // $(this).toggleClass('check')
+        checkStatus = $(this).prop( 'checked' )
         let taskID = $("button.delete").data('task')
-
-        if ($("input.checkbox:checked")) {
-            let task = {
-                author:1,
-                goal: $('#save-changes').attr('data-goal'),
-                text: 'check testing',
-                status: true,
+        let tasks = $(".checkbox")
+        console.log(tasks)
+        $("#save-changes").on('click', function() {
+            for (let task of tasks) {
+                if (checkStatus === true) {
+                    let task = {
+                        author:1,
+                        goal: $('#save-changes').attr('data-goal'),
+                        text: 'check testing',
+                        status: true,
+                    }
+                    $.ajax({
+                        url: `/api/tasks/${taskID}/`,
+                        method: 'put',
+                        data: JSON.stringify(task),
+                        contentType: 'application/json'
+                    }).done(function() {
+                        console.log('Should be updated on API...')
+                        document.getElementById('checklist').innerHTML = "";
+                        getModalTasks();
+                    })
+                };
+                if (checkStatus === false) {
+                    let task = {
+                        author:1,
+                        goal: $('#save-changes').attr('data-goal'),
+                        text: 'testing',
+                        status: false,
+                    }
+                    $.ajax({
+                        url: `/api/tasks/${taskID}/`,
+                        method: 'put',
+                        data: JSON.stringify(task),
+                        contentType: 'application/json'
+                    }).done(function() {
+                        console.log('Should be updated on API...')
+                        document.getElementById('checklist').innerHTML = "";
+                        getModalTasks();
+                    })
+                }
             }
-            $.ajax({
-                url: `/api/tasks/${taskID}/`,
-                method: 'put',
-                data: JSON.stringify(task),
-                contentType: 'application/json'
-            }).done(function() {
-                console.log('Should be updated on API...')
-                document.getElementById('checklist').innerHTML = "";
-                getModalTasks();
-            })
-        }
-        if (!$("input.checkbox:checked")) {
-            let task = {
-                author:1,
-                goal: $('#save-changes').attr('data-goal'),
-                text: 'testing',
-                status: false,
-            }
-            $.ajax({
-                url: `/api/tasks/${taskID}/`,
-                method: 'put',
-                data: JSON.stringify(task),
-                contentType: 'application/json'
-            }).done(function() {
-                console.log('Should be updated on API...')
-                document.getElementById('checklist').innerHTML = "";
-                getModalTasks();
-            })
-        }
+        })
     })
-}
+};
+        //     getModalTasks();
+        // }})
     
 
 function changeStatus() {
@@ -585,10 +593,10 @@ function getModalTasks () {
             contentType: 'application/json'
 
         }).done(function(response){
-            modal.find("#tasksModalLabel").text(response.title)
+            // modal.find("#tasksModalLabel").text(response.title)
             console.log(response.tasks)
             addTaskToList(response.tasks);  
-            modal.find("#save-changes").attr('data-goal', goalId)
+            // modal.find("#save-changes").attr('data-goal', goalId)
 
         }).fail(function(response){
             console.log("There was an issue getting the user's goals.");
