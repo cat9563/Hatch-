@@ -152,27 +152,39 @@ function addTaskToList(tasks){
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
             toggleStatus(task);
             console.log('Tasks have loaded!')
+        };
+        // count how many items are in the list
         
-            
+        let checked = 0;
+        function countBoxes() { 
+            var count = $("input.checkbox").length;
+            return count
+            // return count
         }
-    function countBoxes() { 
-        count = $("input.checkbox").length;
-        // console.log($("input.checkbox"))
-        console.log(count);
-        }
 
-    countBoxes();
-    $(":checkbox").click(countBoxes);
+        // let count = $(":checkbox").click(countBoxes);
+        let count = countBoxes()
 
-    function countChecked() {
-        checked = $("input.checkbox:checked").length;
-        console.log(checked)
-    }
+        // count how many items are checked
+        function countChecked() {
+            console.log(count)
+            let checked = $("input.checkbox:checked").length;
+            console.log(checked)
+            let percent = Math.round(parseInt((checked / count) * 100), 10)
+            console.log(percent)
+            $("#dynamic")
+                .css("width", percent + "%")
+                .attr("aria-valuenow", percent)
+                .text(percent + "% Complete")
+        };
+        countChecked();
+        $(":checkbox").click(countChecked);
 
-    countChecked();
-    $(":checkbox").click(countChecked);
-    deleteTask();
+        deleteTask();
 }
+
+
+
 
 
 // find save-goal button and listen for click to run functions
@@ -302,34 +314,7 @@ function newTaskLineHTML(task) {
 }
 
 
-// // Add checked to list item when clicked
-// function checkItemOnList() {
-//     var list = document.getElementById('checklist')
-//     var checks = list.getElementsByClassName('checkbox')
-
-//     for ( i=0; i < list.length; i++ ) {
-//         if ( checks[i].checked === true) {
-//             console.log('checked')
-//         }
-//     }
-// }
-
-// THIS IS FROM THE INTERNET
-// // Add a "checked" symbol when clicking on a list item
-// var list = document.querySelector('ul');
-// list.addEventListener('click', function(ev) {
-//   if (ev.target.tagName === 'LI') {
-//     ev.target.classList.toggle('checked');
-//   }
-// }, false);
-
 function toggleStatus(task) {
-    // let list = document.querySelector('ul');
-    // list.addEventListener('click', function(ev) {
-    //     if (ev.target === 'input.checkbox') {
-    //         ev.target.classList.toggle('check')
-    //     }})}
-    // })
     $(".checkbox").on('change', function() {
         $(this).toggleClass('check')
         // $(".checkbox").attr('checked')
@@ -380,10 +365,6 @@ function loadProgressBar() {
     let current_progress = 50;
     // minimum value being 0
     // maximum value being 100
-    $("#dynamic")
-        .css("width", current_progress + "%")
-        .attr("aria-valuenow", current_progress)
-        .text(current_progress + "% Complete");
 
   };
 
@@ -598,6 +579,6 @@ $(document).ready(function () {
     loadTasks();
     addTask(); 
     deleteTask();  
-    loadProgressBar();
+    // loadProgressBar();
 
 })
