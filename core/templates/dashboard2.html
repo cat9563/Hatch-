@@ -1,0 +1,121 @@
+{% comment %} {% extends 'base.html' %}
+{% load app_tags %}
+
+{% block title %}
+    Dashboard - {{ block.super }} 
+{% endblock title %}
+
+<body>
+{% block content %}
+<div class="container-fluid">
+  <h1>Basic Grid Structure</h1>
+  <p>Resize the browser window to see the effect.</p>
+  <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
+  
+  <div class="container-fluid">
+    <!-- Control the column width, and how they should appear on different devices -->
+     <div class="row" class="dflex justify-content-start" >
+        <div class="col-sm-4">
+            <div class="profile-card">
+                <div class="row">
+                    <div class="col" id="profile-image">
+                        <img class="rounded-circle resize" src="{{ user|gravatar:100 }}"/>
+                    </div>
+                    <div class="col" id="user-name">
+                        <h2>Welcome, {{ user.username }}</h2>
+                    </div>
+                    <div class="col" id="quote">
+                        <body onload="randomQuote()">
+                        <div id="showQuotes"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="container-clear">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div><!--endofnotediv-->
+     </div>
+ 
+            
+        <div class="col-sm-5" id="note-home"> 
+            <br></br>
+            <div class="row">
+                    <div class="container" id="journal"></div>
+                </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
+        +
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-body" id="note-input">
+                <label for="message-text" class="col-form-label">Journal Entry</label>
+                <textarea class="form-control" id="message-text"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    </div><!--endof note div-->
+        
+    </div>
+    
+    
+   
+</div>
+
+{% endblock content %} {% endcomment %}
+
+{% comment %} <a id="more"></a>
+            <hr>
+            <h2 class="sub-header mt-5">Use card decks for equal height rows of cards</h2>
+            <div class="mb-3">
+                <div class="card-deck">
+                    <div class="card card-inverse card-success text-center">
+                        <div class="card-body">
+                            <blockquote class="card-blockquote">
+                                <p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
+                                <footer>Makes flexible layouts <cite title="Source Title">Faster</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+            
+            <!--/row-->
+       
+            {% comment %} <a id="flexbox"></a>
+            <hr>
+            <h2 class="mt-5">Masonry-style grid columns</h2>
+            <h6>with Bootstrap 4 flexbox</h6>
+
+            <div class="card-columns mb-3">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="//placehold.it/600x200/444/fff?text=..." alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">New XL Grid Tier</h4>
+                        <p class="card-text">With screens getting smaller, Bootstrap 4 introduces a new grid breakpoint with the col-xl-* classes. This extra tier extends the media query range all the way down to 576 px. Eventhough the new XL tier would make one think it’s been added to support extra large screens, it’s actually the opposite.</p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+            
+       
+            {% comment %} <div class="col-md-6 py-1">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>  {% endcomment %}
+
+
+            <!--/card-columns-->

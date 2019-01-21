@@ -1,75 +1,255 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load app_tags %}
-
 {% block title %}
-    Dashboard - {{ block.super }} 
+    Local Events - {{ block.super }} 
 {% endblock title %}
 
-<body>
 {% block content %}
-<div class="container-fluid">
-  <h1>Basic Grid Structure</h1>
-  <p>Resize the browser window to see the effect.</p>
-  <p>The first, second and third row will automatically stack on top of each other when the screen is less than 576px wide.</p>
-  
-  <div class="container-fluid">
-    <!-- Control the column width, and how they should appear on different devices -->
-     <div class="row" class="dflex justify-content-start" >
-        <div class="col-sm-4">
-            <div class="profile-card">
-                <div class="row">
-                    <div class="col" id="profile-image">
-                        <img class="rounded-circle resize" src="{{ user|gravatar:100 }}"/>
+
+<div class="container-fluid" id="main">
+        <div class="col main pt-5 mt-3">
+            <div class="row">
+                <div class="col-sm-4 py-2">
+                    <div class="card text-white h-100">
+                        <div class="card-body">
+                         <h6 class="display-4">Welcome</h6>
+                            <h1 class="display-6">{{ user.username }} !</h1>
+                             <body onload="randomQuote()">
+                         
+                            
+                        {% comment %} <div id="showQuotes"></div> {% endcomment %}
+                        </div>
                     </div>
-                    <div class="col" id="user-name">
-                        <h2>Welcome, {{ user.username }}</h2>
-                    </div>
-                    <div class="col" id="quote">
-                        <body onload="randomQuote()">
-                        <div id="showQuotes"></div>
+                </div>
+                <div class="col-sm-8 py-2">
+                    <div class="card text-white h-100">
+                        <div class="card-body">
+                        <h1 class="display-4 d-none d-sm-block">
+                        Transition your way!!
+                        </h1>
+                        <p class="lead d-none d-sm-block">You can do what you set your mind too!</p>
+                           
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="container-clear">
-                <canvas id="myChart"></canvas>
-            </div>
-        </div><!--endofnotediv-->
-     </div>
-    <div class="row">
-            <div class="col-sm-5" id="goal-home">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                        +Goal</button><br>
-                    <div class="goal-container" id='goal-list' style="margin: 10px"><center>Goal Container</center>
-                    </div>
-<!-- Modal to create a new goal -->
-<div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="newGoalModalTitle">Have a new goal?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div class="input-group mb-3">
-            <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
-        </div>
-        </div>
-    </div>
-</div>
-                                    
-                        <!-- End of modal to create a new goal-->
+            <!--/row-->
 
-                        <!-- Modal for viewing checklist of tasks -->
-                        <!--Modal HEADER-->
+            <a id="features"></a>
+            <hr>
+            <p class="lead mt-5">
+                At hatch we believe that your transition should be done your way and on your terms! There is no right or wrong way to tranistion. The transgender experience can vary but one thing we all have in common is a need to express our true-selves and a place to start planning our journey to accomplis that need. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life!
+            </p>
+            <div class="row my-4">
+                <div class="col-lg-3 col-md-4">
+                    
+                </div>
+                <div class="col-lg-9 col-md-8">
+                    
+                </div>
+            </div>
+            <!--/row-->
+
+            
+
+        <a id="layouts"></a> 
+             <hr> 
+         <h2 class="sub-header mt-5">Track Your Progress</h2>
+         <hr>
+            <div class="row mb-3">
+                <div class="col-lg-6">
+                    <!--took out card here if this is moved profile card moves to the right of the screen -->
+                  
+
+                </div>
+                <div class="col-lg-6" #profile-card>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                    </ul> 
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <br>
+                        <div role="tabpanel" class="tab-pane active" id="home1">
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile1">
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="messages1">
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="settings1">
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-6">
+                    <div class="card card-default card-body" id="profile-card">
+                        <ul id="tabsJustified" class="nav nav-tabs nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Resources</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="" data-target="#tab2" data-toggle="tab">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-target="#tab3" data-toggle="tab">Journal</a>
+                            </li>
+                        </ul>
+                        <!--/tabs-->
+                        <br>
+                        <div id="tabsJustifiedContent" class="tab-content">
+                            <div class="tab-pane" id="tab1">
+                                <div class="list-group">
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">9</span> Home Link</a>
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">8</span> Link 2</a>
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">23</span> Link 3</a>
+                                    <a href="" class="list-group-item text-muted">Link n..</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="tab2">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <h1 "text-uppercase">{{ user.username }}</h1>
+                                        <p><div id="showQuotes"></div></p>
+                                    </div>
+                                    <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
+                                </div>
+                                <hr>
+                                <a href="javascript:;" class="btn btn-info btn-block">Add a Goal</a>
+                                <div class="spacer5"></div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                             <div class="col-sm-12" id="note-home"> 
+                                <div class="row">
+                                        <div class="container" id="journal"></div>
+                                    </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-body" id="note-input">
+                                        <label for="message-text" class="col-form-label">Journal Entry</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <hr>
+                             <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#addNote">Create a Journal Entry</a>
+                            </div>
+                            
+                                 {% comment %} <div class="card mb-3" id="note-home">
+                                    <div class="card-body" id="journal">
+                           
+                                      
+                                    </div>
+                                </div>
+                                  
+                            </div> {% endcomment %}
+                           
+                        </div>
+                        <!--/tabs content-->
+                    </div><!--/card-->
+                </div><!--/col-->
+                <div class="col-lg-6">
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            This will be a header title with different color
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Awesome Title </h5>
+                            <p class="card-text"> <canvas id="myChart"></canvas> </p>  
+                        </div>
+                    </div>
+                    
+
+                </div> <!--dashboard goal madness listed below-->
+                
+            
+            </div>
+            <hr>
+
+            <a id="more"></a>
+             <div class="jumbotron">
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <p class="lead">
+                    <a class="btn btn-success btn-lg btn-getStarted" href="#" role="button">Get Started</a>
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1>Never Give Up</h1>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
+                    +Goal</button>
+                </div>
+
+               
+            <!--CARD BODY STARTS-->
+
+                
+                <div class="card-body">
+                 <a id="features"></a>
+            <hr>
+            <p class="lead mt-5">
+                Are you ready for Bootstap 4? It's the 4th generation of this popular responsive framework. Bootstrap 4 will include some interesting 
+                new features such as flexbox, 5 grid sizes (now including xl), cards, `em` sizing, CSS normalization (reboot) and larger font
+                sizes.
+            </p>
+            <div class="row my-4">
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title">Layouts</h4>
+                            <p class="card-text">Flexbox provides simpler, more flexible layout options like vertical centering.</p>
+                            <a href="#" class="btn btn-primary">Button</a>
+                        </div>
+                    </div>
+                    <div class="card card-inverse bg-inverse mt-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Flexbox</h3>
+                            <p class="card-text">Flexbox is now the default, and Bootstrap 4 supports SASS out of the box.</p>
+                            <a href="#" class="btn btn-outline-secondary">Outline</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-8">
+                    <div class="table-responsive">
+                     <div class="col-lg-12">
+                         <div class="row mb-3" id='goal-list' >
+              
+                <!--/row-->
+                <!--using this for modaling from previous dash -->
+                            <div class="modal fade" id="newGoalModal" tabindex="-1" role="dialog" aria-labelledby="newGoalModal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="newGoalModalTitle">Have a new goal?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="input-group mb-3">
+                                                    <input type="text" id='new-goal-title' class="form-control" placeholder="Let's make it happen ..." aria-label="What's your new goal?" aria-describedby="basic-addon2">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                                    <!-- End of modal to create a new goal-->
+
+                                                    <!-- Modal for viewing checklist of tasks -->
+                                                    <!--Modal HEADER-->
                                 <div class="modal fade" id="tasksModal" tabindex="-1" role="dialog" aria-labelledby="tasksModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -79,7 +259,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                        <!--Modal BODY - CHECKLIST-->
+                                                <!--Modal BODY - CHECKLIST-->
                                             <div class="modal-body" >
                                                 <div class="progress">
                                                     <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
@@ -87,52 +267,67 @@
                                                     </div>
                                                 </div>
                                                 <button id='the-plus-button' type="button" class="btn btn-success" style='margin: 5px; float: right;'>+</button>
-                                                <ul id="checklist" style="list-style: none" class='checklist'>
-                                                </ul>
-
+                                                <ul id="checklist" style="list-style: none" class='checklist'></ul>
                                             </div>
-                        <!-- Modal FOOTER -->                                            
+                                            <!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-            <!--endofgoal--></div>
-            
-        <div class="col-sm-5" id="note-home"> 
-            <br></br>
-            <div class="row">
-                    <div class="container" id="journal"></div>
+                                {% comment %} </div> {% endcomment %}
+                             </div>
+                        </div><!--endofgoal-->
+                        </div>
+                    <p>Your dreams your goals your way</p>
+                      
+                    </div>
                 </div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNote">
-        +
-        </button>
+            </div>
+                  
+                       
+                </div><!--end of body for card -->
+                <div class="card-footer">
+                    <p>image of a transflag here</p>
+                    <p>Button goes up top to the right</p>
+                </div>
+            </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-body" id="note-input">
-                <label for="message-text" class="col-form-label">Journal Entry</label>
-                <textarea class="form-control" id="message-text"></textarea>
+           
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
-            </div>
-            </div>
+            <!--/row-->
+
+            {% comment %} <a id="more"></a>
+            <hr>
+            <h2 class="sub-header mt-5">Use card decks for equal height rows of cards</h2>
+            <div class="mb-3">
+                <div class="card-deck">
+                    <div class="card card-inverse card-success text-center">
+                        <div class="card-body"id="goal-things">
+                        
+                            <blockquote class="card-blockquote">
+                                <p>It's really good news that the new Bootstrap 4 now has support for CSS 3 flexbox.</p>
+                                <footer>Makes flexible layouts <cite title="Source Title">Faster</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                
+                    {% comment %} <div id="accordion" role="tablist" aria-multiselectable="true">
+                    </div>
+                    <p class="mt-4">
+                        <a href="/go/KrUO8QpyXP/bootstrao-4-dashboard" target="_ext">Get this Bootstrap 4 admin dashboard at Codeply</a>
+                    </p>
+                </div><!--/col--> {% endcomment %}
+            </div><!--/row-->
+            
+
         </div>
-        </div>
-    </div>
-    
-    </div><!--endof note div-->
-        
-    </div>
-    
-    
-   
+        <!--/main col-->
+
 </div>
+
+
 
 {% endblock content %}

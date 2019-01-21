@@ -86,5 +86,40 @@ body, html {
   /* #profile-card{
       height: 396px;
   } */
+
+  #goals-new-dash{
+      height: 500px;
+      overflow: scroll;
+      /* display: flex;
+      justify-content: center; */ /*might not need these if parents pick it */
+  }
   
-  
+  /*card body flex test out */
+
+  .cardbodyhome{
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .cardchildren{
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+  }
+
+  .orphens{
+    border: 1px solid #fff;
+  }
+
+  .examples{
+    border: 1px solid #fff;
+  }
+
+  .examples2{
+    border: 1px solid #fff;
+  }
+
+  .examples3{
+    border: 1px solid #fff;
+  }
