@@ -325,9 +325,11 @@ function toggleStatus(task) {
                 contentType: 'application/json'
             }).done(function() {
                 console.log('Should be updated on API...')
+                document.getElementById('checklist').innerHTML = "";
+                getModalTasks();
             })
         }
-        else {
+        if (!$("input.checkbox:checked")) {
             let task = {
                 author:1,
                 goal: $('#save-changes').attr('data-goal'),
@@ -341,6 +343,8 @@ function toggleStatus(task) {
                 contentType: 'application/json'
             }).done(function() {
                 console.log('Should be updated on API...')
+                document.getElementById('checklist').innerHTML = "";
+                getModalTasks();
             })
         }
     })
