@@ -27,8 +27,15 @@ function addTask() {
             let position = document.getElementById('checklist');
             position.prepend(newEl);
         })
-    };
-        
+    }
+
+    let updateGoal = document.getElementById('update-goal');
+    if (updateGoal) {
+        updateGoal.addEventListener('click', function() {
+            updateGoal();
+            console.log('here here')
+        })
+    }
 
     let submitTasks = document.getElementById('save-changes');
     if (submitTasks) {
@@ -36,32 +43,36 @@ function addTask() {
     }
 }
 
+
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(event){
     console.log($('#save-changes').attr('data-goal'))
+    things = $( "ul.checklist" ).find('li')
+    for (let thing of things) {
+        console.log($('#new-task-text').val())
     // console.log(event);
-    let task = {
-        author:1,
-        goal: $('#save-changes').attr('data-goal'),
-        text: $('#new-task-text').val(),
-        status: false,
-    }
-    $.ajax({
-        url: '/api/tasks/',
-        method: 'POST',
-        data: JSON.stringify(task), 
-        contentType: 'application/json'
-    
-    }).done(function() {
-        // console.log('end of ajax post, should then empty checklist')
-        document.getElementById('checklist').innerHTML = "";
-        // loadTasks();
-        getModalTasks();
+        let task = {
+            author:1,
+            goal: $('#save-changes').attr('data-goal'),
+            text: $('#new-task-text').val(),
+            status: false,
+        }
+        $.ajax({
+            url: '/api/tasks/',
+            method: 'POST',
+            data: JSON.stringify(task), 
+            contentType: 'application/json'
+        
+        }).done(function() {
+            // console.log('end of ajax post, should then empty checklist')
+            document.getElementById('checklist').innerHTML = "";
+            // loadTasks();
+            getModalTasks();
 
-    }).fail(function() {
-        console.log("There was an issue getting the user's tasks.")
-    });
-
+        }).fail(function() {
+            console.log("There was an issue getting the user's tasks.")
+        })
+    };
 }
 
 // DELETE task
@@ -81,6 +92,7 @@ function deleteTask() {
             document.getElementById('checklist').innerHTML = "";
             console.log('cleared checklist')
             // getModalTasks();
+            loadTasks();
 
         }).fail(function() {
             console.log("There was an issue getting the user's tasks.")
@@ -153,7 +165,7 @@ function addTaskToList(tasks){
         for (let task of tasks) {
             // toggleStatus(task);
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-            toggleStatus(task);
+            // toggleStatus(task);
             // console.log('Tasks have loaded!')
             
         };
@@ -335,10 +347,37 @@ function newTaskLineHTML(task) {
             <div class='input-group-text'>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input withcheckbox' id='new-task-text'></input>
+            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'>
+            </input>
         </div>
     </div>
         `
+}
+
+
+function createNewTask(){
+    console.log('Creating a new task...')
+    let task = {
+        author:1,
+        goal: $('#save-changes').attr('data-goal'),
+        text: $('#new-task-text').val(),
+        status: false,
+    }
+    $.ajax({
+        url: '/api/tasks/',
+        method: 'POST',
+        data: JSON.stringify(task), 
+        contentType: 'application/json'
+    
+    }).done(function() {
+        // console.log('end of ajax post, should then empty checklist')
+        document.getElementById('checklist').innerHTML = "";
+        // loadTasks();
+        getModalTasks();
+
+    }).fail(function() {
+        console.log("That didn't work out.")
+    });
 }
 
 
@@ -349,9 +388,10 @@ function toggleStatus(task) {
         console.log(checkStatus)
         let taskID = $(this).data('task')
         console.log(taskID)
-        let tasks = $(".checkbox")
-        console.log(tasks)
-        $("#save-changes").on('click', function() {
+        // let tasks = $(".checkbox")
+        // console.log(tasks)
+        $("#update-goal").on('click', function() {
+            // currently not accepting the value of text below - Error: "This field is required"
             let task = {
                 author:1,
                 goal: $('#save-changes').attr('data-goal'),
@@ -597,6 +637,6 @@ $(document).ready(function () {
     // deleteGoal();
     loadTasks();
     addTask(); 
-    deleteTask();  
-
+    deleteTask(); 
+    toggleStatus();
 })
