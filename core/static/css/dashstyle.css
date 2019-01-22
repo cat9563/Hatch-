@@ -56,14 +56,14 @@ body, html {
   
   .card {
       overflow:hidden;
-      background-color: #f5a8b8 !important;
+      /* background-color: #f5a8b8 !important; */
   }
   
   .card-body .rotate {
       z-index: 8;
       float: right;
       height: 100%;
-      background-color: #f5a8b8 !important;
+      /* background-color: #f5a8b8 !important; */
       
   }
   
@@ -91,5 +91,18 @@ body, html {
     height: 495px;
 }
   
+#greeting{
+  background-color: #f5a8b8 !important;
+}
 
+.dash-header{
+  font-family: 'Open Sans', sans-serif;
+}
+.dash-body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.nav-bar{
+  font-family: 'Righteous', cursive;
+}
   
