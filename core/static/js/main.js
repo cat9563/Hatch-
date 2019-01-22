@@ -236,23 +236,56 @@ function closeModal() {
 // old goalHTML kept just in case its needed when we merge and need to fix conflict
 function goalHTML(goal) {
     return `
-    <div class="goal-card" id="${ goal.id }">
+    <div class="goal-card" id="${ goal.id }>
         <div class="card-body" data-author="${ goal.author }"> 
             <div class="progress">
+            <p>progress meter</p>
                 <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-bar="${ goal.id }">
                 <span id="current-progress"></span>
                 </div>
             </div> 
-            <h5 class="ib card-title"> ${ goal.title }</h5>                               
-            <!-- Expand button, connected to goal.id -->                   
-            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>View Tasks</button>
-            
-            <!-- Delete buttons, connected to goal id -->
-            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
+            <hr>
+            <!-- Expand button, connected to goal.id -->   
+            <div class="text-center my-3">${ goal.title }</div>
+           
+                <div class="text-center">
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
+                    <!-- Delete buttons, connected to goal id -->
+                    <button type='button' class="btn btn-primary" id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
+                    </div>
+                </div>   
+                             
         </div>
     </div>
     `
 }
+
+// function goalHTML(goal){
+//         return`
+//         <hr>
+//         <div class="col-xl-3 col-sm-6 py-2" id="${ goal.id }">
+//         <div class="card bg-success text-white h-100">
+//             <div class="card-body bg-success" id="${ goal.author }">
+//                 <h1 class="display-5">${ goal.title}</h1>
+//                 <hr>
+//                 <div class="text-center my-3">Normal Button Group</div>
+//                 <div class="text-center">
+//                     <div class="btn-group">
+//                     <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
+//                     <button type='button' class='btn btn-primary' data-goal="${ goal.id }" id='editgoal'>Edit</button>
+//                     <button type='button' id='deletegoal' class='delete btn btn-primary' data-goal="${ goal.id }">Delete</button>
+//                     </div>
+//                 </div>
+//                     <!-- Expand button, connected to goal.id -->                   
+                   
+                    
+//                     <!-- Edit & Delete buttons, connected to goal id -->
+//             </div>
+//         </div>
+//         </div>
+//         `
+//     }
 
 
 function taskHTML(task) {
