@@ -32,6 +32,97 @@
                         </div>
                     </div>
                 </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-6">
+                    <div class="card card-default card-body" id="profile-card">
+                        <ul id="tabsJustified" class="nav nav-tabs nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Resources</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="" data-target="#tab2" data-toggle="tab">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="" data-target="#tab3" data-toggle="tab">Journal</a>
+                            </li>
+                        </ul>
+                        <!--/tabs-->
+                        <br>
+                        <div id="tabsJustifiedContent" class="tab-content">
+                            <div class="tab-pane" id="tab1">
+                                <div class="list-group">
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">9</span> Home Link</a>
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">8</span> Link 2</a>
+                                    <a href="" class="list-group-item"><span class="float-right label label-success">23</span> Link 3</a>
+                                    <a href="" class="list-group-item text-muted">Link n..</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="tab2">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <h1 "text-uppercase">{{ user.username }}</h1>
+                                        <p><div id="showQuotes"></div></p>
+                                    </div>
+                                    <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
+                                </div>
+                                <hr>
+                                <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
+                                <div class="spacer5"></div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                             <div class="col-sm-12" id="note-home"> 
+                                <div class="row">
+                                        <div class="container" id="journal"></div>
+                                    </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-body" id="note-input">
+                                        <label for="message-text" class="col-form-label">Journal Entry</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id='saveNote'>Save</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <hr>
+                             <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#addNote">Create a Journal Entry</a>
+                            </div>
+                            
+                                 {% comment %} <div class="card mb-3" id="note-home">
+                                    <div class="card-body" id="journal">
+                           
+                                      
+                                    </div>
+                                </div>
+                                  
+                            </div> {% endcomment %}
+                           
+                        </div>
+                        <!--/tabs content-->
+                    </div><!--/card-->
+                </div><!--/col-->
+                <div class="col-lg-6">
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            This will be a header title with different color
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Replaced with .card</h5>
+                            <p class="card-text"> <canvas id="myChart"></canvas> </p>  
+                        </div>
+                    </div>
+                    
+
+                </div> <!--dashboard goal madness listed below-->
+                
+            
             </div>
             <!--/row-->
 
@@ -265,7 +356,8 @@
                                             <!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes'>Save</button>
+                                                <button type="button" class="btn btn-primary" id='update-goal'>Update</button>
+                                                <button type="button" class="btn btn-primary" id='save-changes' data-goal="${ goal.id }">Save</button>
                                             </div>
                                         </div>
                                     </div>

@@ -15,6 +15,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = (
                     'id',
+                    'goal',
                     'text',
                     'status',
                     'task_detail_link')
@@ -34,21 +35,6 @@ class GoalSerializer(serializers.ModelSerializer):
                     'goal_detail_link',
                     'created_at',
                     'tasks',)
-
-class TaskSerializer(serializers.ModelSerializer):
-    # goal = GoalSerializer(many=False, required=False, read_only=True)
-    task_detail_link = serializers.HyperlinkedIdentityField(
-        view_name='task-detail')
-
-    class Meta:
-        model = Task
-        fields = (
-                    'id',
-                    'author',
-                    'goal',
-                    'text',
-                    'status',
-                    'task_detail_link')
 
 
 class NoteSerializer(serializers.ModelSerializer):

@@ -4,11 +4,6 @@ dragula([document.getElementById("left-defaults"), document.getElementById("righ
 let apiPage = 1;
 let controller, scene;
 
-// loadGoals();
-// addTask();
-
-
-
 
 function loadGoals() {
     console.log("Loading goals...")
@@ -26,51 +21,63 @@ function addTask() {
             newEl.innerHTML = newTaskLineHTML();
             let position = document.getElementById('checklist');
             position.prepend(newEl);
-        
-            let submitTasks = document.getElementById('save-changes');
+        })
+    }
 
-            if (submitTasks) {
-                submitTasks.addEventListener('click', postNewTask)
-            }
-        });
+    let updateGoal = document.getElementById('update-goal');
+    if (updateGoal) {
+        updateGoal.addEventListener('click', function() {
+            getModalTasks();
+            toggleStatus();
+            console.log('here here')
+        })
+    }
+
+    let submitTasks = document.getElementById('save-changes');
+    if (submitTasks) {
+        submitTasks.addEventListener('click', postNewTask);
+        closeModal();
     }
 }
+
 
 // POST request to API to save tasks and calls loadTasks
 function postNewTask(event){
     console.log($('#save-changes').attr('data-goal'))
+    things = $( "ul.checklist" ).find('li')
+    for (let thing of things) {
+        console.log($('#new-task-text').val())
     // console.log(event);
-    let task = {
-        author:1,
-        goal: $('#save-changes').attr('data-goal'),
-        text: $('#new-task-text').val(),
-        status: false,
-    }
-    $.ajax({
-        url: '/api/tasks/',
-        method: 'POST',
-        data: JSON.stringify(task), 
-        contentType: 'application/json'
-    
-    }).done(function() {
-        // console.log('end of ajax post, should then empty checklist')
-        document.getElementById('checklist').innerHTML = "";
-        // loadTasks();
-        getModalTasks();
+        let task = {
+            author:1,
+            goal: $('#save-changes').attr('data-goal'),
+            text: $('#new-task-text').val(),
+            status: false,
+        }
+        $.ajax({
+            url: '/api/tasks/',
+            method: 'POST',
+            data: JSON.stringify(task), 
+            contentType: 'application/json'
+        
+        }).done(function() {
+            document.getElementById('checklist').innerHTML = "";
+            // loadTasks();
+            getModalTasks();
 
-    }).fail(function() {
-        console.log("There was an issue getting the user's tasks.")
-    });
-
+        }).fail(function() {
+            console.log("There was an issue getting the user's tasks.")
+        })
+    };
 }
 
 // DELETE task
 function deleteTask() {
     console.log("Inside deleteTask")
-    $( 'div' ).find( "button.delete" ).on('click', function (event) {
-        
-        console.log($("button.delete").data())
-        let taskID = $("button.delete").data('task')
+    $(".delete").on('click', function() {
+        console.log($(this))
+        console.log($(this).data())
+        let taskID = $(this).data('task')
         console.log(taskID)
 
         $.ajax({
@@ -78,10 +85,8 @@ function deleteTask() {
             url: `/api/tasks/${taskID}/`,
         
         }).done(function() {
-            document.getElementById('checklist').innerHTML = "";
-            console.log('cleared checklist')
-            // loadTasks();
-            getModalTasks();
+            $(`#checklist-task-${taskID}`).remove();
+
 
         }).fail(function() {
             console.log("There was an issue getting the user's tasks.")
@@ -109,36 +114,19 @@ function addGoalsToDashboard(goals){
     for (let goal of goals) {
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
 
-        
+    } 
     let showTasks = document.getElementById('expand');
-    console.log('Listening for expand click...')
     showTasks.addEventListener('click', loadTasks)
-    }
+    console.log('Listening for expand click...');
     deleteGoal();
 }
 
 
 // loadTasks->getUserTasks->addTaskToList->taskHTML
 function loadTasks() {
-    getCorrectTasks();
-    getUserTasks(apiPage);
+    getCorrectTasks(apiPage);
+    // getUserTasks(apiPage);
     apiPage =+ 1;
-}
-
-
-function getUserTasks(){
-    $.ajax({
-        method: 'GET',
-        url: `/api/tasks/`,
-        contentType: 'application/json'
-    }).done(function(response){
-        console.log(response)
-        addTaskToList(response);
-        // clickEvent();
-
-    }).fail(function(response){
-        console.log("There was an issue getting the user's tasks.");
-    })
 }
 
 
@@ -147,13 +135,10 @@ function addTaskToList(tasks){
     $(".checklist").empty();
 
         for (let task of tasks) {
-            toggleStatus(task);
             document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
-            toggleStatus(task);
-            console.log('Tasks have loaded!')
             
-        };
-        changeStatus()
+        // };
+        console.log('Tasks have been added to the list')
         // count how many items are in the list
         function countBoxes() { 
             var count = $("input.checkbox").length;
@@ -168,20 +153,30 @@ function addTaskToList(tasks){
             console.log(checked)
             let percent = Math.round(parseInt((checked / count) * 100), 10)
             console.log(percent)
-            $("#dynamic")
+            console.log('task', task)
+
+            $(`#dynamic, #dynamic-${ task.goal }`)
                 .css("width", percent + "%")
                 .attr("aria-valuenow", percent)
                 .text(percent + "% Complete")
-        };
-        countChecked();
-        $(":checkbox").click(countChecked);
+        }}
+        
+    countChecked();
+    $(".checkbox").click(countChecked);
+    deleteTask();
+    toggleStatus();
+};
+    
 
-        deleteTask();
+function completeGoal() {
+    var progressCount = document.getElementsByClassName('goal-card')
+    console.log(progressCount)
 }
 
 
 // find save-goal button and listen for click to run functions
 var saveGoal = document.getElementById('save-goal');
+console.log('Listening for save...')
 saveGoal.addEventListener('click', function() {
     postNewGoal();
     closeModal();
@@ -213,11 +208,9 @@ function postNewGoal() {
 // DELETE goal
 function deleteGoal() {
     console.log("Inside deleteGoal")
-    console.log($( 'div.goal-card' ).find( "button.deletegoal" ))
-    $( 'div.goal-card' ).find( "button.deletegoal" ).on('click', function (event) {
-        
-        console.log($("button.deletegoal").data())
-        let goalID = $("button.deletegoal").data('goal')
+    $('.deletegoal').on('click', function() {
+        console.log($(this).data())
+        let goalID = $(this).data('goal')
         console.log(goalID)
 
         $.ajax({
@@ -244,50 +237,29 @@ function closeModal() {
 function goalHTML(goal) {
     return `
     <div class="goal-card" id="${ goal.id }">
-        <div class="card-body" data-author="${ goal.author }">  
+        <div class="card-body" data-author="${ goal.author }"> 
+            <div class="progress">
+                <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-bar="${ goal.id }">
+                <span id="current-progress"></span>
+                </div>
+            </div> 
             <h5 class="ib card-title"> ${ goal.title }</h5>                               
             <!-- Expand button, connected to goal.id -->                   
-            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>&#128269</button>
+            <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>View Tasks</button>
             
             <!-- Edit & Delete buttons, connected to goal id -->
-            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>&#9997</button>
-            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">&#128465</button>
+            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>Edit</button>
+            <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
         </div>
     </div>
     `
 }
 
-// function goalHTML(goal){
-//     return`
-//     <hr>
-//     <div class="col-xl-3 col-sm-6 py-2" id="${ goal.id }">
-//     <div class="card bg-success text-white h-100">
-//         <div class="card-body bg-success" id="${ goal.author }">
-//             <h1 class="display-5">${ goal.title}</h1>
-//             <hr>
-//             <div class="text-center my-3">Normal Button Group</div>
-//             <div class="text-center">
-//                 <div class="btn-group">
-//                 <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
-//                 <button type='button' class='btn btn-primary' data-goal="${ goal.id }" id='editgoal'>Edit</button>
-//                 <button type='button' id='deletegoal' class='delete btn btn-primary' data-goal="${ goal.id }">Delete</button>
-//                 </div>
-//             </div>
-//                 <!-- Expand button, connected to goal.id -->                   
-               
-                
-//                 <!-- Edit & Delete buttons, connected to goal id -->
-//         </div>
-//     </div>
-//     </div>
-//     `
-// }
-
 
 function taskHTML(task) {
     if (task.status === false) {
         return `
-        <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                     <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
@@ -295,14 +267,14 @@ function taskHTML(task) {
                 </div>
             </div>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
         </div>
             `
     }
     else {
         return `
-        <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                     <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
@@ -310,8 +282,8 @@ function taskHTML(task) {
                 </div>
             </div>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>&#9997</button>
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">&#128465</button>
+            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
+            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
         </div>
             `
     };
@@ -325,93 +297,70 @@ function newTaskLineHTML(task) {
             <div class='input-group-text'>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input withcheckbox' id='new-task-text'></input>
+            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'>
+            </input>
         </div>
     </div>
         `
 }
 
 
-function toggleStatus(task) {
-    $(".checkbox").on('change', function() {
-        $(this).toggleClass('check')
-        let taskID = $("button.delete").data('task')
-
-        if ($("input.checkbox:checked")) {
-            let task = {
-                author:1,
-                goal: $('#save-changes').attr('data-goal'),
-                text: 'check testing',
-                status: true,
-            }
-            $.ajax({
-                url: `/api/tasks/${taskID}/`,
-                method: 'put',
-                data: JSON.stringify(task),
-                contentType: 'application/json'
-            }).done(function() {
-                console.log('Should be updated on API...')
-                document.getElementById('checklist').innerHTML = "";
-                getModalTasks();
-            })
-        }
-        if (!$("input.checkbox:checked")) {
-            let task = {
-                author:1,
-                goal: $('#save-changes').attr('data-goal'),
-                text: 'testing',
-                status: false,
-            }
-            $.ajax({
-                url: `/api/tasks/${taskID}/`,
-                method: 'put',
-                data: JSON.stringify(task),
-                contentType: 'application/json'
-            }).done(function() {
-                console.log('Should be updated on API...')
-                document.getElementById('checklist').innerHTML = "";
-                getModalTasks();
-            })
-        }
-    })
-}
-    
-
-function changeStatus() {
-    let tasks = $("input.checkbox")
-        for (let task of tasks) {
-            if ($("#checkbox").hasClass("check")){
-                // $(this).attr("id", "true")
-                console.log($(this))
-            }
-            // else {
-            //     $(this).attr("id", "false")
-            // }
-            
-        }
-        // updateTask()
-    }
-    
-
-// sends PUT request for any task status changes
-function updateTask(task) {
-    // $("#save-changes").addEventListener('click', function() {
+function createNewTask(){
+    console.log('Creating a new task...')
     let task = {
         author:1,
         goal: $('#save-changes').attr('data-goal'),
         text: $('#new-task-text').val(),
-        status: $('#id').val()
-    }   
+        status: false,
+    }
     $.ajax({
-        url: `api/tasks/${task.id}/`,
-        method: 'PUT',
-        data: JSON.stringify(task),
+        url: '/api/tasks/',
+        method: 'POST',
+        data: JSON.stringify(task), 
         contentType: 'application/json'
-    }).then(function() {
-        loadTasks()
+    
+    }).done(function() {
+        document.getElementById('checklist').innerHTML = "";
+        // loadTasks();
+        getModalTasks();
+
+    }).fail(function() {
+        console.log("That didn't work out.")
+    });
+}
+
+
+function toggleStatus(task) {
+    $(".checkbox").on('change', function() {
+        console.log($(this))
+        checkStatus = $(this).prop( 'checked' )
+        console.log(checkStatus)
+        let taskID = $(this).data('task')
+        console.log(taskID)
+        // let tasks = $(".checkbox")
+        // console.log(tasks)
+        $("#update-goal").on('click', function() {
+            // currently not accepting the value of text below - Error: "This field is required"
+            let task = {
+                author:1,
+                goal: $('#save-changes').attr('data-goal'),
+                text: $('#task-text').text(),
+                status: checkStatus,
+            }
+            $.ajax({
+                url: `/api/tasks/${taskID}/`,
+                method: 'PUT',
+                data: JSON.stringify(task),
+                contentType: 'application/json'
+            }).done(function() {
+                console.log('Should be updated on API...')
+                document.getElementById('checklist').innerHTML = "";
+                getModalTasks();
+            })
+        })
     })
 }
-    
+  
 
 //NOTES SECTION
 
@@ -428,7 +377,6 @@ function noteHtml(note) {
                     ${note.text} 
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
                     </div>`;
-    // return isEven(note.id)
     };
 }
 
@@ -446,10 +394,10 @@ saveNotes.addEventListener('click', function() {
 // DELETE note
 function deleteNote() {
     console.log("Inside deleteNote")
-    $( 'div' ).find( "button.deletenote" ).on('click', function (event) {
-        
-        console.log($("button.deletenote").data())
-        let noteID = $("button.deletenote").data('note')
+    $('.deletenote').on('click', function () {
+        console.log($(this))
+        console.log($(this).data())
+        let noteID = $(this).data('note')
         console.log(noteID)
 
         $.ajax({
@@ -470,7 +418,6 @@ function deleteNote() {
 
 function postNote(){
     let note = {
-        // note: 1,
         text: $('#message-text').val()
     }
     $.ajax({
@@ -486,7 +433,6 @@ function postNote(){
         console.log("should be empty")
         loadNotes();
     });
-
 }
 
 
@@ -506,7 +452,6 @@ function getUserNotes(){
     }).done(function(response){
         addNotesToJournal(response);
 
-
     }).fail(function(response){
         console.log("try again");
     })
@@ -516,13 +461,12 @@ function getUserNotes(){
 function addNotesToJournal(notes){
     for (let note of notes) {
         document.getElementById('journal').insertAdjacentHTML("afterbegin", noteHtml(note));
-        console.log('Notes have loaded!')
     }
+
+    console.log('Notes have loaded!')
     deleteNote();
 }
 
-
-// PLEASE DO NOT TOUCH ANYTHING BELOW THIS LINE!
 
 function setupCSRFAjax () {
     let csrftoken = Cookies.get('csrftoken');
@@ -534,12 +478,9 @@ function setupCSRFAjax () {
         }
       }
     })
-    // console.log('do we make it to end of setupCSRFAjax?')
 }
 
 function csrfSafeMethod(method){
-// these HTTP methods do not require CSRF protection
-// console.log('do we make it into csrfSafeMethod?')
 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
 
 }
@@ -560,19 +501,20 @@ function getCorrectTasks () {
 
         }).done(function(response){
             modal.find("#tasksModalLabel").text(response.title)
-            console.log(response.tasks)
+            console.log('getcorrecttasks '+ response.tasks)
             addTaskToList(response.tasks);  
             modal.find("#save-changes").attr('data-goal', goalId)
-        }).fail(function(response){
+
+        }).fail(function(){
             console.log("There was an issue getting the user's goals.");
         })
         
     })
+    deleteTask();
 }
 
 function getModalTasks () {
-        // let button = $(event.relatedTarget) // Button that triggered the modal
-        let goalId = $('#save-changes').attr('data-goal') // Extract info from data-* attributes
+        let goalId = $('#save-changes').attr('data-goal')
         let modal = $(this)
 
         $.ajax({
@@ -581,25 +523,80 @@ function getModalTasks () {
             contentType: 'application/json'
 
         }).done(function(response){
-            modal.find("#tasksModalLabel").text(response.title)
-            console.log(response.tasks)
+            console.log('getmodaltasks ' + response.tasks)
             addTaskToList(response.tasks);  
-            modal.find("#save-changes").attr('data-goal', goalId)
 
-        }).fail(function(response){
+        }).fail(function(){
             console.log("There was an issue getting the user's goals.");
         })
     }
 
+
+
 $(document).ready(function () {
     setupCSRFAjax();
     loadNotes();
-    deleteNote();
     loadGoals();
-    deleteGoal();
     loadTasks();
-    addTask(); 
-    deleteTask();  
-    // loadProgressBar();
-
+    addTask();
+    toggleStatus();
+    // bigAssDonutThing();
+    completeGoal();
 })
+
+
+
+// MyChart JAVASCRIPT BELOW
+
+
+// function bigAssDonutThing() {
+//     var boxTotal = $("input.checkbox").length
+//     console.log('boxTotal', boxTotal)
+
+//     var completegoals = 7;    //completed_goals.length will count the number of completed bars
+//     var incompletegoals = 3;  //incomplete_goals.length will count the number of incomplete bars
+
+//     var ctx = document.getElementById("myChart");
+//     var myChart = new Chart(ctx, {
+//         type: 'doughnut',
+//         data: {
+//             labels: ["Goals I Have Accomplished", "Goals I Have Left"],
+//             datasets: [{
+//                 label: '',
+//                 data: [completegoals, incompletegoals],
+//                 backgroundColor: [
+//                     '#011326',
+//                     '#87c5dd'
+//                 ],
+//                 borderWidth: 0
+//             }]
+//         },
+//         options: {
+//             cutoutPercentage: 80,
+//             // rotation: 1 * Math.PI,
+//             // circumference: 1 * Math.PI,
+//         }
+//     });
+
+
+//     //Crystal Dashboard testing this
+//     // donut 3
+//     var chDonutData3 = {
+//         labels: ['Angular', 'React', 'Other'],
+//         datasets: [
+//         {
+//             backgroundColor: colors.slice(0,3),
+//             borderWidth: 0,
+//             data: [21, 45, 55, 33]
+//         }
+//         ]
+//     };
+//     var chDonut3 = document.getElementById("chDonut3");
+//     if (chDonut3) {
+//     new Chart(chDonut3, {
+//         type: 'pie',
+//         data: chDonutData3,
+//         options: donutOptions
+//     });
+// }
+// }
