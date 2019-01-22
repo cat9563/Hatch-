@@ -373,13 +373,13 @@ function noteHtml(note) {
     if (note.id % 2 === 0) {
         return ` <div class="item item-blue" id="blue"> 
                     ${note.text} 
-                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
+                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="pink"> 
                     ${note.text} 
-                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">&#128465</button>
+                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                     </div>`;
     };
 }
