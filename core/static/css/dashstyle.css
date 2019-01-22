@@ -92,14 +92,20 @@ body, html {
 }
   
 #greeting{
+  font-family: 'Open Sans', sans-serif;
   background-color: #f5a8b8 !important;
 }
 
-.dash-header{
+#dash-header{
   font-family: 'Open Sans', sans-serif;
 }
 .dash-body{
   font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: normal;
+  box-sizing: border-box;
+  
 }
 
 .nav-bar{
