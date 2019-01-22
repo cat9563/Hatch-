@@ -12,6 +12,7 @@
         {% endblock title %}
     </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
      <link rel="stylesheet" href="{% static 'css/dashstyle.css' %}">
@@ -49,78 +50,11 @@
                 </ul>
             </div>
         </nav>
-
-
-
-      {% comment %} <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
-        <a href="{% url 'home' %}" class="navbar-brand">Hatch</a>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    You've Arrived 
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'resources' %}">Resources</a>
-                    <div class="dropdown-divider"></div>
-                    {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                    <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
-                    {% endif %}
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% if user.is_authenticated %}
-                    Logout
-                    {% else %}
-                    Login
-                    {% endif %}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="{% url 'auth_logout' %}">Logout</a>
-                    {% else %}
-                    <a class="dropdown-item" href="{% url 'auth_login' %}">Login</a>
-                    <a class="dropdown-item" href="{% url 'registration_register' %}">Register</a>
-                    {% endif %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav> {% endcomment %}
-
-    
     {% endblock header %}
 </header>
 
-    {% block content %}{% endblock content %}
-
- {% comment %} {% block footer %}
-<footer class="bg-dark text-white mt-4">
-   
-    <div class="container-fluid py-3">
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Footer</h5></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">I stay at the bottom of the viewport! <span class="small"><br>Unless the page content pushes me further.</span></div>
-            <div class="col-md-3"></div>
-            <div class="col-md-3 text-right small align-self-end">©2017 Brand, Inc.</div>
-        </div>
-    </div>
-    
-</footer>
- {% endblock footer %} {% endcomment %}
-
-
+    {% block content %}
+    {% endblock content %}
 
 <footer>
     {% block footer %}
