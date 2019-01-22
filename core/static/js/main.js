@@ -89,10 +89,11 @@ function deleteTask() {
             url: `/api/tasks/${taskID}/`,
         
         }).done(function() {
-            document.getElementById('checklist').innerHTML = "";
-            console.log('cleared checklist')
-            // getModalTasks();
-            loadTasks();
+            $(`#checklist-task-${taskID}`).remove();
+            // document.getElementById('checklist').innerHTML = "";
+            // console.log('cleared checklist')
+            // // getModalTasks();
+            // loadTasks();
 
         }).fail(function() {
             console.log("There was an issue getting the user's tasks.")
@@ -195,9 +196,10 @@ function addTaskToList(tasks){
         
     countChecked();
     $(".checkbox").click(countChecked);
+    deleteTask();
     toggleStatus();
 };
-    // deleteTask();
+    
 
 
 
@@ -313,7 +315,7 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
-        <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                     <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
@@ -328,7 +330,7 @@ function taskHTML(task) {
     }
     else {
         return `
-        <div class='input-group mb-3' id='checklist-task'>
+        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
             <div class='input-group-prepend'>
                 <div class='input-group-text'>
                     <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
@@ -642,6 +644,6 @@ $(document).ready(function () {
     // deleteGoal();
     loadTasks();
     addTask(); 
-    deleteTask(); 
+    // deleteTask(); 
     toggleStatus();
 })
