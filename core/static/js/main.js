@@ -168,7 +168,7 @@ function addTaskToList(tasks){
             // toggleStatus(task);
             // console.log('Tasks have loaded!')
             
-        };
+        // };
         console.log('Tasks have been added to the list')
         // changeStatus()
         // count how many items are in the list
@@ -185,16 +185,20 @@ function addTaskToList(tasks){
             console.log(checked)
             let percent = Math.round(parseInt((checked / count) * 100), 10)
             console.log(percent)
-            $("#dynamic")
+            // console.log($(this).attr('data-bar'))
+            console.log('task', task)
+            $(`#dynamic, #dynamic-${ task.goal }`)
                 .css("width", percent + "%")
                 .attr("aria-valuenow", percent)
-                .text(percent + "% Complete")
-        };
+                // .text(percent + "% Complete")
+        }}
+        
     countChecked();
     $(".checkbox").click(countChecked);
-
+    toggleStatus();
+};
     // deleteTask();
-}
+
 
 
 // find save-goal button and listen for click to run functions
@@ -263,7 +267,7 @@ function goalHTML(goal) {
     <div class="goal-card" id="${ goal.id }">
         <div class="card-body" data-author="${ goal.author }"> 
             <div class="progress">
-                <div id="dynamic" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-bar="${ goal.id }">
                 <span id="current-progress"></span>
                 </div>
             </div> 
@@ -606,6 +610,7 @@ function getCorrectTasks () {
         })
         
     })
+    deleteTask();
 }
 
 function getModalTasks () {
