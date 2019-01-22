@@ -56,7 +56,7 @@ body, html {
   
   .card {
       overflow:hidden;
-      /* background-color: #f5a8b8 !important; */
+      background-color: #f5a8b8 !important;
   }
   
   .card-body .rotate {
@@ -112,3 +112,6 @@ body, html {
   font-family: 'Righteous', cursive;
 }
   
+#overall-progress{
+  background-color: #fff;
+}
