@@ -377,14 +377,17 @@ overflow: scroll;
 }
 
 .goal-card {
-    margin: 4px;
+    margin: 8px;
     /* border: #ff3052 solid 2px; */
     overflow: scroll; 
     height: 175px;
     width: 175px;
-    background-color: #87c5dd;
+    background-color: #fff;
     border-radius: 10px;
-    
+}
+
+.text-center{
+    margin-top: 40px;
 }
 
 #goal-home{
