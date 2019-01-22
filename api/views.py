@@ -26,6 +26,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAuthenticated
 )
+import math
 
 
 @api_view(['GET'])
@@ -38,6 +39,22 @@ def api_root(request, format=None):
         'events': reverse('event-list', request=request, format=format),
         # 'resources': reverse('resource-list', request=request, format=format),
     })
+
+class CompletePercentage(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        task_count = request.user.tasks.count()
+        complete_count = request.user.tasks.filter(status=True).count()
+
+        if task_count:
+            return Response({
+                "percent_complete": math.floor(complete_count / task_count * 100),
+                "complete": complete_count,
+                "incomplete": task_count - complete_count
+            })
+        return Response({"percent_complete": None, "complete": 0, "incomplete": 0})
+
 
 
 class GoalListCreateView(generics.ListCreateAPIView):
@@ -59,16 +76,18 @@ class GoalDetailView(generics.RetrieveDestroyAPIView):
     Retrieves details of one goal
     Allows only users to destroy their goals
     """
-    queryset = Goal.objects.all()
+
     serializer_class = GoalSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return self.request.user.goals
 
 class TaskListView(generics.ListCreateAPIView):
     """
     Retrieves list of all tasks
     Allows logged in user to submit new task
     """
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
 
@@ -76,14 +95,19 @@ class TaskListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    def get_queryset(self):
+        return self.request.user.tasks
+
 class TaskDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieves details of one task
     Allows only users to destroy their tasks
-    """
-    queryset = Task.objects.all()
+    """    
     serializer_class = TaskSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return self.request.user.tasks
 
 class NoteListView(generics.ListCreateAPIView):
     """

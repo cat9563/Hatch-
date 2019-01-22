@@ -46,6 +46,12 @@ var myChart = new Chart(ctx, {
     }
 });
 
+function updateChart(complete, incomplete) {
+    myChart.data.datasets[0].data = [complete, incomplete]    
+    myChart.update()    
+}
+
+updateChart();
 
 //Crystal Dashboard testing this
 // donut 3
