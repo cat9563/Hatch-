@@ -59,9 +59,9 @@ body {
 .bg-dark {
     background-color: #87c5dd !important;
     color: #fff;
-    font-family: 'Righteous', cursive;
-    font-size: 18px;
-}
+    /* font-family: 'Righteous', cursive; */
+    /* font-size: 18px;*/
+} 
 
 .nav-link{
     /* color: #fff !important; */

@@ -46,6 +46,7 @@
               At hatch we believe that your transition should be done your way and on your terms! There is no right or wrong way to tranistion. The transgender experience can vary but one thing we all have in common is a need to express our true-selves. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and your story! 
                 </div>
             </p>
+            <hr>
             <div class="row mb-3">
                 <div class="col-lg-6">
                     <!--took out card here if this is moved profile card moves to the right of the screen -->
@@ -57,7 +58,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                     </ul> 
                     <!-- Tab panes -->
-                    <div class="tab-content">
+                    {% comment %} <div class="tab-content">
                         <br>
                         <div role="tabpanel" class="tab-pane active" id="home1">
                         </div>
@@ -67,15 +68,15 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="settings1">
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-lg-6">
                     <div class="card card-default card-body" id="profile-card">
                         <ul id="tabsJustified" class="nav nav-tabs nav-justified">
-                            <li class="nav-item">
+                            {% comment %} <li class="nav-item">
                                 <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Resources</a>
-                            </li>
+                            </li> {% endcomment %}
                             <li class="nav-item">
                                 <a class="nav-link active" href="" data-target="#tab2" data-toggle="tab">Profile</a>
                             </li>
@@ -86,14 +87,14 @@
                         <!--/tabs-->
                         <br>
                         <div id="tabsJustifiedContent" class="tab-content">
-                            <div class="tab-pane" id="tab1">
+                            {% comment %} <div class="tab-pane" id="tab1">
                                 <div class="list-group">
                                     <a href="" class="list-group-item"><span class="float-right label label-success"></span> Home Link</a>
                                     <a href="" class="list-group-item"><span class="float-right label label-success"></span> Link 2</a>
                                     <a href="" class="list-group-item"><span class="float-right label label-success">?</span> Link 3</a>
                                     <a href="" class="list-group-item text-muted">Link n..</a>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="tab-pane active" id="tab2">
                                 <div class="row">
                                     <div class="col-sm-7">
@@ -103,7 +104,7 @@
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
                                 <hr>
-                                <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
+                                <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal" id="goal-button">Add a Goal</a>
                                 <div class="spacer5"></div>
                             </div>
                             <div class="tab-pane" id="tab3">
@@ -128,7 +129,7 @@
                                 </div>
                             </div>
                             <hr>
-                             <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#addNote">Create a Journal Entry</a>
+                             <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#addNote" id="journal-button">Create a Journal Entry</a>
                             </div>
                             
                                  {% comment %} <div class="card mb-3" id="note-home">
