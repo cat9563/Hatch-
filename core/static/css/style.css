@@ -65,7 +65,7 @@ body {
 
 .nav-link{
     /* color: #fff !important; */
-    color: #fff !important;
+    color: black;
 }
 
 .dropdown-item {
@@ -96,6 +96,10 @@ body {
     margin-top: 80px;
     padding: 0px;
     justify-content: space-around;
+}
+
+.card-header {
+    background-color: #f5a8b8;
 }
 
 .container {
