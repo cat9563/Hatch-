@@ -380,8 +380,8 @@ overflow: scroll;
     margin: 8px;
     /* border: #ff3052 solid 2px; */
     overflow: scroll; 
-    height: 175px;
-    width: 175px;
+    /* height: 175px;
+    width: 175px; */
     background-color: #fff;
     border-radius: 10px;
 }
