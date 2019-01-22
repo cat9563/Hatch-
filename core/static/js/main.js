@@ -247,8 +247,7 @@ function goalHTML(goal) {
             <!-- Expand button, connected to goal.id -->                   
             <button type="button" class="btn fr" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>View Tasks</button>
             
-            <!-- Edit & Delete buttons, connected to goal id -->
-            <button type='button' class='btn fr' data-goal="${ goal.id }" id='editgoal'>Edit</button>
+            <!-- Delete buttons, connected to goal id -->
             <button type='button' id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
         </div>
     </div>
@@ -267,7 +266,6 @@ function taskHTML(task) {
                 </div>
             </div>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
             <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
         </div>
             `
