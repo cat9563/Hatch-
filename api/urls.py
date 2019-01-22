@@ -28,6 +28,7 @@ urlpatterns = [
     path('events/<pk>/',
          api_views.EventDetailView.as_view(),
          name='event-detail'),
+     path('percent_complete/', api_views.CompletePercentage.as_view(), name='percent-complete')
 
 #     path('resources/',
 #          api_views.ResourceListView.as_view(),

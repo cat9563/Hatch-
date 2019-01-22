@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import EmailValidator
 from PIL import Image
-
+import math
 
 class User(AbstractUser):
     USERNAME_FIELD = 'username'
@@ -58,9 +58,18 @@ class Goal(Timestamp):
     author = models.ForeignKey("User", on_delete=models.CASCADE, related_name="goals")
     title = models.CharField(max_length = 255, null=True)
 
+    @property
+    def percent_complete(self):
+        task_count = self.tasks.count()
+        complete_count = self.tasks.filter(status=True).count()
+
+        if task_count > 0:
+            return math.floor((complete_count / task_count) * 100)
+        return None
+
 
 class Task(models.Model):
-    author = models.ForeignKey("User", on_delete=models.CASCADE, blank=False, null=True)
+    author = models.ForeignKey("User", on_delete=models.CASCADE, blank=False, null=True, related_name="tasks")
     goal = models.ForeignKey("Goal", on_delete=models.CASCADE, related_name="tasks")
     text = models.CharField(max_length=255, blank=False)
     status = models.BooleanField(default=False)

@@ -34,7 +34,8 @@ class GoalSerializer(serializers.ModelSerializer):
                     'title',
                     'goal_detail_link',
                     'created_at',
-                    'tasks',)
+                    'tasks',
+                    'percent_complete')
 
 
 class NoteSerializer(serializers.ModelSerializer):

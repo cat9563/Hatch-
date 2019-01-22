@@ -153,7 +153,7 @@ function addTaskToList(tasks){
             console.log(checked)
             let percent = Math.round(parseInt((checked / count) * 100), 10)
             console.log(percent)
-            console.log('task', task)
+            console.log('task', task)        
 
             $(`#dynamic, #dynamic-${ task.goal }`)
                 .css("width", percent + "%")
@@ -240,8 +240,8 @@ function goalHTML(goal) {
         <div class="card-body" data-author="${ goal.author }"> 
             <div class="progress">
             <p>progress meter</p>
-                <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-bar="${ goal.id }">
-                <span id="current-progress"></span>
+                <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="${goal.percent_complete || 0}" aria-valuemin="0" aria-valuemax="100" style="width: ${goal.percent_complete || 0}%" data-bar="${ goal.id }">
+                ${goal.percent_complete !== null ? `<span>${goal.percent_complete}% complete </span>` : ''}                
                 </div>
             </div> 
             <hr>
@@ -535,6 +535,19 @@ function getModalTasks () {
         })
     }
 
+function updatePercentComplete() {
+  $.ajax({
+    url: '/api/percent_complete/',
+    success: function (result) {
+      console.log("result", result)
+      if (result.percent_complete) {
+        updateChart(result.complete, result.incomplete)
+      }
+    },
+    dataType: 'json'
+  });
+}
+
 
 
 $(document).ready(function () {
@@ -546,61 +559,9 @@ $(document).ready(function () {
     toggleStatus();
     // bigAssDonutThing();
     completeGoal();
+    updatePercentComplete()
 })
 
-
-
-// MyChart JAVASCRIPT BELOW
-
-
-// function bigAssDonutThing() {
-//     var boxTotal = $("input.checkbox").length
-//     console.log('boxTotal', boxTotal)
-
-//     var completegoals = 7;    //completed_goals.length will count the number of completed bars
-//     var incompletegoals = 3;  //incomplete_goals.length will count the number of incomplete bars
-
-//     var ctx = document.getElementById("myChart");
-//     var myChart = new Chart(ctx, {
-//         type: 'doughnut',
-//         data: {
-//             labels: ["Goals I Have Accomplished", "Goals I Have Left"],
-//             datasets: [{
-//                 label: '',
-//                 data: [completegoals, incompletegoals],
-//                 backgroundColor: [
-//                     '#011326',
-//                     '#87c5dd'
-//                 ],
-//                 borderWidth: 0
-//             }]
-//         },
-//         options: {
-//             cutoutPercentage: 80,
-//             // rotation: 1 * Math.PI,
-//             // circumference: 1 * Math.PI,
-//         }
-//     });
-
-
-//     //Crystal Dashboard testing this
-//     // donut 3
-//     var chDonutData3 = {
-//         labels: ['Angular', 'React', 'Other'],
-//         datasets: [
-//         {
-//             backgroundColor: colors.slice(0,3),
-//             borderWidth: 0,
-//             data: [21, 45, 55, 33]
-//         }
-//         ]
-//     };
-//     var chDonut3 = document.getElementById("chDonut3");
-//     if (chDonut3) {
-//     new Chart(chDonut3, {
-//         type: 'pie',
-//         data: chDonutData3,
-//         options: donutOptions
-//     });
-// }
-// }
+$('#tasksModal').on('hide.bs.modal', function (event) {
+  updatePercentComplete()
+})
