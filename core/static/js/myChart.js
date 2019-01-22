@@ -18,7 +18,8 @@
 
 // var totalgoals = 10;
 // var bigbar = 10;
-
+var boxTotal = $("checkbox").length
+console.log('boxTotal', boxTotal)
 
 var completegoals = 7;    //completed_goals.length will count the number of completed bars
 var incompletegoals = 3;  //incomplete_goals.length will count the number of incomplete bars

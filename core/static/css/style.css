@@ -441,6 +441,3 @@ overflow: scroll;
     text-decoration: line-through;
 } */
 
-.check + label {
-    text-decoration: line-through;
-}

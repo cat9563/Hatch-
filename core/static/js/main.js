@@ -168,6 +168,10 @@ function addTaskToList(tasks){
 };
     
 
+function completeGoal() {
+    var progressCount = document.getElementsByClassName('goal-card')
+    console.log(progressCount)
+}
 
 
 // find save-goal button and listen for click to run functions
@@ -527,6 +531,8 @@ function getModalTasks () {
         })
     }
 
+
+
 $(document).ready(function () {
     setupCSRFAjax();
     loadNotes();
@@ -534,4 +540,63 @@ $(document).ready(function () {
     loadTasks();
     addTask();
     toggleStatus();
+    // bigAssDonutThing();
+    completeGoal();
 })
+
+
+
+// MyChart JAVASCRIPT BELOW
+
+
+// function bigAssDonutThing() {
+//     var boxTotal = $("input.checkbox").length
+//     console.log('boxTotal', boxTotal)
+
+//     var completegoals = 7;    //completed_goals.length will count the number of completed bars
+//     var incompletegoals = 3;  //incomplete_goals.length will count the number of incomplete bars
+
+//     var ctx = document.getElementById("myChart");
+//     var myChart = new Chart(ctx, {
+//         type: 'doughnut',
+//         data: {
+//             labels: ["Goals I Have Accomplished", "Goals I Have Left"],
+//             datasets: [{
+//                 label: '',
+//                 data: [completegoals, incompletegoals],
+//                 backgroundColor: [
+//                     '#011326',
+//                     '#87c5dd'
+//                 ],
+//                 borderWidth: 0
+//             }]
+//         },
+//         options: {
+//             cutoutPercentage: 80,
+//             // rotation: 1 * Math.PI,
+//             // circumference: 1 * Math.PI,
+//         }
+//     });
+
+
+//     //Crystal Dashboard testing this
+//     // donut 3
+//     var chDonutData3 = {
+//         labels: ['Angular', 'React', 'Other'],
+//         datasets: [
+//         {
+//             backgroundColor: colors.slice(0,3),
+//             borderWidth: 0,
+//             data: [21, 45, 55, 33]
+//         }
+//         ]
+//     };
+//     var chDonut3 = document.getElementById("chDonut3");
+//     if (chDonut3) {
+//     new Chart(chDonut3, {
+//         type: 'pie',
+//         data: chDonutData3,
+//         options: donutOptions
+//     });
+// }
+// }
