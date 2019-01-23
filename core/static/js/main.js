@@ -105,18 +105,13 @@ function getUserGoals(){
 function addGoalsToDashboard(goals){
     for (let goal of goals) {
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
-
     }
 
     console.log('Goals have loaded!')
     deleteGoal();
-    
-    let showTasks = document.getElementById('expand');
-    showTasks.addEventListener('click', loadTasks)
-    console.log('Listening for expand click...');
+   
 
-    // let goalDelete = document.getElementById('goaldelete')
-    // goalDelete.addEventListener('click', deleteGoal($(this)))
+    // $('.deletegoal').click(deleteGoal);
     // console.log('listening for DELETE CLICK....')
 }
 
@@ -124,7 +119,7 @@ function addGoalsToDashboard(goals){
 // DELETE goal
 function deleteGoal() {
   console.log('Inside deleteGoal')
-  $('.goaldelete').on('click', function() {
+  $(".deletegoal").click(function() {
     console.log($(this))
     console.log($(this).data())
     let goalID = $(this).data('goal')
@@ -263,7 +258,7 @@ function goalHTML(goal) {
                     <div class="btn-group" style="padding: 10px;">
                     <button type="button" class="btn-outline-primary btn-lg" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
                     <!-- Delete buttons, connected to goal id -->
-                    <button type='button' class="btn-outline-primary btn-lg" id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
+                    <button type='button' class="deletegoal btn-outline-primary btn-lg" id='deletegoal' data-goal="${ goal.id }">Delete</button>
                     </div>
                 </div>  
             </div>               
@@ -412,14 +407,16 @@ function toggleStatus(task) {
 //inserts note.id to alteranate colors 
 function noteHtml(note) {
     if (note.id % 2 === 0) {
-        return ` <div class="item item-blue" id="blue"> 
+
+        return ` <div class="item item-blue" id="journal-note-${note.id}"> 
+                    <p>${note.text}</p>
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
-        return `<div class="item item-pink" id="pink"> 
+        return `<div class="item item-pink" id="journal-note-${note.id}"> 
                 <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
@@ -452,9 +449,9 @@ function deleteNote() {
             url: `/api/notes/${noteID}/`,
         
         }).done(function() {
-            document.getElementById('journal').innerHTML = "";
-            console.log('cleared journal')
-            loadNotes();
+            $(`#journal-note-${noteID}`).remove()
+            console.log('cleared journal entry')
+            // loadNotes();
 
         }).fail(function() {
             console.log("There was an issue getting the user's notes.")
@@ -598,11 +595,9 @@ $(document).ready(function () {
     setupCSRFAjax();
     loadNotes();
     loadGoals();
-    // deleteGoal();
     loadTasks();
     addTask();
     toggleStatus();
-    // bigAssDonutThing();
     completeGoal();
     updatePercentComplete()
 })
