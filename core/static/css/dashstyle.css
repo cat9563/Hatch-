@@ -84,10 +84,9 @@
        background-color: #f5a8b8 !important;
   }
 
-  #goal-button{
-      background-color: #87c5dd;
-      border: #87c5dd;
-      margin-top: 44px;
+  .goal-button{
+    margin-left: 18px;
+    margin-right: 16px;
   }
 
   #journal-button{
@@ -111,7 +110,7 @@
 .dash-body{
   /* font-family: 'Roboto', sans-serif; */
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   box-sizing: border-box;
   
@@ -126,3 +125,11 @@
   background-color: #fff;
 }
 
+#tips{
+  height: 100px;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: #87c5dd;
+}

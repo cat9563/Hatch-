@@ -78,10 +78,10 @@
                                 <a class="nav-link" href="" data-target="#tab1" data-toggle="tab">Resources</a>
                             </li> {% endcomment %}
                             <li class="nav-item">
-                                <a class="nav-link active sans" href="" data-target="#tab2" data-toggle="tab">Profile</a>
+                                <a class="nav-link active sans xl" href="" data-target="#tab2" data-toggle="tab">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link sans" href="" data-target="#tab3" data-toggle="tab">Journal</a>
+                                <a class="nav-link sans xl" href="" data-target="#tab3" data-toggle="tab">Journal</a>
                             </li>
                         </ul>
                         <!--/tabs-->
@@ -99,7 +99,7 @@
                                 <div class="row">
                                     <div class="col-sm-7">
                                         <h1 "text-uppercase" class='username'>{{ user.username }}</h1>
-                                        <p><div id="showQuotes" style="font-family: 'Open Sans', sans-serif"></div></p>
+                                        <p><div id="showQuotes" class='lrg show-quotes'></div></p>
                                     </div>
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
@@ -176,7 +176,7 @@
               <p class="lead mt-6">
                 <div class="dash-body">
                      If your journey requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide you with the correct legal documentation. 
-                </div>
+                </div><br>
             </p>
 
             
@@ -199,15 +199,17 @@
             {% comment %} <hr> {% endcomment %}
             <div class="row my-5">
                 <div class="col-lg-4 col-md-4">
-                    <div class="card">
+                    {% comment %} <div class="card"> {% endcomment %}
                         {% comment %} <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap"> {% endcomment %}
-                        <div class="card-body">
-                            <h1 class='sans'>Tips</h1>
-                            <class="card-text">Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!</p>
-                            <class="card-text">Click add a goal to create your main goals. Adding tasks creates your subgoals to accomplish your main goal. </p>
+
+                        {% comment %} <div class="card-body"> {% endcomment %}
+                            <h1 class='serif'>Tips</h1>
+                            <br>
+                            <p class="dash-body">Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!</p><br>
+                            <p class="dash-body">Click add a goal to create your main goals. Adding tasks creates your subgoals to accomplish your main goal. </p>
                             
-                        </div>
-                    </div>
+                        {% comment %} </div>
+                    </div> {% endcomment %}
                 </div>
                 <div class="col-lg-7 col-md-8">
                     <div class="table-responsive">
@@ -275,8 +277,10 @@
                         </div><!--endofgoal-->
                         </div>
                         
-                         <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
-                      
+                        <hr>
+                        <div class=goal-button>
+                            <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
+                        </div>
                     </div>
                 </div>
             </div>
