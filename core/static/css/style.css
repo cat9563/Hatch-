@@ -48,6 +48,17 @@ html {
     min-height: 100%;
 }
 
+.card {
+    border-radius:25px;
+}
+
+.team-card {
+    border-radius:25px;
+    margin-top:45px; 
+    margin:25px; 
+    background-color:#D9DADB;
+}
+
 body {
     background-color: #EBF0ff;
     /* margin-bottom: 170px; */
