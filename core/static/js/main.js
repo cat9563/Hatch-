@@ -158,7 +158,7 @@ function addTaskToList(tasks){
             $(`#dynamic, #dynamic-${ task.goal }`)
                 .css("width", percent + "%")
                 .attr("aria-valuenow", percent)
-                .text(percent + "% Complete")
+                .text(percent + "%")
         }}
         
     countChecked();
@@ -196,7 +196,8 @@ function postNewGoal() {
         contentType: 'application/json'
 
     }).then(function(response) {
-        $('.goal-container').empty(); //
+        $('#goal-list').empty();
+        console.log('cleared goals?')
         loadGoals();
 
     }).fail(function(response){
@@ -239,9 +240,8 @@ function goalHTML(goal) {
     <div class="goal-card" id="${ goal.id }>
         <div class="card-body" data-author="${ goal.author }"> 
             <div class="progress">
-            <p>progress meter</p>
                 <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="${goal.percent_complete || 0}" aria-valuemin="0" aria-valuemax="100" style="width: ${goal.percent_complete || 0}%" data-bar="${ goal.id }">
-                ${goal.percent_complete !== null ? `<span>${goal.percent_complete}% complete </span>` : ''}                
+                ${goal.percent_complete !== null ? `<span>${goal.percent_complete}% </span>` : ''}                
                 </div>
             </div> 
             <hr>
