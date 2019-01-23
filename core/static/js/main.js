@@ -274,6 +274,7 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
+        <div class=container>
         <section class="row">
             <div class="col-md-8" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
@@ -285,10 +286,12 @@ function taskHTML(task) {
                 </div>
             </div>
         </section>
+        </div>
             `
     }
     else {
         return `
+        <div class=container>
         <section class="row">
             <div class="col-md-8" id='checklist-task-${ task.id }'>
                 <div>
@@ -304,6 +307,7 @@ function taskHTML(task) {
                 </div>
             </div>
         </section>
+        </div>
 
        
             `
@@ -313,15 +317,22 @@ function taskHTML(task) {
 
 function newTaskLineHTML(task) {
     return `
-    <div class='input-group mb-3' id='checklist-task'>
-        <div>
-            <div>
-                <input type='checkbox' aria-label='Checkbox for following text input'>
+    <div class=container>
+        <section class="row">
+            <div class="col-md-12" >
+                <div class='input-group mb-3' id='checklist-task'>
+                    <div>
+                        <div>
+                            <input type='checkbox' aria-label='Checkbox for following text input' style="visibility: hidden;">
+                        </div>
+                        <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
+                        </input>
+                    </div>
+                </div>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
-            </input>
         </div>
     </div>
+   
         `
 }
 
@@ -413,15 +424,15 @@ function toggleStatus(task) {
 function noteHtml(note) {
     if (note.id % 2 === 0) {
         return ` <div class="item item-blue" id="blue"> 
-                    <p>${note.text}</p>
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
+                    <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="pink"> 
+                <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
-                  <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                     </div>`;
     };
