@@ -44,10 +44,10 @@
                     <a class="nav-link" style="color: white; font-size: larger;" href="{% url 'auth_logout' %}">Logout</a>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link lrg" style="color: white" href="{% url 'resources' %}">Resources</a>
+                        <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
                     </li>
-                    <a class="nav-link lrg" style="color: white" href="{% url 'auth_login' %}">Login</a>
-                    <a class="nav-link lrg" style="color: white" href="{% url 'registration_register' %}">Register</a>
+                    <a class="nav-link" style="color: white" href="{% url 'auth_login' %}">Login</a>
+                    <a class="nav-link" style="color: white" href="{% url 'registration_register' %}">Register</a>
                     {% endif %}
                 </ul>
             </div>
@@ -62,9 +62,9 @@
 <footer>
     {% block footer %}
         <ul>
-            <li class='lrg'><a href="{% url 'ourteam' %}">Meet the Team</a></li>
-            <li class='lrg'><a href="{% url 'terms' %}">Terms</a></li>
-            <li class='lrg'><a href="{% url 'privacy' %}">Privacy</a></li>
+            <li><a href="{% url 'ourteam' %}">Meet the Team</a></li>
+            <li><a href="{% url 'terms' %}">Terms</a></li>
+            <li><a href="{% url 'privacy' %}">Privacy</a></li>
         </ul>
     {% endblock footer %}
 </footer> 
