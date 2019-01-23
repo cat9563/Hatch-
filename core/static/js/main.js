@@ -301,7 +301,6 @@ function taskHTML(task) {
         </section>
         </div>
 
-       
             `
     };
 }
