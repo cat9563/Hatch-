@@ -32,14 +32,14 @@ function addTask() {
       })
     }
 
-    let updateGoal = document.getElementById('update-goal');
-    if (updateGoal) {
-        updateGoal.addEventListener('click', function() {
-            getModalTasks();
-            toggleStatus();
-            console.log('here here')
-        })
-    }
+    // let updateGoal = document.getElementById('update-goal');
+    // if (updateGoal) {
+    //     updateGoal.addEventListener('click', function() {
+    //         getModalTasks();
+    //         toggleStatus();
+    //         console.log('here here')
+    //     })
+    // }
 
     let submitTasks = document.getElementById('save-changes');
     if (submitTasks) {
@@ -60,10 +60,11 @@ function postNewTask(){
     // things = $( "ul.checklist" ).find('li')
     // for (let thing of things) {
         console.log($('#new-task-text').val())
+
     // console.log(event);
         let task = {
             author:1,
-            goal: $('#save-changes').attr('data-goal'),
+            goal: $('#the-plus-button').attr('data-plus'),
             text: $('#new-task-text').val(),
             status: false,
         }
@@ -186,17 +187,17 @@ function addTaskToList(tasks){
       if (count > 0) {
         console.log('all good here')
         countChecked();
-        $(".checkbox").click(countChecked);
+        // $(".checkbox").click(countChecked);
         deleteTask();
-        toggleStatus();
+        // toggleStatus();
       }
-      else {
+      if (count == 0) {
         console.log( "No boxes.")
       }
     // countChecked();
-    // $(".checkbox").click(countChecked);
+    $(".checkbox").click(countChecked);
     // deleteTask();
-    // toggleStatus();
+    toggleStatus();
 }};
     
 
@@ -277,7 +278,7 @@ function taskHTML(task) {
         <section class="row">
             <div class="col-md-8" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
-                <label id='task-text'> ${ task.text } </label>
+                <label id='task-text-${ task.id }'> ${ task.text } </label>
             </div>
             <div class="col-md-4">
                 <div class="btn-group float-right mt-2" role="group">
@@ -294,7 +295,7 @@ function taskHTML(task) {
                 <div>
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
-                        <label id='task-text'> ${ task.text } </label>
+                        <label id='task-text-${ task.id }'> ${ task.text } </label>
                     </div>
                 </div>
             </div>
@@ -318,7 +319,7 @@ function newTaskLineHTML(task) {
             <div>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
+            <input type='text' class='form-control' onblur='createNewTask()' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
             </input>
         </div>
     </div>
@@ -332,7 +333,7 @@ function createNewTask(){
     console.log('Creating a new task...')
     let task = {
         author:1,
-        goal: $('#save-changes').attr('data-goal'),
+        goal: $('#the-plus-button').attr('data-plus'),
         text: $('#new-task-text').val(),
         status: false,
     }
@@ -376,7 +377,7 @@ function deleteTask() {
 
 
 function toggleStatus(task) {
-    $(".checkbox").on('change', function() {
+    $(".checkbox").on('change', function(event) {
         console.log($(this))
         checkStatus = $(this).prop( 'checked' )
         console.log(checkStatus)
@@ -384,27 +385,27 @@ function toggleStatus(task) {
         console.log(taskID)
         // let tasks = $(".checkbox")
         // console.log(tasks)
-        $("#update-goal").on('click', function() {
+        // $("#update-goal").on('click', function() {
             // currently not accepting the value of text below - Error: "This field is required"
-            let task = {
-                author:1,
-                goal: $('#save-changes').attr('data-goal'),
-                text: $('#task-text').text(),
-                status: checkStatus,
-            }
-            $.ajax({
-                url: `/api/tasks/${taskID}/`,
-                method: 'PUT',
-                data: JSON.stringify(task),
-                contentType: 'application/json'
-            }).done(function() {
-                console.log('Should be updated on API...')
-                document.getElementById('checklist').innerHTML = "";
-                getModalTasks();
-            })
+         
+        let task = {
+            author:1,
+            goal: $('#the-plus-button').attr('data-plus'),
+            text: $(`#task-text-${taskID}`).text(),
+            status: checkStatus,
+        }
+        $.ajax({
+            url: `/api/tasks/${taskID}/`,
+            method: 'PUT',
+            data: JSON.stringify(task),
+            contentType: 'application/json'
+        }).done(function() {
+            console.log('Should be updated on API...')
+            document.getElementById('checklist').innerHTML = "";
+            getModalTasks();
         })
-    })
-}
+      })
+    }
   
 
 //NOTES SECTION
@@ -550,18 +551,19 @@ function getCorrectTasks () {
             modal.find("#tasksModalLabel").text(response.title)
             console.log('getcorrecttasks '+ response.tasks)
             addTaskToList(response.tasks);  
-            modal.find("#save-changes").attr('data-goal', goalId)
+            modal.find("#the-plus-button").attr('data-plus', goalId)
 
         }).fail(function(){
             console.log("There was an issue getting the user's goals.");
         })
-        
+      $('#the-plus-button').attr("data-plus", goalId)
     })
     deleteTask();
 }
 
 function getModalTasks () {
-        let goalId = $('#save-changes').attr('data-goal')
+        let goalId = $('#the-plus-button').attr('data-plus')
+        console.log(goalId)
         let modal = $(this)
 
         $.ajax({
