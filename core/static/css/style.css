@@ -134,6 +134,7 @@ body {
 .container-clear {
     background-color: #EBF0ff;
     margin: 10px;
+    margin-top: 80px;
     margin-bottom: 75px;
 }
 
@@ -430,11 +431,11 @@ overflow: scroll;
 }
 
 .welcome {
-    font-size: 75px;
+    font-size: 55px;
 }
 
 .subwelcome {
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .goal-container {
