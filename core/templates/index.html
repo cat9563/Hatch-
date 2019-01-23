@@ -4,18 +4,23 @@
 {% endblock title %}
 
 {% block content %}
+  <body>
+    {% comment %} <section> {% endcomment %}
 
-  <section>
-    <div class="container-clear" style="margin-top: 60px; margin-left: 70px; margin-right: 70px; margin-bottom: 10px;">
-      <br>
-      <h1><center>You've Arrived!</center></h1>
-      <h4><center>Let's start mapping out your journey...</center></h4>
-      <p>Hatch provides users with a resource to navigate through their unique journey of transition. Coming out [as transgender] isn’t easy, but our mission is to provide stability through a resource that allows users to find local support, map out their individual goals and see progress along the way.</p>
-    </div>
-  </section>
+
+      {% comment %} <div class="container-clear" style="margin-top: 60px; margin-left: 70px; margin-right: 70px; margin-bottom: 10px;">
+        <br> {% endcomment %}
+        <header style="margin-top:60px; padding:20px">
+          <h1><center>You've Arrived!</center></h1>
+          <h4><center>Let's start mapping out your journey...</center></h4>
+          <p>Hatch provides users with a resource to navigate through their unique journey of transition. Coming out [as transgender] isn’t easy, but our mission is to provide stability through a resource that allows users to find local support, map out their individual goals and see progress along the way.</p>
+        </header>
+      {% comment %} </div> {% endcomment %}
+
+    {% comment %} </section> {% endcomment %}
   
-  <div id="myCarousel" class="carousel slide" style="margin-left: 60px; margin-right: 60px" data-ride="carousel">
-    <ol class="carousel-indicators">
+  {% comment %} <div id="myCarousel" class="carousel slide" style="margin-left: 60px; margin-right: 60px" data-ride="carousel">
+    <ol class="carousel-indicators" style="min-height:350px; max-height:350px">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -23,7 +28,7 @@
       <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
     
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="min-height:625px; max-height:625px">
       <div class="carousel-item active">
         <img class="img-fluid" src="https://ichef.bbci.co.uk/images/ic/720x405/p06pn45g.jpg" width="100%" height="100%">
           <div class="carousel-caption text-left">
@@ -79,5 +84,6 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+  </div> {% endcomment %}
+</body>
 {% endblock content %}
