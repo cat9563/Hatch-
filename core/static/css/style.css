@@ -202,6 +202,11 @@ body {
     border: #ff9430 solid 2px;
 }
 
+#goal-title{
+   
+    font-size: 36px;
+}
+
 .goal-row {
     margin: 10px;
     justify-content: space-around;

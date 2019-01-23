@@ -7,14 +7,14 @@
 {% block content %}
 
 <div class="container-fluid" id="main">
-        <div class="col main pt-5 mt-3" style="margin-bottom: 75px">
+        {% comment %} <div class="col main pt-5 mt-3" style="margin-bottom: 75px">
             <div class="row">
                 <div class="col-sm-4 py-2">
                     <div class="card text-white h-100">
                         <div class="card-body" id="greeting">
                          <h6 class="display-4">Welcome</h6>
                             <h1 class="display-6">{{ user.username }} !</h1>
-                             <body onload="randomQuote()"> <!--loads in the profile card-->
+                           <body onload="randomQuote()"> <!--loads in the profile card-->  
                         </div>
                     </div>
                 </div>
@@ -29,10 +29,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <!--/row-->
 
             <a id="features"></a>
+            <body onload="randomQuote()">
             
             <!--/row-->
 
@@ -199,13 +200,13 @@
                     </div> {% endcomment %}
             {% comment %} <hr> {% endcomment %}
             <div class="row my-4">
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-4 col-md-4">
                     <div class="card">
                         {% comment %} <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap"> {% endcomment %}
                         <div class="card-body">
-                            <h4 class="card-title">Layouts</h4>
-                            <p class="card-text">Flexbox provides simpler, more flexible layout options like vertical centering.</p>
-                            <a href="#" class="btn btn-info">Button</a>
+                            
+                            <class="card-text">Find an Awesome Therapist</p>
+                            
                         </div>
                     </div>
                     <div class="card card-inverse bg-inverse mt-3">
@@ -216,7 +217,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-7 col-md-8">
                     <div class="table-responsive">
                     
                      <div class="col-lg-12">
