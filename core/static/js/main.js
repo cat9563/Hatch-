@@ -24,6 +24,14 @@ function addTask() {
         })
     }
 
+    let newTask = document.getElementById('new-task-text');
+    if (newTask) {
+      newTask.addEventListener('blur', function() {
+        console.log('blurred')
+        postNewTask();
+      })
+    }
+
     let updateGoal = document.getElementById('update-goal');
     if (updateGoal) {
         updateGoal.addEventListener('click', function() {
@@ -40,17 +48,17 @@ function addTask() {
     }
 }
 
-var saveTasks = document.getElementById('save-changes')
-saveTasks.addEventListener('click', function() {
-  postNewTask();
-})
+// var saveTasks = document.getElementById('save-changes')
+// saveTasks.addEventListener('click', function() {
+//   postNewTask();
+// })
 
 
 // POST request to API to save tasks and calls loadTasks
-function postNewTask(event){
-    console.log($('#save-changes').attr('data-goal'))
-    things = $( "ul.checklist" ).find('li')
-    for (let thing of things) {
+function postNewTask(){
+    // console.log($('#save-changes').attr('data-goal'))
+    // things = $( "ul.checklist" ).find('li')
+    // for (let thing of things) {
         console.log($('#new-task-text').val())
     // console.log(event);
         let task = {
@@ -74,7 +82,7 @@ function postNewTask(event){
             console.log("There was an issue getting the user's tasks.")
         })
     };
-}
+// }
 
 
 // GET request to API for goals
@@ -160,6 +168,7 @@ function addTaskToList(tasks){
         };
 
         let count = countBoxes()
+
         // count how many items are checked
         function countChecked() {
             console.log(count)
@@ -173,13 +182,22 @@ function addTaskToList(tasks){
                 .css("width", percent + "%")
                 .attr("aria-valuenow", percent)
                 .text(percent + "%")
-        }}
-        
-    countChecked();
-    $(".checkbox").click(countChecked);
-    deleteTask();
-    toggleStatus();
-};
+        }
+      if (count > 0) {
+        console.log('all good here')
+        countChecked();
+        $(".checkbox").click(countChecked);
+        deleteTask();
+        toggleStatus();
+      }
+      else {
+        console.log( "No boxes.")
+      }
+    // countChecked();
+    // $(".checkbox").click(countChecked);
+    // deleteTask();
+    // toggleStatus();
+}};
     
 
 function completeGoal() {
@@ -302,12 +320,14 @@ function newTaskLineHTML(task) {
             <div>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'>
+            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
             </input>
         </div>
     </div>
         `
 }
+
+
 
 
 function createNewTask(){
@@ -591,3 +611,5 @@ $(document).ready(function () {
 $('#tasksModal').on('hide.bs.modal', function (event) {
   updatePercentComplete()
 })
+
+
