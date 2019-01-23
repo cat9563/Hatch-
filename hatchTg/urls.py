@@ -26,9 +26,10 @@ from django.contrib.auth.views import (
 	PasswordResetConfirmView, PasswordResetCompleteView,
 )
 from core.backends import MyRegistrationView
-
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
+    # path('', LoginView.as_view()),
     path('',views.index, name='home'),
     path('admin/', admin.site.urls),
     path('api/', include(api_urls)),

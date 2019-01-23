@@ -670,3 +670,11 @@ btn-outline-primary:focus {
 .serif {
     font-family: 'Roboto Slab', serif;
 }
+
+.thin {
+    font-weight: 200;
+}
+
+.lrg {
+    font-size: large;
+}
