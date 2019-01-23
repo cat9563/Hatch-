@@ -20,6 +20,12 @@ class EditProfileForm(UserChangeForm):
         ]
 
 
-# class CreateGoalForm(forms.Form):
-#     title = forms.CharField(label="What's your Goal", max_length=255)
+class LoginForm(forms.Form):
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'password',
+        ]
 

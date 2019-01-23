@@ -134,6 +134,7 @@ body {
 .container-clear {
     background-color: #EBF0ff;
     margin: 10px;
+    margin-top: 80px;
     margin-bottom: 75px;
 }
 
@@ -430,11 +431,11 @@ overflow: scroll;
 }
 
 .welcome {
-    font-size: 75px;
+    font-size: 55px;
 }
 
 .subwelcome {
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .goal-container {
@@ -687,8 +688,45 @@ btn-outline-primary:focus {
     font-size: x-large;
 }
 
-#all-check-list{
-    height: 26px;
-   
-    overflow: scroll;
+.pink-btn-outline-primary {
+    color: black;
+    background-color: transparent;
+    background-image: none;
+    border-color: black;
+}
+
+.pink-btn-outline-primary:hover {
+    color: white;
+    background-color: #87c5dd;
+    background-image: none;
+    border-color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.pink-btn-outline-primary:active {
+    color: black;
+    background-color: #f5a8b8;
+    background-image: none;
+    border-color: #87c5dd;
+    transform: translateY(4px);
+}
+
+.blue-btn-outline-primary {
+    color: black;
+    background-color: transparent;
+    background-image: none;
+    border-color: black;
+}
+
+.blue-btn-outline-primary:hover {
+    color: white;
+    background-color: #f5a8b8;
+    background-image: none;
+    border-color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.show-quotes {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
 }
