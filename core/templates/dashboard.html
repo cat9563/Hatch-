@@ -8,7 +8,7 @@
 
 <div class="container-fluid" id="main">
         <div class="col main pt-5 mt-3" style="margin-bottom: 75px">
-            <div class="row">
+            {% comment %} <div class="row">
                 <div class="col-sm-4 py-2">
                     <div class="card text-white h-100">
                         <div class="card-body" id="greeting">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <!--/row-->
 
             <a id="features"></a>
@@ -43,7 +43,7 @@
          <h2 class="sub-header mt-5" id="dash-header">Track Your Progress</h2>
           <p class="lead mt-6">
                 <div class="dash-body">
-              At hatch we believe that your transition should be done your way and on your terms! There is no right or wrong way to tranistion. The transgender experience can vary but one thing we all have in common is a need to express our true-selves. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and your story! 
+              At Hatch, we believe that your transition should be done your way and on your terms! There is no right or wrong way to transition. The transgender experience can vary, but one thing we all have in common is a need to express our true-selves. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!
                 </div>
             </p>
             <hr>
@@ -148,11 +148,11 @@
                 <div class="col-lg-6">
 
                     <div class="card mb-3">
-                        <div class="card-header">
-                           My Overall Progress
-                        </div>
+                        {% comment %} <div class="card-header"> {% endcomment %}
+                           {% comment %} My Overall Progress {% endcomment %}
+                        {% comment %} </div> {% endcomment %}
                         <div class="card-body" id="overall-progres">
-                            <h5 class="card-title"> Hatchling </h5>
+                            {% comment %} <h5 class="card-title"> Hatchling </h5> {% endcomment %}
                             <p class="card-text"> <canvas id="myChart"></canvas> </p>  
                         </div>
                     </div>
@@ -168,15 +168,14 @@
             <h2 class="sub-header mt-5"id="dash-header">Create Your Goals</h2>
           <p class="lead mt-6">
                 <div class="dash-body">
-                Below we have provided you with a way to keep track of your goals. 
-                All of our journyes are unique and will require a high degree of planning.
-                Our journey isn't an easy one and it is certain that we will encounter plenty of roadblocks along the way. 
+                Below is a way to track your goals. 
+                Each person's journey is unique and will benefit from thorough planning.
                 </div>
             </p>
 
               <p class="lead mt-6">
                 <div class="dash-body">
-                     If your journey requires a name change, updated gender marker, surgeries, or hormones. You will need to seek out a qualified therapist to assist and provide you with the correct legal documentations. Our resources page will be updated with more information on those topics. In the mean time you can contact your local LGBT center for more details. 
+                     If your journey requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide you with the correct legal documentation. 
                 </div>
             </p>
 
@@ -273,7 +272,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="button" class="btn btn-primary" id='update-goal'>Update</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes' data-goal="${ goal.id }">Save</button>
+                                                <button type="button" class="btn btn-primary" id='save-changes' data-save="{{ goal.id }}"  >Save</button>
                                             </div>
                                         </div>
                                     </div>
@@ -333,3 +332,6 @@
 
 
 {% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
