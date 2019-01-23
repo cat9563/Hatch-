@@ -60,10 +60,11 @@ function postNewTask(){
     // things = $( "ul.checklist" ).find('li')
     // for (let thing of things) {
         console.log($('#new-task-text').val())
+
     // console.log(event);
         let task = {
             author:1,
-            goal: $('#save-changes').attr('data-goal'),
+            goal: $('#the-plus-button').attr('data-plus'),
             text: $('#new-task-text').val(),
             status: false,
         }
@@ -320,7 +321,7 @@ function newTaskLineHTML(task) {
             <div>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
+            <input type='text' class='form-control' onblur='createNewTask()' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
             </input>
         </div>
     </div>
@@ -334,7 +335,7 @@ function createNewTask(){
     console.log('Creating a new task...')
     let task = {
         author:1,
-        goal: $('#save-changes').attr('data-goal'),
+        goal: $('#the-plus-button').attr('data-plus'),
         text: $('#new-task-text').val(),
         status: false,
     }
@@ -390,7 +391,7 @@ function toggleStatus(task) {
             // currently not accepting the value of text below - Error: "This field is required"
             let task = {
                 author:1,
-                goal: $('#save-changes').attr('data-goal'),
+                goal: $('#the-plus-button').attr('data-plus'),
                 text: $('#task-text').text(),
                 status: checkStatus,
             }
@@ -552,18 +553,19 @@ function getCorrectTasks () {
             modal.find("#tasksModalLabel").text(response.title)
             console.log('getcorrecttasks '+ response.tasks)
             addTaskToList(response.tasks);  
-            modal.find("#save-changes").attr('data-goal', goalId)
+            modal.find("#the-plus-button").attr('data-plus', goalId)
 
         }).fail(function(){
             console.log("There was an issue getting the user's goals.");
         })
-        
+      $('#the-plus-button').attr("data-plus", goalId)
     })
     deleteTask();
 }
 
 function getModalTasks () {
-        let goalId = $('#save-changes').attr('data-goal')
+        let goalId = $('#the-plus-button').attr('data-plus')
+        console.log(goalId)
         let modal = $(this)
 
         $.ajax({
