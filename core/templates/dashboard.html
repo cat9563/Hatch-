@@ -98,13 +98,13 @@
                             <div class="tab-pane active" id="tab2">
                                 <div class="row">
                                     <div class="col-sm-7">
-                                        <h1 "text-uppercase">{{ user.username }}</h1>
-                                        <p><div id="showQuotes"></div></p>
+                                        <h1 "text-uppercase" class='username'>{{ user.username }}</h1>
+                                        <p><div id="showQuotes" style="font-family: 'Open Sans', sans-serif"></div></p>
                                     </div>
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
-                                <hr>
-                                <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal" id="goal-button">Add a Goal</a>
+                                {% comment %} <hr> {% endcomment %}
+                                {% comment %} <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal" id="goal-button">Add a Goal</a> {% endcomment %}
                                 <div class="spacer5"></div>
                             </div>
                             <div class="tab-pane" id="tab3">
@@ -148,11 +148,11 @@
                 <div class="col-lg-6">
 
                     <div class="card mb-3">
-                    <div class="card-header">
+                    {% comment %} <div class="card-header">
                             My Overall Progress 
-                         </div> 
+                         </div>  {% endcomment %}
                         <div class="card-body" id="overall-progres">
-                            <h5 class="card-title"> Hatchling </h5>
+                            {% comment %} <h5 class="card-title"> Hatchling </h5> {% endcomment %}
                             <p class="card-text"> <canvas id="myChart"></canvas> </p>  
                         </div>
                     </div>

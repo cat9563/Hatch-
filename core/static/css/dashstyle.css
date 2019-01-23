@@ -57,6 +57,7 @@
   .card {
       overflow:hidden;
       background-color: #f5a8b8 !important;
+      height: 100%;
   }
   
   .card-body .rotate {
