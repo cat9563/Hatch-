@@ -264,31 +264,40 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
-        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
-            <div class='input-group-prepend'>
-                <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
-                    <label id='task-text'> ${ task.text } </label>
+    
+
+        <section class="row">
+            <div class="col-md-8" id='checklist-task-${ task.id }'>
+                <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
+                <label id='task-text'> ${ task.text } </label>
+            </div>
+            <div class="col-md-4">
+                <div class="btn-group float-right mt-2" role="group">
+                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
                 </div>
             </div>
-
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
-        </div>
+        </section>
             `
     }
     else {
         return `
-        <div class='input-group mb-3' id='checklist-task-${ task.id }'>
-            <div class='input-group-prepend'>
-                <div class='input-group-text'>
-                    <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
-                    <label id='task-text'> ${ task.text } </label>
+        <section class="row">
+            <div class="col-md-8" id='checklist-task-${ task.id }'>
+                <div>
+                    <div>
+                        <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
+                        <label id='task-text'> ${ task.text } </label>
+                    </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="btn-group float-right mt-2" role="group">
+                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
+                </div>
+            </div>
+        </section>
 
-            <button type='button' class='btn fr' data-task="${ task.id }" id='edit'>Edit</button>
-            <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
-        </div>
+       
             `
     };
 }
@@ -297,8 +306,8 @@ function taskHTML(task) {
 function newTaskLineHTML(task) {
     return `
     <div class='input-group mb-3' id='checklist-task'>
-        <div class='input-group-prepend'>
-            <div class='input-group-text'>
+        <div>
+            <div>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
             <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'>

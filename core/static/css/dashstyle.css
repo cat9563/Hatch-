@@ -83,16 +83,24 @@
        background-color: #f5a8b8 !important;
   }
 
-  /* #profile-card{
-      height: 396px;
-  } */
+  #goal-button{
+      background-color: #87c5dd;
+      border: #87c5dd;
+      margin-top: 34px;
+  }
 
+  #journal-button{
+    background-color: #87c5dd;
+    border: #87c5dd;
+    font: white !important;
+    margin-top: 14px;
+}
   div#goal-list {
     height: 495px;
 }
   
 #greeting{
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
   background-color: #f5a8b8 !important;
 }
 
@@ -100,7 +108,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 .dash-body{
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
   font-size: 20px;
   font-weight: 400;
   font-style: normal;
@@ -108,8 +116,9 @@
   
 }
 
-.nav-bar{
-  font-family: 'Righteous', cursive;
+#hatch{
+  font-family: 'Roboto Slab', serif;
+  font-size: 22px;
 }
   
 #overall-progress{

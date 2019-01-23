@@ -71,9 +71,9 @@ body {
 .bg-dark {
     background-color: #87c5dd !important;
     color: #fff;
-    font-family: 'Righteous', cursive;
-    font-size: 18px;
-}
+    /* font-family: 'Righteous', cursive; */
+    /* font-size: 18px;*/
+} 
 
 .nav-link{
     /* color: #fff !important; */
@@ -392,8 +392,8 @@ overflow: scroll;
     margin: 8px;
     /* border: #ff3052 solid 2px; */
     overflow: scroll; 
-    height: 175px;
-    width: 175px;
+    /* height: 175px;
+    width: 175px; */
     background-color: #fff;
     border-radius: 10px;
 }
@@ -475,3 +475,8 @@ overflow: scroll;
     text-decoration: line-through;
 } */
 
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    margin-left: .5rem;
+}
