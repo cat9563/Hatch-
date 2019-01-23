@@ -191,7 +191,7 @@ function addTaskToList(tasks){
         deleteTask();
         // toggleStatus();
       }
-      else {
+      if (count == 0) {
         console.log( "No boxes.")
       }
     // countChecked();
