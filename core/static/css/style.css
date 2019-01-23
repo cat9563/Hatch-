@@ -25,9 +25,10 @@
 footer {
     background-color: #f5a8b8;
     text-align: center;
-    clear: both;
-    position: relative;
+    /* clear: both; */
+    /* position: absolute; */
     height: 40px;
+    /* width: 100%; */
     bottom: 0;
     /* margin-top: -40px; */
 }
@@ -42,13 +43,19 @@ footer ul li {
     margin-right: 10px;
 }
 
-html, body {
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
     background-color: #EBF0ff;
+    /* margin-bottom: 170px; */
     /* margin-bottom:  10px; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     height: 100%;
-    margin: 0px;
+    margin: 0px; */
     /* min-height: 100%; */
     /* max-height: 0%; */
 }
@@ -275,10 +282,10 @@ body {
 
 /* Notes css */
 
-.container-fluid{
+/* .container-fluid{
     height: 300px;
     
-}
+} */
 /* .container {
     padding: 2rem 0rem;
     overflow: scroll;

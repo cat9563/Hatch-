@@ -8,7 +8,7 @@
         {% comment %} <div class="container-clear" style="margin-top: 60px"; > {% endcomment %}
             {% comment %} <br> {% endcomment %}
             <header style="margin-top:60px; padding:20px">
-                <center>Allies</center></h1><br>
+                <h1><center>Allies</center></h1><br>
             </header>
             <div class="container-fluid">
                 <ul class="nav nav-pills nav-justified">
@@ -237,3 +237,14 @@
         {% comment %} </div> {% endcomment %}
     </body>
 {% endblock content %}
+{% block footer %}
+
+    <footer class="footer">
+        <ul>
+            <li><a href="{% url 'ourteam' %}">Meet the Team</a></li>
+            <li><a href="{% url 'terms' %}">Terms</a></li>
+            <li><a href="{% url 'privacy' %}">Privacy</a></li>
+        </ul>
+        </footer> 
+{% endblock footer %}
+
