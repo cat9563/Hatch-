@@ -249,23 +249,23 @@ function goalHTML(goal) {
     return `
     <div class="goal-card" id="goal-card-${ goal.id }">
         <div class="card-body" data-author="${ goal.author }"> 
-            <div class="progress">
+            <div class="progress" style="height: 30px;">
                 <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="${goal.percent_complete || 0}" aria-valuemin="0" aria-valuemax="100" style="width: ${goal.percent_complete || 0}%" data-bar="${ goal.id }">
                 ${goal.percent_complete !== null ? `<span>${goal.percent_complete}% </span>` : ''}                
                 </div>
             </div> 
             <hr>
             <!-- Expand button, connected to goal.id -->   
-            <div class="text-center my-3">${ goal.title }
-            </div>
-           
-              <div class="text-center">
-                  <div class="btn-group">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
-                  <!-- Delete buttons, connected to goal id -->
-                  <button type='button' class="btn btn-primary" id='goaldelete' class='goaldelete btn fr' data-goal="${ goal.id }">Delete</button>
-                  </div>
-              </div>   
+            
+            <div class="text-center my-3" id="goal-title">${ goal.title }</div>
+                <div class="row">
+                    <div class="btn-group" style="padding: 10px;">
+                    <button type="button" class="btn-outline-primary btn-lg" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
+                    <!-- Delete buttons, connected to goal id -->
+                    <button type='button' class="btn-outline-primary btn-lg" id='deletegoal' class='deletegoal btn fr' data-goal="${ goal.id }">Delete</button>
+                    </div>
+                </div>  
+            </div>               
         </div>
     </div>
     `
@@ -274,8 +274,6 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
-    
-
         <section class="row">
             <div class="col-md-8" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
