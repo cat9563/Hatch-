@@ -199,15 +199,15 @@
             {% comment %} <hr> {% endcomment %}
             <div class="row my-5">
                 <div class="col-lg-4 col-md-4">
-                    <div class="card">
+                    {% comment %} <div class="card"> {% endcomment %}
                         {% comment %} <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap"> {% endcomment %}
-                        <div class="card-body">
+                        {% comment %} <div class="card-body" id="tips"> {% endcomment %}
                             <h1 class='sans'>Tips</h1>
+                            <br>
                             <class="card-text">Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!</p>
                             <class="card-text">Click add a goal to create your main goals. Adding tasks creates your subgoals to accomplish your main goal. </p>
-                            
-                        </div>
-                    </div>
+                        {% comment %} </div> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
                 </div>
                 <div class="col-lg-7 col-md-8">
                     <div class="table-responsive">
@@ -275,8 +275,10 @@
                         </div><!--endofgoal-->
                         </div>
                         
-                         <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
-                      
+                        <hr>
+                        <div class=goal-button>
+                            <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
+                        </div>
                     </div>
                 </div>
             </div>
