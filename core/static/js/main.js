@@ -276,7 +276,7 @@ function taskHTML(task) {
             <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
                 <label id='task-text-${task.id}'> ${ task.text } </label>
-                <button type='button' id='delete' style='margin: 5px' class='btn btn-outline-primary fr' data-task="${ task.id }">Delete</button>
+                <button type='button' style='margin: 5px' class='btn btn-outline-primary fr delete' data-task="${ task.id }">Delete</button>
             </div>
         </section>
         </div>
@@ -291,7 +291,7 @@ function taskHTML(task) {
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
                         <label id='task-text-${task.id}'> ${ task.text } </label>
-                        <button type='button' id='delete' style='margin: 5px' class='btn btn-outline-primary fr' data-task="${ task.id }">Delete</button>
+                        <button type='button' style='margin: 5px' class='btn btn-outline-primary fr delete' data-task="${ task.id }">Delete</button>
                     </div>
                 </div>
             </div>
