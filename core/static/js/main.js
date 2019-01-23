@@ -190,10 +190,11 @@ function addTaskToList(tasks){
         console.log( "No boxes.")
       }
     // countChecked();
-    $(".checkbox").click(countChecked);
-    // deleteTask();
-    toggleStatus();
-}};
+        $(".checkbox").click(function() {
+            countChecked();
+            toggleStatus();
+        })
+}}
     
 
 function completeGoal() {
@@ -274,7 +275,7 @@ function taskHTML(task) {
         <section class="row">
             <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
-                <label id='task-text'> ${ task.text } </label>
+                <label id='task-text-${task.id}'> ${ task.text } </label>
                 <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
             </div>
         </section>
@@ -289,7 +290,7 @@ function taskHTML(task) {
                 <div>
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
-                        <label id='task-text'> ${ task.text } </label>
+                        <label id='task-text-${task.id}'> ${ task.text } </label>
                         <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
                     </div>
                 </div>
@@ -377,15 +378,12 @@ function toggleStatus(task) {
         console.log(checkStatus)
         let taskID = $(this).data('task')
         console.log(taskID)
-        // let tasks = $(".checkbox")
-        // console.log(tasks)
-        // $("#update-goal").on('click', function() {
-            // currently not accepting the value of text below - Error: "This field is required"
+        text = $(`#task-text-${taskID}`)
          
         let task = {
             author:1,
             goal: $('#the-plus-button').attr('data-plus'),
-            text: $(`#task-text-${taskID}`).text(),
+            text: $(`#task-text-${taskID}`).html(),
             status: checkStatus,
         }
         $.ajax({
