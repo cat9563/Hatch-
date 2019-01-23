@@ -687,3 +687,8 @@ btn-outline-primary:focus {
     font-size: x-large;
 }
 
+#all-check-list{
+    height: 26px;
+   
+    overflow: scroll;
+}
