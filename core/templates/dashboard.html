@@ -6,7 +6,6 @@
 
 {% block content %}
 
-<div class="container-fluid" id="main">
         <div class="col main pt-5 mt-3" style="margin-bottom: 75px">
             {% comment %} <div class="row">
                 <div class="col-sm-4 py-2">
@@ -266,8 +265,8 @@
                                             <!-- Modal FOOTER -->                                            
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id='update-goal'>Update</button>
-                                                <button type="button" class="btn btn-primary" id='save-changes' data-save="{{ goal.id }}"  >Save</button>
+                                                {% comment %} <button type="button" class="btn btn-primary" id='update-goal'>Update</button> {% endcomment %}
+                                                {% comment %} <button type="button" class="btn btn-primary" id='save-changes' data-save="{{ goal.id }}"  >Save</button> {% endcomment %}
                                             </div>
                                         </div>
                                     </div>
@@ -322,11 +321,8 @@
         </div>
         <!--/main col-->
 
-</div>
+
 
 
 
 {% endblock content %}
-
-{% block footer %}
-{% endblock footer %}
