@@ -637,6 +637,13 @@ label {
     border-color: #87c5dd;
 }
 
+/* .btn-outline-primary: {
+    color: black;
+    background-color: #87c5dd;
+    background-image: none;
+    border-color: #87c5dd;
+} */
+
 .progress-bar {
     display: flex;
     -webkit-box-orient: vertical;
@@ -648,4 +655,12 @@ label {
     text-align: center;
     background-color: #87c5dd;
     transition: width .6s ease;
+}
+
+.sans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.serif {
+    font-family: 'Roboto Slab', serif;
 }
