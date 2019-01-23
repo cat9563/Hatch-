@@ -110,7 +110,7 @@
 .dash-body{
   /* font-family: 'Roboto', sans-serif; */
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   box-sizing: border-box;
   
@@ -129,3 +129,7 @@
   height: 100px;
 }
 
+.nav-link:hover {
+  color: white;
+  background-color: #87c5dd;
+}
