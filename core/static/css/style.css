@@ -406,6 +406,7 @@ overflow: scroll;
     width: 175px; */
     background-color: #fff;
     border-radius: 10px;
+    font-weight: 200;
 }
 
 .text-center{

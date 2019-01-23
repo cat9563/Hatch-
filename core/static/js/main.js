@@ -270,58 +270,57 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
+        <div class="container">
         <section class="row">
-            <div class="col-md-8" id='checklist-task-${ task.id }'>
+            <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
-                <label id='task-text-${ task.id }'> ${ task.text } </label>
-            </div>
-            <div class="col-md-4">
-                <div class="btn-group float-right mt-2" role="group">
-                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
-                </div>
+                <label id='task-text'> ${ task.text } </label>
+                <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
             </div>
         </section>
+        </div>
             `
     }
     else {
         return `
+        <div class=container>
         <section class="row">
-            <div class="col-md-8" id='checklist-task-${ task.id }'>
+            <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <div>
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
-                        <label id='task-text-${ task.id }'> ${ task.text } </label>
+                        <label id='task-text'> ${ task.text } </label>
+                        <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="btn-group float-right mt-2" role="group">
-                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
-                </div>
-            </div>
         </section>
+        </div>
 
-       
             `
     };
 }
 
-
 function newTaskLineHTML(task) {
     return `
-    <div class='input-group mb-3' id='checklist-task'>
-        <div>
-            <div>
-                <input type='checkbox' aria-label='Checkbox for following text input'>
+    <div class=container>
+        <section class="row">
+            <div class="col-md-12" >
+                <div class='input-group mb-3' id='checklist-task'>
+                    <div>
+                        <div>
+                            <input type='checkbox' aria-label='Checkbox for following text input' style="visibility: hidden;">
+                        </div>
+                    </div>
+                </div>
             </div>
             <input type='text' class='form-control' onblur='createNewTask()' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
             </input>
         </div>
     </div>
+   
         `
 }
-
-
 
 
 function createNewTask(){
@@ -411,13 +410,15 @@ function noteHtml(note) {
         return ` <div class="item item-blue" id="journal-note-${note.id}"> 
                     <p>${note.text}</p>
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
+                    <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="journal-note-${note.id}"> 
+
+                <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
-                  <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                     </div>`;
     };

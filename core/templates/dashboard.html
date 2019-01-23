@@ -42,9 +42,9 @@
             <hr> 
          <h2 class="sub-header mt-5" id="dash-header">Track Your Progress</h2>
           <p class="lead mt-6">
-                <div class="dash-body">
+                {% comment %} <div class="dash-body">
               At Hatch, we believe that your transition should be done your way and on your terms! There is no right or wrong way to transition. The transgender experience can vary, but one thing we all have in common is a need to express our true-selves. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!
-                </div>
+                </div> {% endcomment %}
             </p>
             <hr>
             <div class="row mb-3">
@@ -148,11 +148,11 @@
                 <div class="col-lg-6">
 
                     <div class="card mb-3">
-                        {% comment %} <div class="card-header"> {% endcomment %}
-                           {% comment %} My Overall Progress {% endcomment %}
-                        {% comment %} </div> {% endcomment %}
+                    <div class="card-header">
+                            My Overall Progress 
+                         </div> 
                         <div class="card-body" id="overall-progres">
-                            {% comment %} <h5 class="card-title"> Hatchling </h5> {% endcomment %}
+                            <h5 class="card-title"> Hatchling </h5>
                             <p class="card-text"> <canvas id="myChart"></canvas> </p>  
                         </div>
                     </div>
@@ -197,21 +197,15 @@
                     +Goal</button>
                     </div> {% endcomment %}
             {% comment %} <hr> {% endcomment %}
-            <div class="row my-4">
+            <div class="row my-5">
                 <div class="col-lg-4 col-md-4">
                     <div class="card">
                         {% comment %} <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap"> {% endcomment %}
                         <div class="card-body">
+                            <h1>Tips</h1>
+                            <class="card-text">Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!</p>
+                            <class="card-text">Click add a goal to create your main goals. Adding tasks creates your subgoals to accomplish your main goal. </p>
                             
-                            <class="card-text">Find an Awesome Therapist</p>
-                            
-                        </div>
-                    </div>
-                    <div class="card card-inverse bg-inverse mt-3">
-                        <div class="card-body">
-                            <h3 class="card-title">Flexbox</h3>
-                            <p class="card-text">Flexbox is now the default, and Bootstrap 4 supports SASS out of the box.</p>
-                            <a href="#" class="btn btn-outline-secondary">Outline</a>
                         </div>
                     </div>
                 </div>
