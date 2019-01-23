@@ -256,9 +256,9 @@ function goalHTML(goal) {
             <div class="text-center my-3" id="goal-title">${ goal.title }</div>
                 <div class="row">
                     <div class="btn-group" style="padding: 10px;">
-                    <button type="button" class="btn-outline-primary btn-lg" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand'>Tasks</button>
+                    <button type="button" class="btn-outline-primary btn-lg" data-toggle="modal" data-goal="${ goal.id }" data-title="${ goal.title }" data-target="#tasksModal" id='expand' style='margin: 2%'>Tasks</button>
                     <!-- Delete buttons, connected to goal id -->
-                    <button type='button' class="deletegoal btn-outline-primary btn-lg" id='deletegoal' data-goal="${ goal.id }">Delete</button>
+                    <button type='button' class="deletegoal btn-outline-primary btn-lg" id='deletegoal' data-goal="${ goal.id }" style='margin: 2%'>Delete</button>
                     </div>
                 </div>  
             </div>               
@@ -408,7 +408,6 @@ function toggleStatus(task) {
 function noteHtml(note) {
     if (note.id % 2 === 0) {
         return ` <div class="item item-blue" id="journal-note-${note.id}"> 
-                    <p>${note.text}</p>
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>

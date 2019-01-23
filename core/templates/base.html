@@ -25,7 +25,7 @@
 
     {% block header %}
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a href="{% url 'home' %}" class="navbar-brand" style="font-size: 24px;" id="hatch">Hatch</a>
+            <a href="{% url 'home' %}" class="navbar-brand" style="font-size: 45px; font-weight=900" id="hatch">Hatch</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,15 +33,15 @@
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="{% url 'dashboard' %}">Dashboard</a>
+                        <a class="nav-link" style="color: white; font-size: larger;" href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
+                        <a class="nav-link" style="color: white; font-size: larger;" href="{% url 'resources' %}">Resources</a>
                     </li>
                     {% comment %} <li class="nav-item">
                         <a class="nav-link" style="color: white" href="{% url 'profile' %}">Profile</a>
                     </li> {% endcomment %}
-                    <a class="nav-link" style="color: white" href="{% url 'auth_logout' %}">Logout</a>
+                    <a class="nav-link" style="color: white; font-size: larger;" href="{% url 'auth_logout' %}">Logout</a>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
