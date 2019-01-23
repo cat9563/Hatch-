@@ -24,6 +24,14 @@ function addTask() {
         })
     }
 
+    let newTask = document.getElementById('new-task-text');
+    if (newTask) {
+      newTask.addEventListener('blur', function() {
+        console.log('blurred')
+        postNewTask();
+      })
+    }
+
     let updateGoal = document.getElementById('update-goal');
     if (updateGoal) {
         updateGoal.addEventListener('click', function() {
@@ -40,12 +48,17 @@ function addTask() {
     }
 }
 
+// var saveTasks = document.getElementById('save-changes')
+// saveTasks.addEventListener('click', function() {
+//   postNewTask();
+// })
+
 
 // POST request to API to save tasks and calls loadTasks
-function postNewTask(event){
-    console.log($('#save-changes').attr('data-goal'))
-    things = $( "ul.checklist" ).find('li')
-    for (let thing of things) {
+function postNewTask(){
+    // console.log($('#save-changes').attr('data-goal'))
+    // things = $( "ul.checklist" ).find('li')
+    // for (let thing of things) {
         console.log($('#new-task-text').val())
     // console.log(event);
         let task = {
@@ -69,29 +82,7 @@ function postNewTask(event){
             console.log("There was an issue getting the user's tasks.")
         })
     };
-}
-
-// DELETE task
-function deleteTask() {
-    console.log("Inside deleteTask")
-    $(".delete").on('click', function() {
-        console.log($(this))
-        console.log($(this).data())
-        let taskID = $(this).data('task')
-        console.log(taskID)
-
-        $.ajax({
-            method: 'DELETE',
-            url: `/api/tasks/${taskID}/`,
-        
-        }).done(function() {
-            $(`#checklist-task-${taskID}`).remove();
-
-
-        }).fail(function() {
-            console.log("There was an issue getting the user's tasks.")
-        });
-    })};
+// }
 
 
 // GET request to API for goals
@@ -114,11 +105,42 @@ function addGoalsToDashboard(goals){
     for (let goal of goals) {
         document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
 
-    } 
+    }
+
+    console.log('Goals have loaded!')
+    deleteGoal();
+    
     let showTasks = document.getElementById('expand');
     showTasks.addEventListener('click', loadTasks)
     console.log('Listening for expand click...');
-    deleteGoal();
+
+    // let goalDelete = document.getElementById('goaldelete')
+    // goalDelete.addEventListener('click', deleteGoal($(this)))
+    // console.log('listening for DELETE CLICK....')
+}
+
+
+// DELETE goal
+function deleteGoal() {
+  console.log('Inside deleteGoal')
+  $('.goaldelete').on('click', function() {
+    console.log($(this))
+    console.log($(this).data())
+    let goalID = $(this).data('goal')
+    console.log(goalID)
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/api/goals/${goalID}/`,
+    
+    }).done(function() {
+        $(`#goal-card-${goalID}`).remove()
+        console.log('removed one goal')
+
+    }).fail(function() {
+        console.log("There was an issue getting the user's goals.")
+    });
+  })
 }
 
 
@@ -146,6 +168,7 @@ function addTaskToList(tasks){
         };
 
         let count = countBoxes()
+
         // count how many items are checked
         function countChecked() {
             console.log(count)
@@ -159,13 +182,22 @@ function addTaskToList(tasks){
                 .css("width", percent + "%")
                 .attr("aria-valuenow", percent)
                 .text(percent + "%")
-        }}
-        
-    countChecked();
-    $(".checkbox").click(countChecked);
-    deleteTask();
-    toggleStatus();
-};
+        }
+      if (count > 0) {
+        console.log('all good here')
+        countChecked();
+        $(".checkbox").click(countChecked);
+        deleteTask();
+        toggleStatus();
+      }
+      else {
+        console.log( "No boxes.")
+      }
+    // countChecked();
+    // $(".checkbox").click(countChecked);
+    // deleteTask();
+    // toggleStatus();
+}};
     
 
 function completeGoal() {
@@ -206,28 +238,6 @@ function postNewGoal() {
 }
 
 
-// DELETE goal
-function deleteGoal() {
-    console.log("Inside deleteGoal")
-    $('.deletegoal').on('click', function() {
-        console.log($(this).data())
-        let goalID = $(this).data('goal')
-        console.log(goalID)
-
-        $.ajax({
-            method: 'DELETE',
-            url: `/api/goals/${goalID}/`,
-        
-        }).done(function() {
-            document.getElementById('goal-list').innerHTML = "";
-            console.log('cleared goal-list')
-            loadGoals()
-
-        }).fail(function() {
-            console.log("There was an issue getting the user's goals.")
-        });
-    })};
-
 
 function closeModal() {
     let modal = document.getElementById('newGoalModal');
@@ -237,7 +247,7 @@ function closeModal() {
 // old goalHTML kept just in case its needed when we merge and need to fix conflict
 function goalHTML(goal) {
     return `
-    <div class="goal-card" id="${ goal.id }>
+    <div class="goal-card" id="goal-card-${ goal.id }">
         <div class="card-body" data-author="${ goal.author }"> 
             <div class="progress" style="height: 30px;">
                 <div id="dynamic-${ goal.id }" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="${goal.percent_complete || 0}" aria-valuemin="0" aria-valuemax="100" style="width: ${goal.percent_complete || 0}%" data-bar="${ goal.id }">
@@ -308,12 +318,14 @@ function newTaskLineHTML(task) {
             <div>
                 <input type='checkbox' aria-label='Checkbox for following text input'>
             </div>
-            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text'>
+            <input type='text' class='form-control' aria-label='Text input with checkbox' id='new-task-text' (blur)="postNewTask()">
             </input>
         </div>
     </div>
         `
 }
+
+
 
 
 function createNewTask(){
@@ -339,6 +351,28 @@ function createNewTask(){
         console.log("That didn't work out.")
     });
 }
+
+// DELETE task
+function deleteTask() {
+  console.log("Inside deleteTask")
+  $(".delete").on('click', function() {
+      console.log($(this))
+      console.log($(this).data())
+      let taskID = $(this).data('task')
+      console.log(taskID)
+
+      $.ajax({
+          method: 'DELETE',
+          url: `/api/tasks/${taskID}/`,
+      
+      }).done(function() {
+          $(`#checklist-task-${taskID}`).remove();
+
+
+      }).fail(function() {
+          console.log("There was an issue getting the user's tasks.")
+      });
+  })};
 
 
 function toggleStatus(task) {
@@ -563,6 +597,7 @@ $(document).ready(function () {
     setupCSRFAjax();
     loadNotes();
     loadGoals();
+    // deleteGoal();
     loadTasks();
     addTask();
     toggleStatus();
@@ -574,3 +609,5 @@ $(document).ready(function () {
 $('#tasksModal').on('hide.bs.modal', function (event) {
   updatePercentComplete()
 })
+
+
