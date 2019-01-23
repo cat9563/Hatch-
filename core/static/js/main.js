@@ -104,7 +104,7 @@ function getUserGoals(){
 // Iterates over goals received from API, inserts the goalHTML onto page for each
 function addGoalsToDashboard(goals){
     for (let goal of goals) {
-        document.getElementById('goal-list').insertAdjacentHTML('beforeend', goalHTML(goal));
+        document.getElementById('goal-list').insertAdjacentHTML('afterbegin', goalHTML(goal));
     }
 
     console.log('Goals have loaded!')
@@ -153,7 +153,7 @@ function addTaskToList(tasks){
     $(".checklist").empty();
 
         for (let task of tasks) {
-            document.getElementById('checklist').insertAdjacentHTML('beforeend', taskHTML(task))
+            document.getElementById('checklist').insertAdjacentHTML('afterbegin', taskHTML(task))
             
         // };
         console.log('Tasks have been added to the list')
@@ -407,7 +407,6 @@ function toggleStatus(task) {
 //inserts note.id to alteranate colors 
 function noteHtml(note) {
     if (note.id % 2 === 0) {
-
         return ` <div class="item item-blue" id="journal-note-${note.id}"> 
                     <p>${note.text}</p>
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
@@ -425,10 +424,10 @@ function noteHtml(note) {
 }
 
 //gets the container for the notes and adds the notehtml
-function postNoteToJournal(note){
-    document.getElementById("journal").insertAdjacentHTML('afterbegin',
-    noteHtml(note));
-}
+// function postNoteToJournal(note){
+//     document.getElementById("journal").insertAdjacentHTML('afterbegin',
+//     noteHtml(note));
+// }
 
 var saveNotes = document.getElementById('saveNote')
 saveNotes.addEventListener('click', function() {
