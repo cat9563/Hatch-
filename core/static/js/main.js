@@ -372,13 +372,15 @@ function toggleStatus(task) {
 function noteHtml(note) {
     if (note.id % 2 === 0) {
         return ` <div class="item item-blue" id="blue"> 
-                    ${note.text} 
+                    <p>${note.text}</p>
+                    <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="pink"> 
-                    ${note.text} 
+                  <p>${note.text}</p>
+                  <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
                     </div>`;
     };
