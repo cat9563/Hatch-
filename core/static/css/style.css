@@ -463,3 +463,8 @@ overflow: scroll;
     text-decoration: line-through;
 } */
 
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    margin-left: .5rem;
+}
