@@ -34,9 +34,9 @@ urlpatterns = [
     path('api/', include(api_urls)),
     path('accounts/', include('allauth.urls')),
 
-    path('profile/', core_views.profile, name='profile'),
-    path('profile/edit', core_views.edit_profile, name='edit_profile'),
-    path('change-password/', core_views.change_password, name='change_password'),
+    # path('profile/', core_views.profile, name='profile'),
+    # path('profile/edit', core_views.edit_profile, name='edit_profile'),
+    # path('change-password/', core_views.change_password, name='change_password'),
 
     path('ourteam/', TemplateView.as_view(template_name='ourteam.html'),
         name='ourteam'),
