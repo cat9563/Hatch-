@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,31 +20,32 @@
     <script src="{% static 'js/js.cookies.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.css'>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Righteous|Roboto" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Righteous|Roboto|Roboto+Slab" rel="stylesheet">  
 </head>
 
-<body>
-<header>
     {% block header %}
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a href="{% url 'home' %}" class="navbar-brand" style="font-size: 24px;">Hatch</a>
+            <a href="{% url 'home' %}" class="navbar-brand" style="font-size: 24px;" id="hatch">Hatch</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse justify-content-stretch"id="navbar7">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
-                    </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white" href="{% url 'profile' %}">Profile</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: white" href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
+                    </li>
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'profile' %}">Profile</a>
+                    </li> {% endcomment %}
                     <a class="nav-link" style="color: white" href="{% url 'auth_logout' %}">Logout</a>
                     {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" href="{% url 'resources' %}">Resources</a>
+                    </li>
                     <a class="nav-link" style="color: white" href="{% url 'auth_login' %}">Login</a>
                     <a class="nav-link" style="color: white" href="{% url 'registration_register' %}">Register</a>
                     {% endif %}
@@ -51,10 +53,11 @@
             </div>
         </nav>
     {% endblock header %}
-</header>
 
+<body>
     {% block content %}
     {% endblock content %}
+</body>
 
 <footer>
     {% block footer %}
