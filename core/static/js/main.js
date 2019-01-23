@@ -274,16 +274,12 @@ function goalHTML(goal) {
 function taskHTML(task) {
     if (task.status === false) {
         return `
-        <div class=container>
+        <div class="container">
         <section class="row">
-            <div class="col-md-8" id='checklist-task-${ task.id }'>
+            <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
                 <label id='task-text'> ${ task.text } </label>
-            </div>
-            <div class="col-md-4">
-                <div class="btn-group float-right mt-2" role="group">
-                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
-                </div>
+                <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
             </div>
         </section>
         </div>
@@ -293,17 +289,13 @@ function taskHTML(task) {
         return `
         <div class=container>
         <section class="row">
-            <div class="col-md-8" id='checklist-task-${ task.id }'>
+            <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <div>
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
                         <label id='task-text'> ${ task.text } </label>
+                        <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="btn-group float-right mt-2" role="group">
-                    <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
                 </div>
             </div>
         </section>
