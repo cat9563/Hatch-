@@ -190,10 +190,11 @@ function addTaskToList(tasks){
         console.log( "No boxes.")
       }
     // countChecked();
-    $(".checkbox").click(countChecked);
-    // deleteTask();
-    toggleStatus();
-}};
+        $(".checkbox").click(function() {
+            countChecked();
+            toggleStatus();
+        })
+}}
     
 
 function completeGoal() {
@@ -274,8 +275,8 @@ function taskHTML(task) {
         <section class="row">
             <div class="col-md-12" id='checklist-task-${ task.id }'>
                 <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox'>
-                <label id='task-text'> ${ task.text } </label>
-                <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
+                <label id='task-text-${task.id}'> ${ task.text } </label>
+                <button type='button' id='delete' style='margin: 5px' class='btn btn-outline-primary fr' data-task="${ task.id }">Delete</button>
             </div>
         </section>
         </div>
@@ -289,8 +290,8 @@ function taskHTML(task) {
                 <div>
                     <div>
                         <input type='checkbox' aria-label='Checkbox for following text input' data-task="${ task.id }" id="${ task.status }" class='checkbox check' checked>
-                        <label id='task-text'> ${ task.text } </label>
-                        <button type='button' id='delete' class='delete btn fr' data-task="${ task.id }">Delete</button>
+                        <label id='task-text-${task.id}'> ${ task.text } </label>
+                        <button type='button' id='delete' style='margin: 5px' class='btn btn-outline-primary fr' data-task="${ task.id }">Delete</button>
                     </div>
                 </div>
             </div>
@@ -377,15 +378,12 @@ function toggleStatus(task) {
         console.log(checkStatus)
         let taskID = $(this).data('task')
         console.log(taskID)
-        // let tasks = $(".checkbox")
-        // console.log(tasks)
-        // $("#update-goal").on('click', function() {
-            // currently not accepting the value of text below - Error: "This field is required"
+        text = $(`#task-text-${taskID}`)
          
         let task = {
             author:1,
             goal: $('#the-plus-button').attr('data-plus'),
-            text: $(`#task-text-${taskID}`).text(),
+            text: $(`#task-text-${taskID}`).html(),
             status: checkStatus,
         }
         $.ajax({
@@ -410,14 +408,14 @@ function noteHtml(note) {
         return ` <div class="item item-blue" id="journal-note-${note.id}"> 
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <p>${note.text}</p>
-                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
+                    <button type='button' id='deletenote' class='fr pink-btn-outline-primary' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="journal-note-${note.id}"> 
                 <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
-                    <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
+                    <button type='button' id='deletenote' class='fr blue-btn-outline-primary' data-note="${ note.id }">Delete</button>
                     </div>`;
     };
 }
