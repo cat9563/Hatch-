@@ -84,10 +84,9 @@
        background-color: #f5a8b8 !important;
   }
 
-  #goal-button{
-      background-color: #87c5dd;
-      border: #87c5dd;
-      margin-top: 44px;
+  .goal-button{
+    margin-left: 18px;
+    margin-right: 16px;
   }
 
   #journal-button{
@@ -124,5 +123,9 @@
   
 #overall-progress{
   background-color: #fff;
+}
+
+#tips{
+  height: 100px;
 }
 
