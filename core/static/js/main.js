@@ -108,20 +108,18 @@ function addGoalsToDashboard(goals){
     }
 
     console.log('Goals have loaded!')
-    // deleteGoal();
+    deleteGoal();
    
 
-    let goalDelete = document.getElementById('deletegoal')
-    goalDelete.addEventListener('click', deleteGoal($(this)))
-    console.log('listening for DELETE CLICK....')
+    // $('.deletegoal').click(deleteGoal);
+    // console.log('listening for DELETE CLICK....')
 }
 
 
 // DELETE goal
 function deleteGoal() {
   console.log('Inside deleteGoal')
-  $("#deletegoal")
-  .on('click', function() {
+  $(".deletegoal").click(function() {
     console.log($(this))
     console.log($(this).data())
     let goalID = $(this).data('goal')
