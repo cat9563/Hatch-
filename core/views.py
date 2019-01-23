@@ -1,3 +1,5 @@
+from django.http import HttpResponseRedirect
+from .forms import LoginForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from core.forms import EditProfileForm
@@ -5,8 +7,22 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/dashboard/')
+
+    if request.method == 'GET':
+        form = LoginForm()
+
+    return render(request, 'index.html', {'form': form})
+
+
+
+
+
 
 @login_required
 def profile(request):
