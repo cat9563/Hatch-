@@ -678,3 +678,11 @@ btn-outline-primary:focus {
 .lrg {
     font-size: large;
 }
+
+.med {
+    font-size: medium;
+}
+
+.xl {
+    font-size: x-large;
+}
