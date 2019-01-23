@@ -57,6 +57,7 @@
   .card {
       overflow:hidden;
       background-color: #f5a8b8 !important;
+      height: 100%;
   }
   
   .card-body .rotate {
@@ -83,10 +84,9 @@
        background-color: #f5a8b8 !important;
   }
 
-  #goal-button{
-      background-color: #87c5dd;
-      border: #87c5dd;
-      margin-top: 42px;
+  .goal-button{
+    margin-left: 18px;
+    margin-right: 16px;
   }
 
   #journal-button{
