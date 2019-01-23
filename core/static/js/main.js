@@ -416,7 +416,6 @@ function noteHtml(note) {
     } 
     else {
         return `<div class="item item-pink" id="journal-note-${note.id}"> 
-
                 <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
                     <button type='button' id='deletenote' class='deletenote btn fr' data-note="${ note.id }">Delete</button>
