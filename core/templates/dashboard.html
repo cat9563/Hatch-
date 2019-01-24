@@ -72,7 +72,7 @@
                                         <h1 "text-uppercase" class='username'>{{ user.username }}</h1>
                                         <p><div id="showQuotes" class='lrg show-quotes'></div></p>
                                     </div>
-                                    <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
+                                    <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded" style='border: white solid 3px; border-radius: 10px'></div>
                                 </div>
 
                                 <div class="spacer5"></div>
@@ -121,7 +121,7 @@
                     {% comment %} <div class="card-header">
                             My Overall Progress 
                          </div>  {% endcomment %}
-                        <div class="card-body" id="overall-progres">
+                        <div class="card-body" id="overall-progres" style='background-color: white; border: solid 10px #f5a8b8'>
                             {% comment %} <h5 class="card-title"> Hatchling </h5> {% endcomment %}
                             <p class="card-text"> <canvas id="myChart"></canvas> </p>  
                         </div>
@@ -164,15 +164,16 @@
                  <a id="features"></a>
 
             <div class="row my-5">
-                <div class="col-lg-4 col-md-4">
+    
+                <div class="col-lg-4 col-md-4" style='background-color: white; border-radius: 4%'>
                     {% comment %} <div class="card"> {% endcomment %}
                         {% comment %} <img class="card-img-top img-fluid" src="//placehold.it/740x180/bbb/fff?text=..." alt="Card image cap"> {% endcomment %}
 
                         {% comment %} <div class="card-body"> {% endcomment %}
-                            <h1 class='serif'>Tips</h1>
+                            <h1 class='serif' style='margin: 10px 0px 10px 0px'>Tips</h1>
                             <br>
-                            <p class="dash-body">Click 'Add a Goal' to create your main goal cards. Expand a goal card to view your tasks. Adding tasks builds the detailed steps to accomplish each goal. </p><br>
-                            <p class="dash-body">If your journey requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide the correct legal documentation.</p>
+                            <p class="dash-body" style='margin: 0px 10px 0px 10px'>Click 'Add a Goal' to create your main goal cards. Expand a goal card to view your tasks. Adding tasks builds the detailed steps to accomplish each goal. </p><br>
+                            <p class="dash-body" style='margin: 0px 10px 0px 10px'>If your journey     requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide the correct legal documentation.</p>
                             
                         {% comment %} </div>
                     </div> {% endcomment %}
