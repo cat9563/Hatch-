@@ -408,14 +408,14 @@ function noteHtml(note) {
         return ` <div class="item item-blue" id="journal-note-${note.id}"> 
                     <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                     <p>${note.text}</p>
-                    <button type='button' id='deletenote' class='deletenote fr pink-btn-outline-primary' data-note="${ note.id }">Delete</button>
+                    <button type='button' id='deletenote' class='deletenote btn fr pink-btn-outline-primary' data-note="${ note.id }">Delete</button>
                 </div>`;
     } 
     else {
         return `<div class="item item-pink" id="journal-note-${note.id}"> 
                 <small>${moment(note.created_at).format("MMM. D, YYYY, hh:mm a")}</small>
                   <p>${note.text}</p>
-                    <button type='button' id='deletenote' class='deletenote fr blue-btn-outline-primary' data-note="${ note.id }">Delete</button>
+                    <button type='button' id='deletenote' class='deletenote btn fr blue-btn-outline-primary' data-note="${ note.id }">Delete</button>
                     </div>`;
     };
 }

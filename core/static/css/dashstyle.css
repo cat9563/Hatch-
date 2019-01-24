@@ -84,10 +84,16 @@
        background-color: #f5a8b8 !important;
   }
 
-  .goal-button{
-    margin-left: 18px;
-    margin-right: 16px;
-  }
+.goal-button{
+  margin-left: 18px;
+  margin-right: 16px;
+}
+  
+.add-a-goal {
+  background-color: #87c5dd;
+  border: #87c5dd;
+  font: white !important;
+}
 
   #journal-button{
     background-color: #87c5dd;

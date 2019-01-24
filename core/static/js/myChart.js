@@ -28,7 +28,7 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ["Goals I Have Accomplished", "Goals I Have Left"],
+        labels: ["Achieved", "Remaining"],
         datasets: [{
             label: '',
             data: [completegoals, incompletegoals],
