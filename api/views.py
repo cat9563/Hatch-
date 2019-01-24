@@ -121,6 +121,9 @@ class NoteListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+    def get_queryset(self):
+        return self.request.user.notes
+
 class NoteDetailView(generics.RetrieveDestroyAPIView):
     """
     Retrieves details of one note
@@ -129,6 +132,9 @@ class NoteDetailView(generics.RetrieveDestroyAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return self.request.user.notes
 
 class EventListView(generics.ListCreateAPIView):
     """
