@@ -7,30 +7,6 @@
 {% block content %}
 
         <div class="col main pt-5 mt-3" style="margin-bottom: 75px">
-            {% comment %} <div class="row">
-                <div class="col-sm-4 py-2">
-                    <div class="card text-white h-100">
-                        <div class="card-body" id="greeting">
-                         <h6 class="display-4">Welcome</h6>
-                            <h1 class="display-6">{{ user.username }} !</h1>
-                           <body onload="randomQuote()"> <!--loads in the profile card-->  
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-8 py-2">
-                    <div class="card text-white h-100">
-                        <div class="card-body" id="greeting">
-                        <h1 class="display-4 d-none d-sm-block">
-                        Transition your way!!
-                        </h1>
-                        <p class="lead d-none d-sm-block">You can do what you set your mind too!</p>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div> {% endcomment %}
-            <!--/row-->
-
             <a id="features"></a>
             <body onload="randomQuote()">
             
@@ -39,12 +15,7 @@
             
 
         <a id="layouts"></a> 
-            {% comment %} <hr>  {% endcomment %}
-         {% comment %} <h2 class="sub-header mt-5" id="dash-header">Track Your Progress</h2> {% endcomment %}
           <p class="lead mt-6">
-                {% comment %} <div class="dash-body">
-              At Hatch, we believe that your transition should be done your way and on your terms! There is no right or wrong way to transition. The transgender experience can vary, but one thing we all have in common is a need to express our true-selves. Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!
-                </div> {% endcomment %}
             </p>
             <hr>
             <div class="row mb-3">
@@ -55,8 +26,8 @@
                 </div>
                 <div class="col-lg-6" #profile-card>
                     <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                    </ul> 
+                    {% comment %} <ul class="nav nav-tabs" role="tablist">
+                    </ul>  {% endcomment %}
                     <!-- Tab panes -->
                     {% comment %} <div class="tab-content">
                         <br>
@@ -103,8 +74,7 @@
                                     </div>
                                     <div class="col-sm-5"><img src="{{ user|gravatar:200 }}" class="float-right img-responsive img-rounded"></div>
                                 </div>
-                                {% comment %} <hr> {% endcomment %}
-                                {% comment %} <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal" id="goal-button">Add a Goal</a> {% endcomment %}
+
                                 <div class="spacer5"></div>
                             </div>
                             <div class="tab-pane" id="tab3">
@@ -162,20 +132,20 @@
                 
             
             </div>
-            <p> 
+            {% comment %} <p>  {% endcomment %}
             <hr>
 
             <h2 class="sub-header mt-5 serif">Map Out Your Goals</h2>
           <p class="lead mt-6">
                 <div class="dash-body">
-                Below is a way to track your goals. 
-                Each person's journey is unique and will benefit from thorough planning.
+                Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!
                 </div>
             </p>
 
               <p class="lead mt-6">
                 <div class="dash-body">
-                     If your journey requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide you with the correct legal documentation. 
+                Below is a way to track your goals. 
+                Each person's journey is unique and will benefit from thorough planning.
                 </div><br>
             </p>
 
@@ -192,11 +162,7 @@
                 </div> {% endcomment %}
                 <div class="card-body">
                  <a id="features"></a>
-                {% comment %} <div class="d-flex justify-content-end">
-                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newGoalModal">
-                    +Goal</button>
-                    </div> {% endcomment %}
-            {% comment %} <hr> {% endcomment %}
+
             <div class="row my-5">
                 <div class="col-lg-4 col-md-4">
                     {% comment %} <div class="card"> {% endcomment %}
@@ -205,8 +171,8 @@
                         {% comment %} <div class="card-body"> {% endcomment %}
                             <h1 class='serif'>Tips</h1>
                             <br>
-                            <p class="dash-body">Our mission is to provide you with the resources and tools needed to accomplish such a huge part of your life and story!</p><br>
-                            <p class="dash-body">Click add a goal to create your main goals. Adding tasks creates your subgoals to accomplish your main goal. </p>
+                            <p class="dash-body">Click 'Add a Goal' to create your main goal cards. Expand a goal card to view your tasks. Adding tasks builds the detailed steps to accomplish each goal. </p><br>
+                            <p class="dash-body">If your journey requires a name change, updated gender marker, surgeries, or hormones, you will need to seek out a qualified therapist to assist and provide the correct legal documentation.</p>
                             
                         {% comment %} </div>
                     </div> {% endcomment %}
@@ -234,8 +200,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary" id='save-goal' data-dismiss="modal">Save</button>
+                                                    <button type="button" class="btn close-btn-outline-primary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn save-btn-outline-primary" id='save-goal' data-dismiss="modal">Save</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +245,7 @@
                         
                         <hr>
                         <div class=goal-button>
-                            <a href="javascript:;" class="btn btn-info btn-block" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
+                            <a href="javascript:;" class="btn btn-info btn-block add-a-goal" data-toggle="modal" data-target="#newGoalModal">Add a Goal</a>
                         </div>
                     </div>
                 </div>
